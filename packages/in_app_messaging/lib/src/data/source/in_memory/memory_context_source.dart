@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:in_app_messaging/in_app_messaging.dart';
 
@@ -24,11 +25,13 @@ class MemoryContextSource implements ContextSource {
 
   @override
   FutureOr<void> updateUserProperty(String key, dynamic value) {
-    _user = UserContext.fromJson(_user.toJson()..[key] = value);
+    _user = _user.change(key, value);
+    log('[MemoryContextSource.updateUserProperty]: user updated - ${_device.toJson()}');
   }
 
   @override
   FutureOr<void> updateDeviceProperty(String key, dynamic value) {
     _device = DeviceContext.fromJson(_device.toJson()..[key] = value);
+    log('[MemoryContextSource.updateDeviceProperty]: device updated - ${_device.toJson()}');
   }
 }

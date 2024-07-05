@@ -63,12 +63,12 @@ class DefaultMessageGateway implements MessageGateway {
   }
 
   @override
-  FutureOr<void> setDeviceProperty(String key, value) {
+  FutureOr<void> setDeviceProperty(String key, String? value) {
     return _contextSource.updateDeviceProperty(key, value);
   }
 
   @override
-  FutureOr<void> setUserProperty(String key, value) {
+  FutureOr<void> setUserProperty(String key, String? value) {
     return _contextSource.updateUserProperty(key, value);
   }
 }

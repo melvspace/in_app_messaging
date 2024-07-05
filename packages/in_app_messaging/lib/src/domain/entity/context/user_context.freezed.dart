@@ -163,7 +163,7 @@ class __$$UserContextImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserContextImpl implements _UserContext {
+class _$UserContextImpl extends _UserContext {
   const _$UserContextImpl(
       {this.id,
       this.name,
@@ -171,7 +171,8 @@ class _$UserContextImpl implements _UserContext {
       this.phone,
       this.language,
       final Map<String, String> extra = const {}})
-      : _extra = extra;
+      : _extra = extra,
+        super._();
 
   factory _$UserContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserContextImplFromJson(json);
@@ -233,7 +234,7 @@ class _$UserContextImpl implements _UserContext {
   }
 }
 
-abstract class _UserContext implements UserContext {
+abstract class _UserContext extends UserContext {
   const factory _UserContext(
       {final String? id,
       final String? name,
@@ -241,6 +242,7 @@ abstract class _UserContext implements UserContext {
       final String? phone,
       final String? language,
       final Map<String, String> extra}) = _$UserContextImpl;
+  const _UserContext._() : super._();
 
   factory _UserContext.fromJson(Map<String, dynamic> json) =
       _$UserContextImpl.fromJson;

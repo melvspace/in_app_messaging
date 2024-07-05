@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Fix context updates
+
 ## 0.0.3
 
 - Add missing exports

@@ -11,6 +11,7 @@ _$DeviceContextImpl _$$DeviceContextImplFromJson(Map<String, dynamic> json) =>
       platform: json['platform'] as String,
       version: json['version'] as String,
       versionNumber: json['versionNumber'] as String,
+      language: json['language'] as String,
     );
 
 Map<String, dynamic> _$$DeviceContextImplToJson(_$DeviceContextImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$DeviceContextImplToJson(_$DeviceContextImpl instance) =>
       'platform': instance.platform,
       'version': instance.version,
       'versionNumber': instance.versionNumber,
+      'language': instance.language,
     };

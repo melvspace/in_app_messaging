@@ -1,8 +1,5 @@
 import 'package:checks/checks.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
-import 'package:in_app_messaging/src/data/model/comparison/comparison_type.dart';
-import 'package:in_app_messaging/src/data/model/conditions/device_condition.dart';
-import 'package:in_app_messaging/src/data/model/conditions/user_condition.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -18,6 +15,7 @@ void main() {
         platform: 'Android',
         version: '5.4.0',
         versionNumber: '3124',
+        language: 'en',
       ),
       user: const UserContext(
         id: '1234',
@@ -31,7 +29,7 @@ void main() {
           id: 'android_message',
           type: const MessageType(name: 'none'),
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
-          condition: DeviceCondition(
+          condition: DevicePropertyCondition(
             key: 'platform',
             value: 'Android',
             type: ComparisonType.exactlyMatches,
@@ -42,7 +40,7 @@ void main() {
           id: 'version_message_equals',
           type: const MessageType(name: 'none'),
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
-          condition: DeviceCondition(
+          condition: DevicePropertyCondition(
             key: 'version',
             type: ComparisonType.equals,
             value: '5.4.1',
@@ -53,7 +51,7 @@ void main() {
           id: 'version_message_greater',
           type: const MessageType(name: 'none'),
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
-          condition: DeviceCondition(
+          condition: DevicePropertyCondition(
             key: 'version',
             type: ComparisonType.greater,
             value: '5.6.0',
@@ -64,12 +62,12 @@ void main() {
           id: 'john_doe_message',
           type: const MessageType(name: 'none'),
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
-          condition: UserCondition(
+          condition: UserPropertyCondition(
                 key: 'name',
                 type: ComparisonType.exactlyMatches,
                 value: 'John Doe',
               ) &
-              UserCondition(
+              UserPropertyCondition(
                 key: 'email',
                 type: ComparisonType.exactlyMatches,
                 value: 'john@doe.com',

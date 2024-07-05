@@ -23,6 +23,7 @@ mixin _$DeviceContext {
   String get platform => throw _privateConstructorUsedError;
   String get version => throw _privateConstructorUsedError;
   String get versionNumber => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,8 @@ abstract class $DeviceContextCopyWith<$Res> {
           DeviceContext value, $Res Function(DeviceContext) then) =
       _$DeviceContextCopyWithImpl<$Res, DeviceContext>;
   @useResult
-  $Res call({String platform, String version, String versionNumber});
+  $Res call(
+      {String platform, String version, String versionNumber, String language});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$DeviceContextCopyWithImpl<$Res, $Val extends DeviceContext>
     Object? platform = null,
     Object? version = null,
     Object? versionNumber = null,
+    Object? language = null,
   }) {
     return _then(_value.copyWith(
       platform: null == platform
@@ -69,6 +72,10 @@ class _$DeviceContextCopyWithImpl<$Res, $Val extends DeviceContext>
           ? _value.versionNumber
           : versionNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -81,7 +88,8 @@ abstract class _$$DeviceContextImplCopyWith<$Res>
       __$$DeviceContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String platform, String version, String versionNumber});
+  $Res call(
+      {String platform, String version, String versionNumber, String language});
 }
 
 /// @nodoc
@@ -98,6 +106,7 @@ class __$$DeviceContextImplCopyWithImpl<$Res>
     Object? platform = null,
     Object? version = null,
     Object? versionNumber = null,
+    Object? language = null,
   }) {
     return _then(_$DeviceContextImpl(
       platform: null == platform
@@ -112,17 +121,23 @@ class __$$DeviceContextImplCopyWithImpl<$Res>
           ? _value.versionNumber
           : versionNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DeviceContextImpl implements _DeviceContext {
+class _$DeviceContextImpl extends _DeviceContext {
   const _$DeviceContextImpl(
       {required this.platform,
       required this.version,
-      required this.versionNumber});
+      required this.versionNumber,
+      required this.language})
+      : super._();
 
   factory _$DeviceContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$DeviceContextImplFromJson(json);
@@ -133,10 +148,12 @@ class _$DeviceContextImpl implements _DeviceContext {
   final String version;
   @override
   final String versionNumber;
+  @override
+  final String language;
 
   @override
   String toString() {
-    return 'DeviceContext(platform: $platform, version: $version, versionNumber: $versionNumber)';
+    return 'DeviceContext(platform: $platform, version: $version, versionNumber: $versionNumber, language: $language)';
   }
 
   @override
@@ -148,13 +165,15 @@ class _$DeviceContextImpl implements _DeviceContext {
                 other.platform == platform) &&
             (identical(other.version, version) || other.version == version) &&
             (identical(other.versionNumber, versionNumber) ||
-                other.versionNumber == versionNumber));
+                other.versionNumber == versionNumber) &&
+            (identical(other.language, language) ||
+                other.language == language));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, platform, version, versionNumber);
+      Object.hash(runtimeType, platform, version, versionNumber, language);
 
   @JsonKey(ignore: true)
   @override
@@ -170,11 +189,13 @@ class _$DeviceContextImpl implements _DeviceContext {
   }
 }
 
-abstract class _DeviceContext implements DeviceContext {
+abstract class _DeviceContext extends DeviceContext {
   const factory _DeviceContext(
       {required final String platform,
       required final String version,
-      required final String versionNumber}) = _$DeviceContextImpl;
+      required final String versionNumber,
+      required final String language}) = _$DeviceContextImpl;
+  const _DeviceContext._() : super._();
 
   factory _DeviceContext.fromJson(Map<String, dynamic> json) =
       _$DeviceContextImpl.fromJson;
@@ -185,6 +206,8 @@ abstract class _DeviceContext implements DeviceContext {
   String get version;
   @override
   String get versionNumber;
+  @override
+  String get language;
   @override
   @JsonKey(ignore: true)
   _$$DeviceContextImplCopyWith<_$DeviceContextImpl> get copyWith =>
