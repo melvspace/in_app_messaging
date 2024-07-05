@@ -11,3 +11,26 @@ scripts:
   test: |
     melos exec --dir-exists test --depends-on=test --depends-on allure_report -- dart test
   
+  generate:drift:
+    run: |
+      melos exec --scope=in_app_messaging_drift -- dart run build_runner build -d
+      melos generate:drift:schema
+      melos generate:drift:migrations
+      melos generate:drift:tests
+    description: Build all database related files
+
+  generate:drift:schema:
+    run: |
+      melos exec --scope=in_app_messaging_drift -- fvm flutter pub run drift_dev schema dump lib/src/data/database/database.dart lib/src/data/database/migrations
+    description: Build database schema json
+
+  generate:drift:migrations:
+    run: |
+      melos exec --scope=in_app_messaging_drift -- fvm flutter pub run drift_dev schema steps lib/src/data/database/migrations lib/src/data/database/schema_versions.dart
+    description: Build database step-by-step migrations helper
+
+  generate:drift:tests:
+    run: |
+      melos exec --scope=in_app_messaging_drift -- mkdir -p test/database/generated_migrations/
+      melos exec --scope=in_app_messaging_drift -- fvm flutter pub run drift_dev schema generate lib/src/data/database/migrations/ test/database/generated_migrations/
+    description: Build database tests related code

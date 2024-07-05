@@ -1,0 +1,25 @@
+targets:
+  $default:
+    builders:
+      # region drift database
+      drift_dev:
+        # disable drift's default builder, we're using the modular setup instead.
+        enabled: false
+      drift_dev:analyzer:
+        enabled: true
+        options:
+          &options # Drift build options, as per https://drift.simonbinder.eu/docs/advanced-features/builder_options/
+          data_class_to_companions: false
+        generate_for: &generate_for
+          include:
+            - "lib/src/data/*.dart"
+            - "lib/src/data/**/*.dart"
+          exclude:
+            - "**/schema_versions.dart"
+      drift_dev:modular:
+        enabled: true
+        options: *options
+        generate_for: *generate_for
+      # endregion
+
+   

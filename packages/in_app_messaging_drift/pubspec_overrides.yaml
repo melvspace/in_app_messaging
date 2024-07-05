@@ -1,4 +1,0 @@
-# melos_managed_dependency_overrides: in_app_messaging
-dependency_overrides:
-  in_app_messaging:
-    path: ../in_app_messaging

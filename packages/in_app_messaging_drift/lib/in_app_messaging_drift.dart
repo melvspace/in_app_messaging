@@ -3,4 +3,5 @@
 /// More dartdocs go here.
 library;
 
-export 'src/in_app_messaging_drift_base.dart';
+export 'src/data/database/database.dart';
+export 'src/data/source/drift_interaction_source.dart';
