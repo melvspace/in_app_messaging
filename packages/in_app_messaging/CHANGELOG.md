@@ -1,3 +1,7 @@
+## 0.0.3
+
+- Add missing exports
+
 ## 0.0.2
 
 - Add user and device conditions
