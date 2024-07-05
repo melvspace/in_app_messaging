@@ -8,6 +8,7 @@ class SimpleMessage with _$SimpleMessage implements Message {
   const factory SimpleMessage({
     required String id,
     required MessageType type,
+    required List<MessageTrigger> triggers,
     required MessageCondition condition,
     required Map<String, dynamic> data,
   }) = _SimpleMessage;

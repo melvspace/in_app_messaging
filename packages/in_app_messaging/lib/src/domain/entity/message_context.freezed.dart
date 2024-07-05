@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MessageContext _$MessageContextFromJson(Map<String, dynamic> json) {
+  return _MessageContext.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MessageContext {
   /// For Trigger conditions
@@ -22,6 +26,11 @@ mixin _$MessageContext {
   /// For Interactions conditions
   MessageInteractions get interactions => throw _privateConstructorUsedError;
 
+  /// For Interactions conditions
+  UserContext get user => throw _privateConstructorUsedError;
+  DeviceContext get device => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MessageContextCopyWith<MessageContext> get copyWith =>
       throw _privateConstructorUsedError;
@@ -33,10 +42,16 @@ abstract class $MessageContextCopyWith<$Res> {
           MessageContext value, $Res Function(MessageContext) then) =
       _$MessageContextCopyWithImpl<$Res, MessageContext>;
   @useResult
-  $Res call({MessageTrigger trigger, MessageInteractions interactions});
+  $Res call(
+      {MessageTrigger trigger,
+      MessageInteractions interactions,
+      UserContext user,
+      DeviceContext device});
 
   $MessageTriggerCopyWith<$Res> get trigger;
   $MessageInteractionsCopyWith<$Res> get interactions;
+  $UserContextCopyWith<$Res> get user;
+  $DeviceContextCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -54,6 +69,8 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
   $Res call({
     Object? trigger = null,
     Object? interactions = null,
+    Object? user = null,
+    Object? device = null,
   }) {
     return _then(_value.copyWith(
       trigger: null == trigger
@@ -64,6 +81,14 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
           ? _value.interactions
           : interactions // ignore: cast_nullable_to_non_nullable
               as MessageInteractions,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserContext,
+      device: null == device
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as DeviceContext,
     ) as $Val);
   }
 
@@ -82,6 +107,22 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
       return _then(_value.copyWith(interactions: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserContextCopyWith<$Res> get user {
+    return $UserContextCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DeviceContextCopyWith<$Res> get device {
+    return $DeviceContextCopyWith<$Res>(_value.device, (value) {
+      return _then(_value.copyWith(device: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -92,12 +133,20 @@ abstract class _$$MessageContextImplCopyWith<$Res>
       __$$MessageContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MessageTrigger trigger, MessageInteractions interactions});
+  $Res call(
+      {MessageTrigger trigger,
+      MessageInteractions interactions,
+      UserContext user,
+      DeviceContext device});
 
   @override
   $MessageTriggerCopyWith<$Res> get trigger;
   @override
   $MessageInteractionsCopyWith<$Res> get interactions;
+  @override
+  $UserContextCopyWith<$Res> get user;
+  @override
+  $DeviceContextCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -113,6 +162,8 @@ class __$$MessageContextImplCopyWithImpl<$Res>
   $Res call({
     Object? trigger = null,
     Object? interactions = null,
+    Object? user = null,
+    Object? device = null,
   }) {
     return _then(_$MessageContextImpl(
       trigger: null == trigger
@@ -123,15 +174,29 @@ class __$$MessageContextImplCopyWithImpl<$Res>
           ? _value.interactions
           : interactions // ignore: cast_nullable_to_non_nullable
               as MessageInteractions,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserContext,
+      device: null == device
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as DeviceContext,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MessageContextImpl implements _MessageContext {
   const _$MessageContextImpl(
-      {required this.trigger, required this.interactions});
+      {required this.trigger,
+      required this.interactions,
+      required this.user,
+      required this.device});
+
+  factory _$MessageContextImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageContextImplFromJson(json);
 
   /// For Trigger conditions
   @override
@@ -141,9 +206,15 @@ class _$MessageContextImpl implements _MessageContext {
   @override
   final MessageInteractions interactions;
 
+  /// For Interactions conditions
+  @override
+  final UserContext user;
+  @override
+  final DeviceContext device;
+
   @override
   String toString() {
-    return 'MessageContext(trigger: $trigger, interactions: $interactions)';
+    return 'MessageContext(trigger: $trigger, interactions: $interactions, user: $user, device: $device)';
   }
 
   @override
@@ -153,11 +224,15 @@ class _$MessageContextImpl implements _MessageContext {
             other is _$MessageContextImpl &&
             (identical(other.trigger, trigger) || other.trigger == trigger) &&
             (identical(other.interactions, interactions) ||
-                other.interactions == interactions));
+                other.interactions == interactions) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.device, device) || other.device == device));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, trigger, interactions);
+  int get hashCode =>
+      Object.hash(runtimeType, trigger, interactions, user, device);
 
   @JsonKey(ignore: true)
   @override
@@ -165,12 +240,24 @@ class _$MessageContextImpl implements _MessageContext {
   _$$MessageContextImplCopyWith<_$MessageContextImpl> get copyWith =>
       __$$MessageContextImplCopyWithImpl<_$MessageContextImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageContextImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _MessageContext implements MessageContext {
   const factory _MessageContext(
       {required final MessageTrigger trigger,
-      required final MessageInteractions interactions}) = _$MessageContextImpl;
+      required final MessageInteractions interactions,
+      required final UserContext user,
+      required final DeviceContext device}) = _$MessageContextImpl;
+
+  factory _MessageContext.fromJson(Map<String, dynamic> json) =
+      _$MessageContextImpl.fromJson;
 
   @override
 
@@ -180,6 +267,12 @@ abstract class _MessageContext implements MessageContext {
 
   /// For Interactions conditions
   MessageInteractions get interactions;
+  @override
+
+  /// For Interactions conditions
+  UserContext get user;
+  @override
+  DeviceContext get device;
   @override
   @JsonKey(ignore: true)
   _$$MessageContextImplCopyWith<_$MessageContextImpl> get copyWith =>

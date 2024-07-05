@@ -1,5 +1,4 @@
 import '../../../../in_app_messaging.dart';
-import '../../../domain/entity/message_context.dart';
 
 class DeliveryCondition extends MessageCondition {
   @override

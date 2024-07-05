@@ -9,4 +9,8 @@ abstract interface class MessageGateway {
   FutureOr<void> interact<T>(String id, String key, T data);
 
   FutureOr<void> markSeen(String id);
+
+  FutureOr<void> setUserProperty(String key, String value);
+
+  FutureOr<void> setDeviceProperty(String key, String value);
 }

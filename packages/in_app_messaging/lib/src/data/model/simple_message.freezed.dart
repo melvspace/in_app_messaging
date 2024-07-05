@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SimpleMessage {
   String get id => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
+  List<MessageTrigger> get triggers => throw _privateConstructorUsedError;
   MessageCondition get condition => throw _privateConstructorUsedError;
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
@@ -35,6 +36,7 @@ abstract class $SimpleMessageCopyWith<$Res> {
   $Res call(
       {String id,
       MessageType type,
+      List<MessageTrigger> triggers,
       MessageCondition condition,
       Map<String, dynamic> data});
 
@@ -56,6 +58,7 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
   $Res call({
     Object? id = null,
     Object? type = null,
+    Object? triggers = null,
     Object? condition = null,
     Object? data = null,
   }) {
@@ -68,6 +71,10 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
+      triggers: null == triggers
+          ? _value.triggers
+          : triggers // ignore: cast_nullable_to_non_nullable
+              as List<MessageTrigger>,
       condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
@@ -99,6 +106,7 @@ abstract class _$$SimpleMessageImplCopyWith<$Res>
   $Res call(
       {String id,
       MessageType type,
+      List<MessageTrigger> triggers,
       MessageCondition condition,
       Map<String, dynamic> data});
 
@@ -119,6 +127,7 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? type = null,
+    Object? triggers = null,
     Object? condition = null,
     Object? data = null,
   }) {
@@ -131,6 +140,10 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
+      triggers: null == triggers
+          ? _value._triggers
+          : triggers // ignore: cast_nullable_to_non_nullable
+              as List<MessageTrigger>,
       condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
@@ -149,14 +162,24 @@ class _$SimpleMessageImpl implements _SimpleMessage {
   const _$SimpleMessageImpl(
       {required this.id,
       required this.type,
+      required final List<MessageTrigger> triggers,
       required this.condition,
       required final Map<String, dynamic> data})
-      : _data = data;
+      : _triggers = triggers,
+        _data = data;
 
   @override
   final String id;
   @override
   final MessageType type;
+  final List<MessageTrigger> _triggers;
+  @override
+  List<MessageTrigger> get triggers {
+    if (_triggers is EqualUnmodifiableListView) return _triggers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_triggers);
+  }
+
   @override
   final MessageCondition condition;
   final Map<String, dynamic> _data;
@@ -169,7 +192,7 @@ class _$SimpleMessageImpl implements _SimpleMessage {
 
   @override
   String toString() {
-    return 'SimpleMessage(id: $id, type: $type, condition: $condition, data: $data)';
+    return 'SimpleMessage(id: $id, type: $type, triggers: $triggers, condition: $condition, data: $data)';
   }
 
   @override
@@ -179,13 +202,19 @@ class _$SimpleMessageImpl implements _SimpleMessage {
             other is _$SimpleMessageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other._triggers, _triggers) &&
             (identical(other.condition, condition) ||
                 other.condition == condition) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, condition,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      type,
+      const DeepCollectionEquality().hash(_triggers),
+      condition,
       const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
@@ -199,6 +228,7 @@ abstract class _SimpleMessage implements SimpleMessage {
   const factory _SimpleMessage(
       {required final String id,
       required final MessageType type,
+      required final List<MessageTrigger> triggers,
       required final MessageCondition condition,
       required final Map<String, dynamic> data}) = _$SimpleMessageImpl;
 
@@ -206,6 +236,8 @@ abstract class _SimpleMessage implements SimpleMessage {
   String get id;
   @override
   MessageType get type;
+  @override
+  List<MessageTrigger> get triggers;
   @override
   MessageCondition get condition;
   @override

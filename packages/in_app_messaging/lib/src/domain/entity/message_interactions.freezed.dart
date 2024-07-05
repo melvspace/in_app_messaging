@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MessageInteractions _$MessageInteractionsFromJson(Map<String, dynamic> json) {
+  return _MessageInteractions.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MessageInteractions {
   /// message id
@@ -25,6 +29,7 @@ mixin _$MessageInteractions {
   /// additional dynamic interactions
   Map<String, dynamic> get additional => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MessageInteractionsCopyWith<MessageInteractions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -123,7 +128,7 @@ class __$$MessageInteractionsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MessageInteractionsImpl
     with DiagnosticableTreeMixin
     implements _MessageInteractions {
@@ -133,6 +138,9 @@ class _$MessageInteractionsImpl
       required final Map<String, dynamic> additional})
       : _seenDates = seenDates,
         _additional = additional;
+
+  factory _$MessageInteractionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageInteractionsImplFromJson(json);
 
   /// message id
   @override
@@ -187,6 +195,7 @@ class _$MessageInteractionsImpl
                 .equals(other._additional, _additional));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -200,6 +209,13 @@ class _$MessageInteractionsImpl
   _$$MessageInteractionsImplCopyWith<_$MessageInteractionsImpl> get copyWith =>
       __$$MessageInteractionsImplCopyWithImpl<_$MessageInteractionsImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageInteractionsImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _MessageInteractions implements MessageInteractions {
@@ -208,6 +224,9 @@ abstract class _MessageInteractions implements MessageInteractions {
           required final List<DateTime> seenDates,
           required final Map<String, dynamic> additional}) =
       _$MessageInteractionsImpl;
+
+  factory _MessageInteractions.fromJson(Map<String, dynamic> json) =
+      _$MessageInteractionsImpl.fromJson;
 
   @override
 

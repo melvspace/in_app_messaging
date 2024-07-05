@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import '../../../in_app_messaging.dart';
-import '../../domain/entity/message_context.dart';
 
 class DefaultMessageGateway implements MessageGateway {
   final MessageSource _messageSource;
   final InteractionSource _interactionSource;
+  final ContextSource _contextSource;
 
   final AsyncCache<List<Message>> _messages =
       AsyncCache(const Duration(minutes: 5));
@@ -14,18 +14,28 @@ class DefaultMessageGateway implements MessageGateway {
   DefaultMessageGateway({
     required MessageSource messageSource,
     required InteractionSource interactionSource,
+    required ContextSource contextSource,
   })  : _messageSource = messageSource,
-        _interactionSource = interactionSource;
+        _interactionSource = interactionSource,
+        _contextSource = contextSource;
 
   @override
   FutureOr<MessageWithContext?> evaluate(MessageTrigger trigger) async {
-    final messages =
+    Iterable<Message> messages =
         await _messages.fetch(() async => _messageSource.fetchMessages());
+
+    messages =
+        messages.where((element) => element.triggers.any(trigger.contains));
 
     for (final message in messages) {
       final interactions = await getInteractions(message.id);
-      final context =
-          MessageContext(trigger: trigger, interactions: interactions);
+      final context = MessageContext(
+        trigger: trigger,
+        interactions: interactions,
+        user: await _contextSource.getUser(),
+        device: await _contextSource.getDevice(),
+      );
+
       if (message.condition.evaluate(context)) {
         return MessageWithContext(
           message: message,
@@ -50,5 +60,15 @@ class DefaultMessageGateway implements MessageGateway {
   @override
   FutureOr<void> markSeen(String id) {
     return _interactionSource.markSeen(id);
+  }
+
+  @override
+  FutureOr<void> setDeviceProperty(String key, value) {
+    return _contextSource.updateDeviceProperty(key, value);
+  }
+
+  @override
+  FutureOr<void> setUserProperty(String key, value) {
+    return _contextSource.updateUserProperty(key, value);
   }
 }

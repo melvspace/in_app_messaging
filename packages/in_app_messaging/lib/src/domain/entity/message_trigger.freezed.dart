@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MessageTrigger _$MessageTriggerFromJson(Map<String, dynamic> json) {
+  return MessageEventTrigger.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MessageTrigger {
   String get event => throw _privateConstructorUsedError;
@@ -52,7 +56,7 @@ mixin _$MessageTrigger {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MessageTriggerCopyWith<MessageTrigger> get copyWith =>
       throw _privateConstructorUsedError;
@@ -135,11 +139,15 @@ class __$$MessageEventTriggerImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$MessageEventTriggerImpl implements MessageEventTrigger {
+@JsonSerializable()
+class _$MessageEventTriggerImpl extends MessageEventTrigger {
   const _$MessageEventTriggerImpl(
       {required this.event, required final Map<String, dynamic>? data})
-      : _data = data;
+      : _data = data,
+        super._();
+
+  factory _$MessageEventTriggerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageEventTriggerImplFromJson(json);
 
   @override
   final String event;
@@ -171,6 +179,7 @@ class _$MessageEventTriggerImpl implements MessageEventTrigger {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, event, const DeepCollectionEquality().hash(_data));
@@ -237,12 +246,23 @@ class _$MessageEventTriggerImpl implements MessageEventTrigger {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageEventTriggerImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class MessageEventTrigger implements MessageTrigger {
+abstract class MessageEventTrigger extends MessageTrigger {
   const factory MessageEventTrigger(
       {required final String event,
       required final Map<String, dynamic>? data}) = _$MessageEventTriggerImpl;
+  const MessageEventTrigger._() : super._();
+
+  factory MessageEventTrigger.fromJson(Map<String, dynamic> json) =
+      _$MessageEventTriggerImpl.fromJson;
 
   @override
   String get event;
