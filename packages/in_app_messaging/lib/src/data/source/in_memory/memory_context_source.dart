@@ -26,7 +26,7 @@ class MemoryContextSource implements ContextSource {
   @override
   FutureOr<void> updateUserProperty(String key, dynamic value) {
     _user = _user.change(key, value);
-    log('[MemoryContextSource.updateUserProperty]: user updated - ${_device.toJson()}');
+    log('[MemoryContextSource.updateUserProperty]: user updated - ${_user.toJson()}');
   }
 
   @override
