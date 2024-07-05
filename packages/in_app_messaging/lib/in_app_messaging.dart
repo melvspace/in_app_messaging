@@ -32,7 +32,7 @@ class InAppMessaging {
     final message = tuple?.message;
 
     if (tuple == null || message == null) {
-      log('[InAppMessaging]: No message triggered');
+      log('[InAppMessaging]: No message triggered for $trigger');
       return Future.value(false);
     }
 

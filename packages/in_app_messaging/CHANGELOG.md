@@ -1,3 +1,7 @@
+## 0.0.8
+
+- Make condition combinable with nulls
+
 ## 0.0.7
 
 - Add once condition
