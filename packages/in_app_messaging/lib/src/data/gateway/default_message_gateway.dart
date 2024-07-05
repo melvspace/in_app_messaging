@@ -19,6 +19,8 @@ class DefaultMessageGateway implements MessageGateway {
         _interactionSource = interactionSource,
         _contextSource = contextSource;
 
+  // TODO(@melvspace): 07/05/24 return list of valid messages
+  // TODO(@melvspace): 07/05/24 filter messages by concurrency priority?
   @override
   FutureOr<MessageWithContext?> evaluate(MessageTrigger trigger) async {
     Iterable<Message> messages =
@@ -36,7 +38,7 @@ class DefaultMessageGateway implements MessageGateway {
         device: await _contextSource.getDevice(),
       );
 
-      if (message.condition.evaluate(context)) {
+      if (message.condition?.evaluate(context) ?? true) {
         return MessageWithContext(
           message: message,
           context: context,

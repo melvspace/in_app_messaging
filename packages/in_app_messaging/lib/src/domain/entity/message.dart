@@ -5,6 +5,6 @@ abstract class Message {
   String get id;
   MessageType get type;
   List<MessageTrigger> get triggers;
-  MessageCondition get condition;
+  MessageCondition? get condition;
   Map<String, dynamic> get data;
 }

@@ -1,6 +1,6 @@
-import '../../../../in_app_messaging.dart';
+import 'package:in_app_messaging/in_app_messaging.dart';
 
-class DeliveryCondition extends MessageCondition {
+class OncePerDayCondition extends MessageCondition {
   @override
   bool evaluate(MessageContext context) {
     final lastSeenDate =

@@ -19,7 +19,7 @@ mixin _$SimpleMessage {
   String get id => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
   List<MessageTrigger> get triggers => throw _privateConstructorUsedError;
-  MessageCondition get condition => throw _privateConstructorUsedError;
+  MessageCondition? get condition => throw _privateConstructorUsedError;
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $SimpleMessageCopyWith<$Res> {
       {String id,
       MessageType type,
       List<MessageTrigger> triggers,
-      MessageCondition condition,
+      MessageCondition? condition,
       Map<String, dynamic> data});
 
   $MessageTypeCopyWith<$Res> get type;
@@ -59,7 +59,7 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
     Object? id = null,
     Object? type = null,
     Object? triggers = null,
-    Object? condition = null,
+    Object? condition = freezed,
     Object? data = null,
   }) {
     return _then(_value.copyWith(
@@ -75,10 +75,10 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
           ? _value.triggers
           : triggers // ignore: cast_nullable_to_non_nullable
               as List<MessageTrigger>,
-      condition: null == condition
+      condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as MessageCondition,
+              as MessageCondition?,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$SimpleMessageImplCopyWith<$Res>
       {String id,
       MessageType type,
       List<MessageTrigger> triggers,
-      MessageCondition condition,
+      MessageCondition? condition,
       Map<String, dynamic> data});
 
   @override
@@ -128,7 +128,7 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
     Object? id = null,
     Object? type = null,
     Object? triggers = null,
-    Object? condition = null,
+    Object? condition = freezed,
     Object? data = null,
   }) {
     return _then(_$SimpleMessageImpl(
@@ -144,10 +144,10 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
           ? _value._triggers
           : triggers // ignore: cast_nullable_to_non_nullable
               as List<MessageTrigger>,
-      condition: null == condition
+      condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as MessageCondition,
+              as MessageCondition?,
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ class _$SimpleMessageImpl implements _SimpleMessage {
   }
 
   @override
-  final MessageCondition condition;
+  final MessageCondition? condition;
   final Map<String, dynamic> _data;
   @override
   Map<String, dynamic> get data {
@@ -229,7 +229,7 @@ abstract class _SimpleMessage implements SimpleMessage {
       {required final String id,
       required final MessageType type,
       required final List<MessageTrigger> triggers,
-      required final MessageCondition condition,
+      required final MessageCondition? condition,
       required final Map<String, dynamic> data}) = _$SimpleMessageImpl;
 
   @override
@@ -239,7 +239,7 @@ abstract class _SimpleMessage implements SimpleMessage {
   @override
   List<MessageTrigger> get triggers;
   @override
-  MessageCondition get condition;
+  MessageCondition? get condition;
   @override
   Map<String, dynamic> get data;
   @override
