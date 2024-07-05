@@ -1,0 +1,30 @@
+name: in_app_messaging
+description: "Simple In-App Messaging for your application"
+version: 0.0.1
+repository: https://github.com/rIIh/in_app_messaging
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # utility
+  async: ^2.11.0
+  freezed_annotation: ^2.0.0
+  equatable: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # codegen
+  build_runner: ^2.4.11
+  freezed: ^2.5.2
+
+  # linting
+  flutter_lints: ^3.0.0
+
+flutter:

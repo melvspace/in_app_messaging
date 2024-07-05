@@ -1,0 +1,13 @@
+name: in_app_messaging_workspace
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  generate: |
+    melos exec --depends-on=build_runner -- dart run build_runner build -d
+
+  test: |
+    melos exec --dir-exists test --depends-on=test --depends-on allure_report -- dart test
+  

@@ -1,0 +1,14 @@
+name: in_app_messaging_drift
+description: Placeholder
+version: 0.0.1
+repository: https://github.com/rIIh/in_app_messaging
+
+environment:
+  sdk: ^3.4.3
+
+dependencies:
+  in_app_messaging: ^0.0.1
+
+dev_dependencies:
+  # lints
+  lints: ^3.0.0
