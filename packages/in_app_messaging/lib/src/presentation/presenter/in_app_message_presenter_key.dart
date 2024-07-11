@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'in_app_message_presenter.dart';
+import 'package:in_app_messaging/src/presentation/presenter/dynamic_message_presenter.dart';
 
-final GlobalKey<InAppMessagePresenterState> inAppMessagePresenterKey =
+final GlobalKey<DynamicMessagePresenterState> inAppMessagePresenterKey =
     GlobalKey();

@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import '../entity/message_trigger.dart';
-import '../entity/message_with_context.dart';
+import 'package:in_app_messaging/in_app_messaging.dart';
 
 abstract interface class MessageGateway {
-  FutureOr<MessageWithContext?> evaluate(MessageTrigger trigger);
+  FutureOr<DynamicMessageContext?> evaluate(
+    String event,
+    Map<String, dynamic> properties,
+  );
 
   FutureOr<void> interact<T>(String id, String key, T data);
 

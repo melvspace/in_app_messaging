@@ -1,16 +1,39 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:in_app_messaging/src/domain/entity/context/device_context.dart';
-import 'package:in_app_messaging/src/domain/entity/context/user_context.dart';
-import 'message_interactions.dart';
-import 'message_trigger.dart';
+import 'package:in_app_messaging/in_app_messaging.dart';
+import 'package:in_app_messaging/src/domain/entity/message_slot.dart';
+import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
+import 'package:in_app_messaging/src/domain/entity/messages/static_message.dart';
 
 part 'message_context.freezed.dart';
-part 'message_context.g.dart';
 
 /// MessageContext used to evaluate expression and possibly fill templates
-@freezed
+@Freezed(unionKey: 'type')
 class MessageContext with _$MessageContext {
-  const factory MessageContext({
+  const MessageContext._();
+
+  @override
+  Message get message;
+
+  const factory MessageContext.static({
+    required StaticMessage message,
+
+    /// For Trigger conditions
+    required MessageSlot slot,
+
+    /// For Interactions conditions
+    required MessageInteractions interactions,
+
+    /// For Interactions conditions
+    required UserContext user,
+    required DeviceContext device,
+
+    /// Interaction use case
+    required Interact interact,
+  }) = StaticMessageContext;
+
+  const factory MessageContext.dynamic({
+    required DynamicMessage message,
+
     /// For Trigger conditions
     required MessageTrigger trigger,
 
@@ -20,8 +43,8 @@ class MessageContext with _$MessageContext {
     /// For Interactions conditions
     required UserContext user,
     required DeviceContext device,
-  }) = _MessageContext;
 
-  factory MessageContext.fromJson(Map<String, dynamic> json) =>
-      _$MessageContextFromJson(json);
+    /// Interaction use case
+    required Interact interact,
+  }) = DynamicMessageContext;
 }

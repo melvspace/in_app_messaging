@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:async/async.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
 import '../../../in_app_messaging.dart';
 
 class DefaultMessageGateway implements MessageGateway {
@@ -10,6 +13,8 @@ class DefaultMessageGateway implements MessageGateway {
 
   final AsyncCache<List<Message>> _messages =
       AsyncCache(const Duration(minutes: 5));
+
+  final _events = <(String, DateTime, Map<String, dynamic>)>[];
 
   DefaultMessageGateway({
     required MessageSource messageSource,
@@ -22,28 +27,34 @@ class DefaultMessageGateway implements MessageGateway {
   // TODO(@melvspace): 07/05/24 return list of valid messages
   // TODO(@melvspace): 07/05/24 filter messages by concurrency priority?
   @override
-  FutureOr<MessageWithContext?> evaluate(MessageTrigger trigger) async {
-    Iterable<Message> messages =
+  FutureOr<DynamicMessageContext?> evaluate(
+      String event, Map<String, dynamic> properties) async {
+    Iterable<Message> allMessages =
         await _messages.fetch(() async => _messageSource.fetchMessages());
 
-    messages =
-        messages.where((element) => element.triggers.any(trigger.contains));
+    if (await handleSequences(event, properties, allMessages)
+        case DynamicMessageContext context) {
+      return context;
+    }
+
+    final eventTrigger = MessageEventTrigger(event: event, data: properties);
+    final messages = allMessages.whereType<DynamicMessage>().where(
+          (element) => element.triggers.any(eventTrigger.contains),
+        );
 
     for (final message in messages) {
       final interactions = await getInteractions(message.id);
-      final context = MessageContext(
-        trigger: trigger,
+      final context = DynamicMessageContext(
+        message: message,
+        trigger: eventTrigger,
         interactions: interactions,
         user: await _contextSource.getUser(),
         device: await _contextSource.getDevice(),
+        interact: Interact(message: message, gateway: this),
       );
 
       if (message.condition?.evaluate(context) ?? true) {
-        return MessageWithContext(
-          message: message,
-          context: context,
-          interact: Interact(message: message, gateway: this),
-        );
+        return context;
       }
     }
 
@@ -72,5 +83,71 @@ class DefaultMessageGateway implements MessageGateway {
   @override
   FutureOr<void> setUserProperty(String key, String? value) {
     return _contextSource.updateUserProperty(key, value);
+  }
+
+  /// it is not working properly
+  ///
+  /// How to handle event sequences?
+  ///
+  /// What rules?
+  @experimental
+  Future<DynamicMessageContext?> handleSequences(
+    String event,
+    Map<String, dynamic> properties,
+    Iterable<Message> allMessages,
+  ) async {
+    _events.add((event, DateTime.now(), properties));
+
+    for (final message in allMessages.whereType<DynamicMessage>()) {
+      final sequenceTriggers =
+          message.triggers.whereType<MessageEventSequenceTrigger>();
+      for (final trigger in sequenceTriggers) {
+        var triggerQueue = Queue<EventSequenceItem>.from(trigger.events);
+        var eventQueue =
+            Queue<(String, DateTime, Map<String, dynamic>)>.from(_events);
+
+        var triggerEvent = triggerQueue.removeLast();
+        double? delay;
+        DateTime? prevEventTime;
+
+        while (true) {
+          if (eventQueue.isEmpty) break;
+          if (triggerQueue.isEmpty) break;
+
+          var event = eventQueue.removeLast();
+          var delta =
+              prevEventTime != null ? event.$2.difference(prevEventTime) : null;
+          prevEventTime = event.$2;
+
+          if (triggerEvent.name == event.$1) {
+            if (delay case double seconds when delta!.inSeconds > seconds) {
+              break;
+            }
+
+            delay = triggerEvent.maxDelay;
+            if (eventQueue.isNotEmpty) {
+              triggerEvent = triggerQueue.removeLast();
+            }
+          }
+        }
+
+        if (triggerQueue.isEmpty) {
+          final interactions = await getInteractions(message.id);
+          final context = DynamicMessageContext(
+            message: message,
+            trigger: trigger,
+            interactions: interactions,
+            user: await _contextSource.getUser(),
+            device: await _contextSource.getDevice(),
+            interact: Interact(message: message, gateway: this),
+          );
+
+          if (message.condition?.evaluate(context) ?? true) {
+            return context;
+          }
+        }
+      }
+    }
+    return null;
   }
 }

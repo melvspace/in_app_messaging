@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
+
 import '../../../in_app_messaging.dart';
 
 class Interact {

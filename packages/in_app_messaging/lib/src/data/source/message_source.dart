@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../in_app_messaging.dart';
+import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
 
 abstract interface class MessageSource {
   FutureOr<List<Message>> fetchMessages();

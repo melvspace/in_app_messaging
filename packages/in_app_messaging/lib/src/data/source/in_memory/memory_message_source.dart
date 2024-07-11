@@ -1,5 +1,6 @@
+import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
+
 import '../message_source.dart';
-import '../../../domain/entity/message.dart';
 
 class MemoryMessageSource implements MessageSource {
   final List<Message> messages;

@@ -1,9 +1,12 @@
 export 'context/device_context.dart';
 export 'context/user_context.dart';
-export 'message.dart';
 export 'message_condition.dart';
 export 'message_context.dart';
 export 'message_interactions.dart';
+export 'message_slot.dart';
 export 'message_trigger.dart';
 export 'message_type.dart';
-export 'message_with_context.dart';
+export 'messages/dynamic_message.dart';
+export 'messages/message.dart';
+export 'messages/static_message.dart';
+export 'triggers/event_sequence_item.dart';

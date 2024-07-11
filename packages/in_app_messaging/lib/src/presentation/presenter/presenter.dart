@@ -1,3 +1,3 @@
-export 'in_app_message_builder.dart';
-export 'in_app_message_lifecycle.dart';
-export 'in_app_message_presenter.dart';
+export 'dynamic_message_handle_factory.dart';
+export 'dynamic_message_handle.dart';
+export 'dynamic_message_presenter.dart';

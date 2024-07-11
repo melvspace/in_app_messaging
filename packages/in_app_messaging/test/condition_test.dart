@@ -27,7 +27,10 @@ void main() {
       messageSource: MemoryMessageSource(messages: [
         SimpleMessage(
           id: 'android_message',
+          enabled: true,
           type: const MessageType(name: 'none'),
+          start: DateTime.now(),
+          end: null,
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
           condition: DevicePropertyCondition(
             key: 'platform',
@@ -38,7 +41,10 @@ void main() {
         ),
         SimpleMessage(
           id: 'version_message_equals',
+          enabled: true,
           type: const MessageType(name: 'none'),
+          start: DateTime.now(),
+          end: null,
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
           condition: DevicePropertyCondition(
             key: 'version',
@@ -49,7 +55,10 @@ void main() {
         ),
         SimpleMessage(
           id: 'version_message_greater',
+          enabled: true,
           type: const MessageType(name: 'none'),
+          start: DateTime.now(),
+          end: null,
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
           condition: DevicePropertyCondition(
             key: 'version',
@@ -60,7 +69,10 @@ void main() {
         ),
         SimpleMessage(
           id: 'john_doe_message',
+          enabled: true,
           type: const MessageType(name: 'none'),
+          start: DateTime.now(),
+          end: null,
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
           condition: UserPropertyCondition(
                 key: 'name',
@@ -83,8 +95,7 @@ void main() {
   test('device condition evaluates true', () async {
     contextSource.updateDeviceProperty('platform', 'Android');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message).has((it) => it?.message.id, 'id').equals('android_message');
   });
@@ -92,8 +103,7 @@ void main() {
   test('device condition evaluates false', () async {
     contextSource.updateDeviceProperty('platform', 'iOS');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message).has((it) => it?.message.id, 'id').isNull();
   });
@@ -102,8 +112,7 @@ void main() {
     contextSource.updateDeviceProperty('platform', 'Linux');
     contextSource.updateDeviceProperty('version', '5.4.1');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message)
         .has((it) => it?.message.id, 'id')
@@ -114,8 +123,7 @@ void main() {
     contextSource.updateDeviceProperty('platform', 'Linux');
     contextSource.updateDeviceProperty('version', '5.7.1');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message)
         .has((it) => it?.message.id, 'id')
@@ -126,8 +134,7 @@ void main() {
     contextSource.updateDeviceProperty('platform', 'Linux');
     contextSource.updateDeviceProperty('version', '5.3.0');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message).has((it) => it?.message.id, 'id').isNull();
   });
@@ -138,8 +145,7 @@ void main() {
     contextSource.updateUserProperty('name', 'John Doe');
     contextSource.updateUserProperty('email', 'john@doe.com');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message).has((it) => it?.message.id, 'id').equals('john_doe_message');
   });
@@ -150,8 +156,7 @@ void main() {
     contextSource.updateUserProperty('name', 'John Doe');
     contextSource.updateUserProperty('email', 'john2@doe.com');
 
-    final message = await gateway
-        .evaluate(const MessageTrigger.event(event: 'event', data: {}));
+    final message = await gateway.evaluate('event', {});
 
     check(message).has((it) => it?.message.id, 'id').isNull();
   });

@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: in_app_messaging,in_app_messaging_drift
+dependency_overrides:
+  in_app_messaging:
+    path: ../../packages/in_app_messaging
+  in_app_messaging_drift:
+    path: ../../packages/in_app_messaging_drift
