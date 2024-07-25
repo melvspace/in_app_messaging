@@ -1,3 +1,11 @@
+## 0.0.11
+
+- Fix trigger properties lost
+
+## 0.0.10
+
+- Use Json Logic package for conditions
+
 ## 0.0.8
 
 - Make condition combinable with nulls

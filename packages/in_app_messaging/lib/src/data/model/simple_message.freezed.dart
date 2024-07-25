@@ -14,19 +14,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+SimpleMessage _$SimpleMessageFromJson(Map<String, dynamic> json) {
+  return _SimpleMessage.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SimpleMessage {
   String get id => throw _privateConstructorUsedError;
   bool get enabled => throw _privateConstructorUsedError;
-  MessageType get type => throw _privateConstructorUsedError; //
+  MessageType get type =>
+      throw _privateConstructorUsedError; // display settings
   DateTime get start => throw _privateConstructorUsedError;
-  DateTime? get end =>
+  DateTime? get end => throw _privateConstructorUsedError;
+  int get priority =>
       throw _privateConstructorUsedError; // triggers and conditions
   List<MessageTrigger> get triggers => throw _privateConstructorUsedError;
-  MessageCondition? get condition =>
+  Map<String, dynamic>? get condition =>
       throw _privateConstructorUsedError; // custom properties
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SimpleMessageCopyWith<SimpleMessage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -44,8 +51,9 @@ abstract class $SimpleMessageCopyWith<$Res> {
       MessageType type,
       DateTime start,
       DateTime? end,
+      int priority,
       List<MessageTrigger> triggers,
-      MessageCondition? condition,
+      Map<String, dynamic>? condition,
       Map<String, dynamic> data});
 
   $MessageTypeCopyWith<$Res> get type;
@@ -69,6 +77,7 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
     Object? type = null,
     Object? start = null,
     Object? end = freezed,
+    Object? priority = null,
     Object? triggers = null,
     Object? condition = freezed,
     Object? data = null,
@@ -94,6 +103,10 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as int,
       triggers: null == triggers
           ? _value.triggers
           : triggers // ignore: cast_nullable_to_non_nullable
@@ -101,7 +114,7 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
       condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as MessageCondition?,
+              as Map<String, dynamic>?,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -132,8 +145,9 @@ abstract class _$$SimpleMessageImplCopyWith<$Res>
       MessageType type,
       DateTime start,
       DateTime? end,
+      int priority,
       List<MessageTrigger> triggers,
-      MessageCondition? condition,
+      Map<String, dynamic>? condition,
       Map<String, dynamic> data});
 
   @override
@@ -156,6 +170,7 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
     Object? type = null,
     Object? start = null,
     Object? end = freezed,
+    Object? priority = null,
     Object? triggers = null,
     Object? condition = freezed,
     Object? data = null,
@@ -181,14 +196,18 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as int,
       triggers: null == triggers
           ? _value._triggers
           : triggers // ignore: cast_nullable_to_non_nullable
               as List<MessageTrigger>,
       condition: freezed == condition
-          ? _value.condition
+          ? _value._condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as MessageCondition?,
+              as Map<String, dynamic>?,
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -198,19 +217,24 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$SimpleMessageImpl implements _SimpleMessage {
   const _$SimpleMessageImpl(
       {required this.id,
       required this.enabled,
       required this.type,
       required this.start,
-      required this.end,
+      this.end,
+      this.priority = 0,
       required final List<MessageTrigger> triggers,
-      required this.condition,
+      final Map<String, dynamic>? condition,
       required final Map<String, dynamic> data})
       : _triggers = triggers,
+        _condition = condition,
         _data = data;
+
+  factory _$SimpleMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SimpleMessageImplFromJson(json);
 
   @override
   final String id;
@@ -218,11 +242,14 @@ class _$SimpleMessageImpl implements _SimpleMessage {
   final bool enabled;
   @override
   final MessageType type;
-//
+// display settings
   @override
   final DateTime start;
   @override
   final DateTime? end;
+  @override
+  @JsonKey()
+  final int priority;
 // triggers and conditions
   final List<MessageTrigger> _triggers;
 // triggers and conditions
@@ -233,8 +260,16 @@ class _$SimpleMessageImpl implements _SimpleMessage {
     return EqualUnmodifiableListView(_triggers);
   }
 
+  final Map<String, dynamic>? _condition;
   @override
-  final MessageCondition? condition;
+  Map<String, dynamic>? get condition {
+    final value = _condition;
+    if (value == null) return null;
+    if (_condition is EqualUnmodifiableMapView) return _condition;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
 // custom properties
   final Map<String, dynamic> _data;
 // custom properties
@@ -247,7 +282,7 @@ class _$SimpleMessageImpl implements _SimpleMessage {
 
   @override
   String toString() {
-    return 'SimpleMessage(id: $id, enabled: $enabled, type: $type, start: $start, end: $end, triggers: $triggers, condition: $condition, data: $data)';
+    return 'SimpleMessage(id: $id, enabled: $enabled, type: $type, start: $start, end: $end, priority: $priority, triggers: $triggers, condition: $condition, data: $data)';
   }
 
   @override
@@ -260,12 +295,15 @@ class _$SimpleMessageImpl implements _SimpleMessage {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
             const DeepCollectionEquality().equals(other._triggers, _triggers) &&
-            (identical(other.condition, condition) ||
-                other.condition == condition) &&
+            const DeepCollectionEquality()
+                .equals(other._condition, _condition) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -274,8 +312,9 @@ class _$SimpleMessageImpl implements _SimpleMessage {
       type,
       start,
       end,
+      priority,
       const DeepCollectionEquality().hash(_triggers),
-      condition,
+      const DeepCollectionEquality().hash(_condition),
       const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
@@ -283,6 +322,13 @@ class _$SimpleMessageImpl implements _SimpleMessage {
   @pragma('vm:prefer-inline')
   _$$SimpleMessageImplCopyWith<_$SimpleMessageImpl> get copyWith =>
       __$$SimpleMessageImplCopyWithImpl<_$SimpleMessageImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SimpleMessageImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SimpleMessage implements SimpleMessage {
@@ -291,10 +337,14 @@ abstract class _SimpleMessage implements SimpleMessage {
       required final bool enabled,
       required final MessageType type,
       required final DateTime start,
-      required final DateTime? end,
+      final DateTime? end,
+      final int priority,
       required final List<MessageTrigger> triggers,
-      required final MessageCondition? condition,
+      final Map<String, dynamic>? condition,
       required final Map<String, dynamic> data}) = _$SimpleMessageImpl;
+
+  factory _SimpleMessage.fromJson(Map<String, dynamic> json) =
+      _$SimpleMessageImpl.fromJson;
 
   @override
   String get id;
@@ -302,14 +352,16 @@ abstract class _SimpleMessage implements SimpleMessage {
   bool get enabled;
   @override
   MessageType get type;
-  @override //
+  @override // display settings
   DateTime get start;
   @override
   DateTime? get end;
+  @override
+  int get priority;
   @override // triggers and conditions
   List<MessageTrigger> get triggers;
   @override
-  MessageCondition? get condition;
+  Map<String, dynamic>? get condition;
   @override // custom properties
   Map<String, dynamic> get data;
   @override

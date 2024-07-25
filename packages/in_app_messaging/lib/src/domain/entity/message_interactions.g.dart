@@ -10,16 +10,14 @@ _$MessageInteractionsImpl _$$MessageInteractionsImplFromJson(
         Map<String, dynamic> json) =>
     _$MessageInteractionsImpl(
       message: json['message'] as String,
-      seenDates: (json['seen_dates'] as List<dynamic>)
-          .map((e) => DateTime.parse(e as String))
+      seenEntries: (json['seen_entries'] as List<dynamic>)
+          .map((e) => MessageSeenEntry.fromJson(e as Map<String, dynamic>))
           .toList(),
-      additional: json['additional'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$$MessageInteractionsImplToJson(
         _$MessageInteractionsImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'seen_dates': instance.seenDates.map((e) => e.toIso8601String()).toList(),
-      'additional': instance.additional,
+      'seen_entries': instance.seenEntries,
     };

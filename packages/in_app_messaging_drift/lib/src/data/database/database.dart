@@ -14,21 +14,50 @@ class InAppMessagingDatabase extends $InAppMessagingDatabase {
       : super(executor ?? openConnection('in_app_messaging', 'db'));
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
       onCreate: (m) => m.createAll(),
-      onUpgrade: (m, from, to) {
+      onUpgrade: (m, from, to) async {
         if (to < from) {
-          // TODO(@melvspace): 01/09/24 handle downgrade
+          await _reset(m);
+          return;
         }
 
         return stepByStep(
           from0To1: (m, schema) async {},
+          from1To2: (m, schema) async {
+            await m.addColumn(
+              inAppMessageSeenDates,
+              inAppMessageSeenDates.trigger,
+            );
+            await m.addColumn(
+              inAppMessageSeenDates,
+              inAppMessageSeenDates.triggerProperties,
+            );
+          },
         )(m, from, to);
       },
     );
+  }
+
+  Future<void> _reset(Migrator m) async {
+    final entities = await m.database
+        .customSelect(
+          "select name, type from sqlite_master where type in ('table', 'index', 'view', 'trigger');",
+        )
+        .get();
+
+    for (final entity in entities) {
+      final name = entity.read<String>('name');
+      final type = entity.read<String>('type');
+
+      await m.database
+          .customStatement('DROP ${type.toUpperCase()} IF EXISTS $name;');
+    }
+
+    await m.createAll();
   }
 }

@@ -1,7 +1,7 @@
+import 'package:in_app_messaging/src/core/typedefs.dart';
 import 'package:in_app_messaging/src/data/model/comparison/comparison_type.dart';
 
 import '../../../domain/entity/message_condition.dart';
-import '../../../domain/entity/message_context.dart';
 
 class UserPropertyCondition extends MessageCondition {
   final String key;
@@ -15,7 +15,35 @@ class UserPropertyCondition extends MessageCondition {
   });
 
   @override
-  bool evaluate(MessageContext context) {
-    return type.compare(context.user.getByKey(key), value);
+  JsonMap asJsonLogic() {
+    final negate = switch (type) {
+      ComparisonType.doesNotContains => true,
+      _ => false,
+    };
+
+    final op = switch (type) {
+      ComparisonType.exactlyMatches => '==',
+      ComparisonType.contains => 'in',
+      ComparisonType.doesNotContains => 'in',
+      ComparisonType.containsRegex => 'in',
+      ComparisonType.greater => '>',
+      ComparisonType.greaterOrEquals => '>=',
+      ComparisonType.less => '<',
+      ComparisonType.lessOrEquals => '<=',
+      ComparisonType.equals => '==',
+      ComparisonType.notEquals => '!=',
+    };
+
+    final rule = [
+      {"var": 'user.$key'},
+      value
+    ];
+
+    return {
+      if (negate) //
+        '!': {op: rule}
+      else
+        op: rule,
+    };
   }
 }

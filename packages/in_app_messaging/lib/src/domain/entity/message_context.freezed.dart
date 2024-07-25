@@ -24,9 +24,6 @@ mixin _$MessageContext {
   /// For Interactions conditions
   UserContext get user => throw _privateConstructorUsedError;
   DeviceContext get device => throw _privateConstructorUsedError;
-
-  /// Interaction use case
-  Interact get interact => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -34,16 +31,14 @@ mixin _$MessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         static,
     required TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         dynamic,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,16 +49,14 @@ mixin _$MessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult? Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,16 +67,14 @@ mixin _$MessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
     required TResult orElse(),
   }) =>
@@ -122,8 +113,7 @@ abstract class $MessageContextCopyWith<$Res> {
   $Res call(
       {MessageInteractions interactions,
       UserContext user,
-      DeviceContext device,
-      Interact interact});
+      DeviceContext device});
 
   $MessageInteractionsCopyWith<$Res> get interactions;
   $UserContextCopyWith<$Res> get user;
@@ -146,7 +136,6 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
     Object? interactions = null,
     Object? user = null,
     Object? device = null,
-    Object? interact = null,
   }) {
     return _then(_value.copyWith(
       interactions: null == interactions
@@ -161,10 +150,6 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
               as DeviceContext,
-      interact: null == interact
-          ? _value.interact
-          : interact // ignore: cast_nullable_to_non_nullable
-              as Interact,
     ) as $Val);
   }
 
@@ -206,8 +191,7 @@ abstract class _$$StaticMessageContextImplCopyWith<$Res>
       MessageSlot slot,
       MessageInteractions interactions,
       UserContext user,
-      DeviceContext device,
-      Interact interact});
+      DeviceContext device});
 
   $MessageSlotCopyWith<$Res> get slot;
   @override
@@ -234,7 +218,6 @@ class __$$StaticMessageContextImplCopyWithImpl<$Res>
     Object? interactions = null,
     Object? user = null,
     Object? device = null,
-    Object? interact = null,
   }) {
     return _then(_$StaticMessageContextImpl(
       message: null == message
@@ -257,10 +240,6 @@ class __$$StaticMessageContextImplCopyWithImpl<$Res>
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
               as DeviceContext,
-      interact: null == interact
-          ? _value.interact
-          : interact // ignore: cast_nullable_to_non_nullable
-              as Interact,
     ));
   }
 
@@ -275,14 +254,14 @@ class __$$StaticMessageContextImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@experimental
 class _$StaticMessageContextImpl extends StaticMessageContext {
   const _$StaticMessageContextImpl(
       {required this.message,
       required this.slot,
       required this.interactions,
       required this.user,
-      required this.device,
-      required this.interact})
+      required this.device})
       : super._();
 
   @override
@@ -302,13 +281,9 @@ class _$StaticMessageContextImpl extends StaticMessageContext {
   @override
   final DeviceContext device;
 
-  /// Interaction use case
-  @override
-  final Interact interact;
-
   @override
   String toString() {
-    return 'MessageContext.static(message: $message, slot: $slot, interactions: $interactions, user: $user, device: $device, interact: $interact)';
+    return 'MessageContext.static(message: $message, slot: $slot, interactions: $interactions, user: $user, device: $device)';
   }
 
   @override
@@ -321,14 +296,12 @@ class _$StaticMessageContextImpl extends StaticMessageContext {
             (identical(other.interactions, interactions) ||
                 other.interactions == interactions) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.device, device) || other.device == device) &&
-            (identical(other.interact, interact) ||
-                other.interact == interact));
+            (identical(other.device, device) || other.device == device));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, slot, interactions, user, device, interact);
+  int get hashCode =>
+      Object.hash(runtimeType, message, slot, interactions, user, device);
 
   @JsonKey(ignore: true)
   @override
@@ -346,19 +319,17 @@ class _$StaticMessageContextImpl extends StaticMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         static,
     required TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         dynamic,
   }) {
-    return static(message, slot, interactions, user, device, interact);
+    return static(message, slot, interactions, user, device);
   }
 
   @override
@@ -369,19 +340,17 @@ class _$StaticMessageContextImpl extends StaticMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult? Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
   }) {
-    return static?.call(message, slot, interactions, user, device, interact);
+    return static?.call(message, slot, interactions, user, device);
   }
 
   @override
@@ -392,21 +361,19 @@ class _$StaticMessageContextImpl extends StaticMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
     required TResult orElse(),
   }) {
     if (static != null) {
-      return static(message, slot, interactions, user, device, interact);
+      return static(message, slot, interactions, user, device);
     }
     return orElse();
   }
@@ -449,8 +416,7 @@ abstract class StaticMessageContext extends MessageContext {
       required final MessageSlot slot,
       required final MessageInteractions interactions,
       required final UserContext user,
-      required final DeviceContext device,
-      required final Interact interact}) = _$StaticMessageContextImpl;
+      required final DeviceContext device}) = _$StaticMessageContextImpl;
   const StaticMessageContext._() : super._();
 
   @override
@@ -468,10 +434,6 @@ abstract class StaticMessageContext extends MessageContext {
   UserContext get user;
   @override
   DeviceContext get device;
-  @override
-
-  /// Interaction use case
-  Interact get interact;
   @override
   @JsonKey(ignore: true)
   _$$StaticMessageContextImplCopyWith<_$StaticMessageContextImpl>
@@ -492,8 +454,7 @@ abstract class _$$DynamicMessageContextImplCopyWith<$Res>
       MessageTrigger trigger,
       MessageInteractions interactions,
       UserContext user,
-      DeviceContext device,
-      Interact interact});
+      DeviceContext device});
 
   $MessageTriggerCopyWith<$Res> get trigger;
   @override
@@ -520,7 +481,6 @@ class __$$DynamicMessageContextImplCopyWithImpl<$Res>
     Object? interactions = null,
     Object? user = null,
     Object? device = null,
-    Object? interact = null,
   }) {
     return _then(_$DynamicMessageContextImpl(
       message: null == message
@@ -543,10 +503,6 @@ class __$$DynamicMessageContextImplCopyWithImpl<$Res>
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
               as DeviceContext,
-      interact: null == interact
-          ? _value.interact
-          : interact // ignore: cast_nullable_to_non_nullable
-              as Interact,
     ));
   }
 
@@ -567,8 +523,7 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
       required this.trigger,
       required this.interactions,
       required this.user,
-      required this.device,
-      required this.interact})
+      required this.device})
       : super._();
 
   @override
@@ -588,13 +543,9 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   final DeviceContext device;
 
-  /// Interaction use case
-  @override
-  final Interact interact;
-
   @override
   String toString() {
-    return 'MessageContext.dynamic(message: $message, trigger: $trigger, interactions: $interactions, user: $user, device: $device, interact: $interact)';
+    return 'MessageContext.dynamic(message: $message, trigger: $trigger, interactions: $interactions, user: $user, device: $device)';
   }
 
   @override
@@ -607,14 +558,12 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
             (identical(other.interactions, interactions) ||
                 other.interactions == interactions) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.device, device) || other.device == device) &&
-            (identical(other.interact, interact) ||
-                other.interact == interact));
+            (identical(other.device, device) || other.device == device));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, message, trigger, interactions, user, device, interact);
+  int get hashCode =>
+      Object.hash(runtimeType, message, trigger, interactions, user, device);
 
   @JsonKey(ignore: true)
   @override
@@ -631,19 +580,17 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         static,
     required TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)
+            DeviceContext device)
         dynamic,
   }) {
-    return dynamic(message, trigger, interactions, user, device, interact);
+    return dynamic(message, trigger, interactions, user, device);
   }
 
   @override
@@ -654,20 +601,17 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult? Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
   }) {
-    return dynamic?.call(
-        message, trigger, interactions, user, device, interact);
+    return dynamic?.call(message, trigger, interactions, user, device);
   }
 
   @override
@@ -678,21 +622,19 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
             MessageSlot slot,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         static,
     TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
             UserContext user,
-            DeviceContext device,
-            Interact interact)?
+            DeviceContext device)?
         dynamic,
     required TResult orElse(),
   }) {
     if (dynamic != null) {
-      return dynamic(message, trigger, interactions, user, device, interact);
+      return dynamic(message, trigger, interactions, user, device);
     }
     return orElse();
   }
@@ -735,8 +677,7 @@ abstract class DynamicMessageContext extends MessageContext {
       required final MessageTrigger trigger,
       required final MessageInteractions interactions,
       required final UserContext user,
-      required final DeviceContext device,
-      required final Interact interact}) = _$DynamicMessageContextImpl;
+      required final DeviceContext device}) = _$DynamicMessageContextImpl;
   const DynamicMessageContext._() : super._();
 
   @override
@@ -754,10 +695,6 @@ abstract class DynamicMessageContext extends MessageContext {
   UserContext get user;
   @override
   DeviceContext get device;
-  @override
-
-  /// Interaction use case
-  Interact get interact;
   @override
   @JsonKey(ignore: true)
   _$$DynamicMessageContextImplCopyWith<_$DynamicMessageContextImpl>

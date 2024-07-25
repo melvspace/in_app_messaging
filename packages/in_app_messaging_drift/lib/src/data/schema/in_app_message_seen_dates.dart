@@ -5,4 +5,8 @@ class InAppMessageSeenDates extends Table {
 
   TextColumn get message => text()();
   DateTimeColumn get seen => dateTime()();
+
+  /// seen for trigger
+  TextColumn get trigger => text().nullable()();
+  TextColumn get triggerProperties => text().nullable()();
 }

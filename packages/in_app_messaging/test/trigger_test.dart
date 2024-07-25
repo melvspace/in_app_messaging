@@ -1,10 +1,10 @@
 import 'package:checks/checks.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
-import 'package:in_app_messaging/src/domain/entity/triggers/event_sequence_item.dart';
 import 'package:test/test.dart';
 
 void main() {
   test(
+    skip: 'not implemented',
     'test event sequence',
     () {
       InAppMessaging.initialize(
@@ -25,7 +25,7 @@ void main() {
                   data: [null, null],
                 ),
               ],
-              condition: OnceCondition(),
+              condition: OnceCondition().asJsonLogic(),
               data: {},
             ),
           ]),
@@ -50,6 +50,5 @@ void main() {
         InAppMessaging.instance.trigger('event_2', {}),
       ).completes((it) => it.equals(true));
     },
-    skip: 'not implemented',
   );
 }

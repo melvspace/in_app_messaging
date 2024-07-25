@@ -1,5 +1,6 @@
+import 'package:in_app_messaging/src/core/typedefs.dart';
+
 import '../../../domain/entity/message_condition.dart';
-import '../../../domain/entity/message_context.dart';
 
 class AndCondition extends MessageCondition {
   final MessageCondition left;
@@ -8,7 +9,13 @@ class AndCondition extends MessageCondition {
   AndCondition(this.left, this.right);
 
   @override
-  bool evaluate(MessageContext context) {
-    return left.evaluate(context) && right.evaluate(context);
+  @override
+  JsonMap asJsonLogic() {
+    return {
+      "and": [
+        left.asJsonLogic(),
+        right.asJsonLogic(),
+      ]
+    };
   }
 }

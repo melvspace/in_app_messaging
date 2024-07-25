@@ -3,10 +3,9 @@ library in_app_messaging;
 import 'dart:async';
 import 'dart:developer';
 
-import 'src/domain/entity/messages/message.dart';
-import 'src/domain/gateway/message_gateway.dart';
-import 'src/presentation/presenter/in_app_message_presenter_key.dart';
+import 'package:in_app_messaging/in_app_messaging.dart';
 
+import 'src/presentation/presenter/in_app_message_presenter_key.dart';
 export 'src/data/data.dart';
 export 'src/domain/domain.dart';
 export 'src/presentation/presentation.dart';
@@ -40,7 +39,7 @@ class InAppMessaging {
     log('[InAppMessaging]: Message(${message.id}) of ${message.type.runtimeType} type triggered and enqueued');
     return inAppMessagePresenterKey.currentState //
             ?.enqueue(context)
-            .then((value) => _markSeen(value, message))
+            .then((value) => _markSeen(value, context))
             .then((value) => _logSeen(value, message)) ??
         Future.value(false);
   }
@@ -63,9 +62,22 @@ class InAppMessaging {
     return seen;
   }
 
-  Future<bool> _markSeen(bool value, Message message) async {
+  Future<bool> _markSeen(bool value, MessageContext context) async {
     if (value) {
-      await gateway.markSeen(message.id);
+      await gateway.markSeen(
+        id: context.message.id,
+        trigger: context.map(
+          static: (value) => value.slot.id,
+          dynamic: (value) => value.trigger.mapOrNull(
+            event: (value) => value.event,
+          ),
+        ),
+        triggerProperties: context.mapOrNull(
+          dynamic: (value) => value.trigger.mapOrNull(
+            event: (value) => value.data,
+          ),
+        ),
+      );
     }
 
     return value;

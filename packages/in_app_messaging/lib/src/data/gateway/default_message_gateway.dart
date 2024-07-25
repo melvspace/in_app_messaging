@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:async/async.dart';
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
+import 'package:in_app_messaging/src/core/jsonlogic.dart';
 import '../../../in_app_messaging.dart';
 
 class DefaultMessageGateway implements MessageGateway {
@@ -28,7 +29,9 @@ class DefaultMessageGateway implements MessageGateway {
   // TODO(@melvspace): 07/05/24 filter messages by concurrency priority?
   @override
   FutureOr<DynamicMessageContext?> evaluate(
-      String event, Map<String, dynamic> properties) async {
+    String event,
+    Map<String, dynamic> properties,
+  ) async {
     Iterable<Message> allMessages =
         await _messages.fetch(() async => _messageSource.fetchMessages());
 
@@ -37,10 +40,17 @@ class DefaultMessageGateway implements MessageGateway {
       return context;
     }
 
+    final now = DateTime.now();
     final eventTrigger = MessageEventTrigger(event: event, data: properties);
-    final messages = allMessages.whereType<DynamicMessage>().where(
-          (element) => element.triggers.any(eventTrigger.contains),
-        );
+    final messages = allMessages
+        .whereType<DynamicMessage>()
+        .where(
+          (message) =>
+              now.isAfter(message.start) &&
+              (message.end == null || now.isBefore(message.end!)) &&
+              message.triggers.any(eventTrigger.contains),
+        )
+        .sortedBy<num>((element) => element.priority);
 
     for (final message in messages) {
       final interactions = await getInteractions(message.id);
@@ -50,10 +60,16 @@ class DefaultMessageGateway implements MessageGateway {
         interactions: interactions,
         user: await _contextSource.getUser(),
         device: await _contextSource.getDevice(),
-        interact: Interact(message: message, gateway: this),
       );
 
-      if (message.condition?.evaluate(context) ?? true) {
+      final result = message.condition != null
+          ? defaultJsonLogic.apply(
+              message.condition,
+              _buildConditionContext(properties, event, context),
+            )
+          : true;
+
+      if (result == true) {
         return context;
       }
     }
@@ -66,13 +82,16 @@ class DefaultMessageGateway implements MessageGateway {
   }
 
   @override
-  FutureOr<void> interact<T>(String id, String key, T data) {
-    return _interactionSource.interact(id, key, data);
-  }
-
-  @override
-  FutureOr<void> markSeen(String id) {
-    return _interactionSource.markSeen(id);
+  FutureOr<void> markSeen({
+    required String id,
+    String? trigger,
+    Map<String, dynamic>? triggerProperties,
+  }) {
+    return _interactionSource.markSeen(
+      id: id,
+      trigger: trigger,
+      triggerProperties: triggerProperties,
+    );
   }
 
   @override
@@ -139,15 +158,45 @@ class DefaultMessageGateway implements MessageGateway {
             interactions: interactions,
             user: await _contextSource.getUser(),
             device: await _contextSource.getDevice(),
-            interact: Interact(message: message, gateway: this),
           );
 
-          if (message.condition?.evaluate(context) ?? true) {
+          final result = message.condition != null
+              ? defaultJsonLogic.apply(
+                  message.condition,
+                  _buildConditionContext(properties, event, context),
+                )
+              : true;
+
+          if (result == true) {
             return context;
           }
         }
       }
     }
     return null;
+  }
+
+  Map<String, Map<String, Object?>> _buildConditionContext(
+    Map<String, dynamic> properties,
+    String event,
+    DynamicMessageContext context,
+  ) {
+    final conditionContext = {
+      'event': {
+        ...properties,
+        'name': event,
+      },
+      'user': context.user.toJson(),
+      'device': context.device.toJson(),
+      'interactions': {
+        'last_seen': context.interactions.seenEntries.lastOrNull //
+            ?.toJson(),
+        'seen_entries': context.interactions.seenEntries //
+            .map((e) => e.toJson())
+            .toList(),
+      }
+    };
+
+    return conditionContext;
   }
 }

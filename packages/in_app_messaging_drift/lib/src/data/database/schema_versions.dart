@@ -80,8 +80,69 @@ i1.GeneratedColumn<String> _column_3(String aliasedName) =>
 i1.GeneratedColumn<String> _column_4(String aliasedName) =>
     i1.GeneratedColumn<String>('interactions', aliasedName, false,
         type: i1.DriftSqlType.string);
+
+final class Schema2 extends i0.VersionedSchema {
+  Schema2({required super.database}) : super(version: 2);
+  @override
+  late final List<i1.DatabaseSchemaEntity> entities = [
+    inAppMessageSeenDates,
+    inAppMessageInteractions,
+  ];
+  late final Shape2 inAppMessageSeenDates = Shape2(
+      source: i0.VersionedTable(
+        entityName: 'in_app_message_seen_dates',
+        withoutRowId: false,
+        isStrict: false,
+        tableConstraints: [],
+        columns: [
+          _column_0,
+          _column_1,
+          _column_2,
+          _column_5,
+          _column_6,
+        ],
+        attachedDatabase: database,
+      ),
+      alias: null);
+  late final Shape1 inAppMessageInteractions = Shape1(
+      source: i0.VersionedTable(
+        entityName: 'in_app_message_interactions',
+        withoutRowId: false,
+        isStrict: false,
+        tableConstraints: [],
+        columns: [
+          _column_0,
+          _column_3,
+          _column_4,
+        ],
+        attachedDatabase: database,
+      ),
+      alias: null);
+}
+
+class Shape2 extends i0.VersionedTable {
+  Shape2({required super.source, required super.alias}) : super.aliased();
+  i1.GeneratedColumn<int> get id =>
+      columnsByName['id']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<String> get message =>
+      columnsByName['message']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<DateTime> get seen =>
+      columnsByName['seen']! as i1.GeneratedColumn<DateTime>;
+  i1.GeneratedColumn<String> get trigger =>
+      columnsByName['trigger']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get triggerProperties =>
+      columnsByName['trigger_properties']! as i1.GeneratedColumn<String>;
+}
+
+i1.GeneratedColumn<String> _column_5(String aliasedName) =>
+    i1.GeneratedColumn<String>('trigger', aliasedName, true,
+        type: i1.DriftSqlType.string);
+i1.GeneratedColumn<String> _column_6(String aliasedName) =>
+    i1.GeneratedColumn<String>('trigger_properties', aliasedName, true,
+        type: i1.DriftSqlType.string);
 i0.MigrationStepWithVersion migrationSteps({
   required Future<void> Function(i1.Migrator m, Schema1 schema) from0To1,
+  required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
 }) {
   return (currentVersion, database) async {
     switch (currentVersion) {
@@ -90,6 +151,11 @@ i0.MigrationStepWithVersion migrationSteps({
         final migrator = i1.Migrator(database, schema);
         await from0To1(migrator, schema);
         return 1;
+      case 1:
+        final schema = Schema2(database: database);
+        final migrator = i1.Migrator(database, schema);
+        await from1To2(migrator, schema);
+        return 2;
       default:
         throw ArgumentError.value('Unknown migration from $currentVersion');
     }
@@ -98,8 +164,10 @@ i0.MigrationStepWithVersion migrationSteps({
 
 i1.OnUpgrade stepByStep({
   required Future<void> Function(i1.Migrator m, Schema1 schema) from0To1,
+  required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
 }) =>
     i0.VersionedSchema.stepByStepHelper(
         step: migrationSteps(
       from0To1: from0To1,
+      from1To2: from1To2,
     ));

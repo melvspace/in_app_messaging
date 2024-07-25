@@ -1,3 +1,15 @@
+## 0.0.11
+
+- sync with in_app_messaging
+
+## 0.0.10
+
+- update to in_app_messaging@0.0.10 requirements
+
+## 0.0.4
+
+- update seen model
+
 ## 0.0.4
 
 - adjust pubspec constraints

@@ -361,14 +361,21 @@ packages:
       path: "../../packages/in_app_messaging"
       relative: true
     source: path
-    version: "0.0.8"
+    version: "0.0.9"
   in_app_messaging_drift:
     dependency: "direct main"
     description:
       path: "../../packages/in_app_messaging_drift"
       relative: true
     source: path
-    version: "0.0.4"
+    version: "0.0.9"
+  in_app_messaging_json_logic:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/in_app_messaging_json_logic"
+      relative: true
+    source: path
+    version: "2.1.0"
   io:
     dependency: transitive
     description:

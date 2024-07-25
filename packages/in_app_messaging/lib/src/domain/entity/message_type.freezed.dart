@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MessageType _$MessageTypeFromJson(Map<String, dynamic> json) {
+  return _MessageType.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MessageType {
   String get name => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MessageTypeCopyWith<MessageType> get copyWith =>
       throw _privateConstructorUsedError;
@@ -90,9 +95,12 @@ class __$$MessageTypeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MessageTypeImpl implements _MessageType {
   const _$MessageTypeImpl({required this.name});
+
+  factory _$MessageTypeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageTypeImplFromJson(json);
 
   @override
   final String name;
@@ -110,6 +118,7 @@ class _$MessageTypeImpl implements _MessageType {
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name);
 
@@ -118,10 +127,20 @@ class _$MessageTypeImpl implements _MessageType {
   @pragma('vm:prefer-inline')
   _$$MessageTypeImplCopyWith<_$MessageTypeImpl> get copyWith =>
       __$$MessageTypeImplCopyWithImpl<_$MessageTypeImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageTypeImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _MessageType implements MessageType {
   const factory _MessageType({required final String name}) = _$MessageTypeImpl;
+
+  factory _MessageType.fromJson(Map<String, dynamic> json) =
+      _$MessageTypeImpl.fromJson;
 
   @override
   String get name;

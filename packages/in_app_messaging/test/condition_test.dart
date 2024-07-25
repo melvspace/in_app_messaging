@@ -36,7 +36,7 @@ void main() {
             key: 'platform',
             value: 'Android',
             type: ComparisonType.exactlyMatches,
-          ),
+          ).asJsonLogic(),
           data: {},
         ),
         SimpleMessage(
@@ -50,7 +50,7 @@ void main() {
             key: 'version',
             type: ComparisonType.equals,
             value: '5.4.1',
-          ),
+          ).asJsonLogic(),
           data: {},
         ),
         SimpleMessage(
@@ -64,7 +64,7 @@ void main() {
             key: 'version',
             type: ComparisonType.greater,
             value: '5.6.0',
-          ),
+          ).asJsonLogic(),
           data: {},
         ),
         SimpleMessage(
@@ -74,16 +74,17 @@ void main() {
           start: DateTime.now(),
           end: null,
           triggers: [const MessageTrigger.event(event: 'event', data: {})],
-          condition: UserPropertyCondition(
-                key: 'name',
-                type: ComparisonType.exactlyMatches,
-                value: 'John Doe',
-              ) &
-              UserPropertyCondition(
-                key: 'email',
-                type: ComparisonType.exactlyMatches,
-                value: 'john@doe.com',
-              ),
+          condition: (UserPropertyCondition(
+                    key: 'name',
+                    type: ComparisonType.exactlyMatches,
+                    value: 'John Doe',
+                  ) &
+                  UserPropertyCondition(
+                    key: 'email',
+                    type: ComparisonType.exactlyMatches,
+                    value: 'john@doe.com',
+                  ))
+              .asJsonLogic(),
           data: {},
         ),
       ]),

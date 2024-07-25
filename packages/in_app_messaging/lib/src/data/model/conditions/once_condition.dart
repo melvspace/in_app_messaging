@@ -1,8 +1,14 @@
-import 'package:in_app_messaging/in_app_messaging.dart';
+import 'package:in_app_messaging/src/core/typedefs.dart';
+import 'package:in_app_messaging/src/domain/entity/message_condition.dart';
 
 class OnceCondition extends MessageCondition {
   @override
-  bool evaluate(MessageContext context) {
-    return context.interactions.seenDates.isEmpty;
+  JsonMap asJsonLogic() {
+    return {
+      '==': [
+        {'var': 'interactions.last_seen'},
+        null
+      ],
+    };
   }
 }

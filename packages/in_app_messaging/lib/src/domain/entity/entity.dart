@@ -1,5 +1,6 @@
 export 'context/device_context.dart';
 export 'context/user_context.dart';
+export 'interaction/message_seen_entry.dart';
 export 'message_condition.dart';
 export 'message_context.dart';
 export 'message_interactions.dart';

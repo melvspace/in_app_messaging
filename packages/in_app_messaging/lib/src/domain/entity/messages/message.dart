@@ -1,4 +1,5 @@
 import 'package:in_app_messaging/in_app_messaging.dart';
+import 'package:in_app_messaging/src/core/typedefs.dart';
 
 /// Message template
 abstract class Message {
@@ -9,7 +10,9 @@ abstract class Message {
   DateTime get start;
   DateTime? get end;
 
-  MessageCondition? get condition;
+  JsonMap? get condition;
 
-  Map<String, dynamic> get data;
+  JsonMap get data;
+
+  JsonMap toJson();
 }

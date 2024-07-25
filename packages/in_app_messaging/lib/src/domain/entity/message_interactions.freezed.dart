@@ -24,10 +24,7 @@ mixin _$MessageInteractions {
   String get message => throw _privateConstructorUsedError;
 
   /// dates when user seend this message
-  List<DateTime> get seenDates => throw _privateConstructorUsedError;
-
-  /// additional dynamic interactions
-  Map<String, dynamic> get additional => throw _privateConstructorUsedError;
+  List<MessageSeenEntry> get seenEntries => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,10 +38,7 @@ abstract class $MessageInteractionsCopyWith<$Res> {
           MessageInteractions value, $Res Function(MessageInteractions) then) =
       _$MessageInteractionsCopyWithImpl<$Res, MessageInteractions>;
   @useResult
-  $Res call(
-      {String message,
-      List<DateTime> seenDates,
-      Map<String, dynamic> additional});
+  $Res call({String message, List<MessageSeenEntry> seenEntries});
 }
 
 /// @nodoc
@@ -61,22 +55,17 @@ class _$MessageInteractionsCopyWithImpl<$Res, $Val extends MessageInteractions>
   @override
   $Res call({
     Object? message = null,
-    Object? seenDates = null,
-    Object? additional = null,
+    Object? seenEntries = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      seenDates: null == seenDates
-          ? _value.seenDates
-          : seenDates // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      additional: null == additional
-          ? _value.additional
-          : additional // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+      seenEntries: null == seenEntries
+          ? _value.seenEntries
+          : seenEntries // ignore: cast_nullable_to_non_nullable
+              as List<MessageSeenEntry>,
     ) as $Val);
   }
 }
@@ -89,10 +78,7 @@ abstract class _$$MessageInteractionsImplCopyWith<$Res>
       __$$MessageInteractionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String message,
-      List<DateTime> seenDates,
-      Map<String, dynamic> additional});
+  $Res call({String message, List<MessageSeenEntry> seenEntries});
 }
 
 /// @nodoc
@@ -107,22 +93,17 @@ class __$$MessageInteractionsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
-    Object? seenDates = null,
-    Object? additional = null,
+    Object? seenEntries = null,
   }) {
     return _then(_$MessageInteractionsImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      seenDates: null == seenDates
-          ? _value._seenDates
-          : seenDates // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      additional: null == additional
-          ? _value._additional
-          : additional // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+      seenEntries: null == seenEntries
+          ? _value._seenEntries
+          : seenEntries // ignore: cast_nullable_to_non_nullable
+              as List<MessageSeenEntry>,
     ));
   }
 }
@@ -134,10 +115,8 @@ class _$MessageInteractionsImpl
     implements _MessageInteractions {
   const _$MessageInteractionsImpl(
       {required this.message,
-      required final List<DateTime> seenDates,
-      required final Map<String, dynamic> additional})
-      : _seenDates = seenDates,
-        _additional = additional;
+      required final List<MessageSeenEntry> seenEntries})
+      : _seenEntries = seenEntries;
 
   factory _$MessageInteractionsImpl.fromJson(Map<String, dynamic> json) =>
       _$$MessageInteractionsImplFromJson(json);
@@ -147,30 +126,19 @@ class _$MessageInteractionsImpl
   final String message;
 
   /// dates when user seend this message
-  final List<DateTime> _seenDates;
+  final List<MessageSeenEntry> _seenEntries;
 
   /// dates when user seend this message
   @override
-  List<DateTime> get seenDates {
-    if (_seenDates is EqualUnmodifiableListView) return _seenDates;
+  List<MessageSeenEntry> get seenEntries {
+    if (_seenEntries is EqualUnmodifiableListView) return _seenEntries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_seenDates);
-  }
-
-  /// additional dynamic interactions
-  final Map<String, dynamic> _additional;
-
-  /// additional dynamic interactions
-  @override
-  Map<String, dynamic> get additional {
-    if (_additional is EqualUnmodifiableMapView) return _additional;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_additional);
+    return EqualUnmodifiableListView(_seenEntries);
   }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MessageInteractions(message: $message, seenDates: $seenDates, additional: $additional)';
+    return 'MessageInteractions(message: $message, seenEntries: $seenEntries)';
   }
 
   @override
@@ -179,8 +147,7 @@ class _$MessageInteractionsImpl
     properties
       ..add(DiagnosticsProperty('type', 'MessageInteractions'))
       ..add(DiagnosticsProperty('message', message))
-      ..add(DiagnosticsProperty('seenDates', seenDates))
-      ..add(DiagnosticsProperty('additional', additional));
+      ..add(DiagnosticsProperty('seenEntries', seenEntries));
   }
 
   @override
@@ -190,18 +157,13 @@ class _$MessageInteractionsImpl
             other is _$MessageInteractionsImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality()
-                .equals(other._seenDates, _seenDates) &&
-            const DeepCollectionEquality()
-                .equals(other._additional, _additional));
+                .equals(other._seenEntries, _seenEntries));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      message,
-      const DeepCollectionEquality().hash(_seenDates),
-      const DeepCollectionEquality().hash(_additional));
+      runtimeType, message, const DeepCollectionEquality().hash(_seenEntries));
 
   @JsonKey(ignore: true)
   @override
@@ -221,8 +183,7 @@ class _$MessageInteractionsImpl
 abstract class _MessageInteractions implements MessageInteractions {
   const factory _MessageInteractions(
           {required final String message,
-          required final List<DateTime> seenDates,
-          required final Map<String, dynamic> additional}) =
+          required final List<MessageSeenEntry> seenEntries}) =
       _$MessageInteractionsImpl;
 
   factory _MessageInteractions.fromJson(Map<String, dynamic> json) =
@@ -235,11 +196,7 @@ abstract class _MessageInteractions implements MessageInteractions {
   @override
 
   /// dates when user seend this message
-  List<DateTime> get seenDates;
-  @override
-
-  /// additional dynamic interactions
-  Map<String, dynamic> get additional;
+  List<MessageSeenEntry> get seenEntries;
   @override
   @JsonKey(ignore: true)
   _$$MessageInteractionsImplCopyWith<_$MessageInteractionsImpl> get copyWith =>

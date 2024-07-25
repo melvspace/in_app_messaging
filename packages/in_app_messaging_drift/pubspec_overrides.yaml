@@ -1,4 +1,6 @@
-# melos_managed_dependency_overrides: in_app_messaging
+# melos_managed_dependency_overrides: in_app_messaging,in_app_messaging_json_logic
 dependency_overrides:
   in_app_messaging:
     path: ../in_app_messaging
+  in_app_messaging_json_logic:
+    path: ../in_app_messaging_json_logic

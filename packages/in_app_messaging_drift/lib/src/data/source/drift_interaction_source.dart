@@ -10,22 +10,24 @@ class DriftInteractionSource implements InteractionSource {
 
   @override
   Future<MessageInteractions> getInteractions(String id) async {
-    final interactions = await _dao.getInteractions(id);
+    final seenEntries = await _dao.getSeenEntries(id);
 
     return MessageInteractions(
       message: id,
-      seenDates: interactions.seenDates,
-      additional: interactions.additional,
+      seenEntries: seenEntries,
     );
   }
 
   @override
-  Future<void> interact<T>(String id, String key, T data) async {
-    await _dao.interact(id, key, data);
-  }
-
-  @override
-  Future<void> markSeen(String id) async {
-    await _dao.markSeen(id);
+  Future<void> markSeen({
+    required String id,
+    String? trigger,
+    Map<String, dynamic>? triggerProperties,
+  }) async {
+    await _dao.markSeen(
+      id: id,
+      trigger: trigger,
+      triggerProperties: triggerProperties,
+    );
   }
 }

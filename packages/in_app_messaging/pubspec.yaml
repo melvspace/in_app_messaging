@@ -1,6 +1,6 @@
 name: in_app_messaging
 description: "Simple In-App Messaging for your application"
-version: 0.0.8
+version: 0.0.11
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:
@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # framework
+  in_app_messaging_json_logic: ^2.1.0
 
   # utility
   version: ^3.0.0

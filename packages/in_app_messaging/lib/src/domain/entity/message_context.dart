@@ -1,8 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
-import 'package:in_app_messaging/src/domain/entity/message_slot.dart';
-import 'package:in_app_messaging/src/domain/entity/messages/message.dart';
-import 'package:in_app_messaging/src/domain/entity/messages/static_message.dart';
 
 part 'message_context.freezed.dart';
 
@@ -14,6 +11,7 @@ class MessageContext with _$MessageContext {
   @override
   Message get message;
 
+  @experimental
   const factory MessageContext.static({
     required StaticMessage message,
 
@@ -26,9 +24,6 @@ class MessageContext with _$MessageContext {
     /// For Interactions conditions
     required UserContext user,
     required DeviceContext device,
-
-    /// Interaction use case
-    required Interact interact,
   }) = StaticMessageContext;
 
   const factory MessageContext.dynamic({
@@ -43,8 +38,5 @@ class MessageContext with _$MessageContext {
     /// For Interactions conditions
     required UserContext user,
     required DeviceContext device,
-
-    /// Interaction use case
-    required Interact interact,
   }) = DynamicMessageContext;
 }

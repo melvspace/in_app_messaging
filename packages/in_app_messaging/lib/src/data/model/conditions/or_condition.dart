@@ -1,5 +1,6 @@
+import 'package:in_app_messaging/src/core/typedefs.dart';
+
 import '../../../domain/entity/message_condition.dart';
-import '../../../domain/entity/message_context.dart';
 
 class OrCondition extends MessageCondition {
   final MessageCondition left;
@@ -8,7 +9,12 @@ class OrCondition extends MessageCondition {
   OrCondition(this.left, this.right);
 
   @override
-  bool evaluate(MessageContext context) {
-    return left.evaluate(context) || right.evaluate(context);
+  JsonMap asJsonLogic() {
+    return {
+      'or': [
+        left.asJsonLogic(),
+        right.asJsonLogic(),
+      ],
+    };
   }
 }

@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/internal/migrations.dart';
 import 'schema_v0.dart' as v0;
 import 'schema_v1.dart' as v1;
+import 'schema_v2.dart' as v2;
 
 class GeneratedHelper implements SchemaInstantiationHelper {
   @override
@@ -14,8 +15,10 @@ class GeneratedHelper implements SchemaInstantiationHelper {
         return v0.DatabaseAtV0(db);
       case 1:
         return v1.DatabaseAtV1(db);
+      case 2:
+        return v2.DatabaseAtV2(db);
       default:
-        throw MissingSchemaException(version, const {0, 1});
+        throw MissingSchemaException(version, const {0, 1, 2});
     }
   }
 }

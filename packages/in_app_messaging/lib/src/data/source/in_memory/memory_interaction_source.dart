@@ -1,28 +1,33 @@
 import 'dart:async';
 
+import 'package:in_app_messaging/src/domain/entity/interaction/message_seen_entry.dart';
+
 import '../interaction_source.dart';
 import '../../../domain/entity/message_interactions.dart';
 
 class MemoryInteractionSource implements InteractionSource {
-  final Map<String, Map<String, dynamic>> _interactions = {};
-  final Map<String, List<DateTime>> _seenDates = {};
+  final Map<String, List<MessageSeenEntry>> _seenEntries = {};
 
   @override
   FutureOr<MessageInteractions> getInteractions(String id) {
     return MessageInteractions(
       message: id,
-      seenDates: _seenDates[id] ?? [],
-      additional: _interactions[id] ?? {},
+      seenEntries: _seenEntries[id] ?? [],
     );
   }
 
   @override
-  FutureOr<void> interact<T>(String id, String key, T data) {
-    _interactions.putIfAbsent(id, () => {})[key] = data;
-  }
-
-  @override
-  FutureOr<void> markSeen(String id) {
-    _seenDates.putIfAbsent(id, () => []).add(DateTime.now());
+  FutureOr<void> markSeen({
+    required String id,
+    String? trigger,
+    Map<String, dynamic>? triggerProperties,
+  }) {
+    _seenEntries.putIfAbsent(id, () => []).add(
+          MessageSeenEntry(
+            date: DateTime.now(),
+            trigger: trigger,
+            triggerProperties: triggerProperties,
+          ),
+        );
   }
 }

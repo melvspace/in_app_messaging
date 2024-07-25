@@ -1,36 +1,43 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:drift/drift.dart';
+import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging_drift/src/data/dao/in_app_messaging_dao.drift.dart';
 import 'package:in_app_messaging_drift/src/data/database/database.dart';
 import 'package:in_app_messaging_drift/src/data/schema/schema.dart';
-
-typedef InteractionsTuple = ({
-  Map<String, dynamic> additional,
-  List<DateTime> seenDates,
-});
 
 @DriftAccessor(tables: [InAppMessageSeenDates, InAppMessageInteractions])
 class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
     with $InAppMessagingDaoMixin {
   InAppMessagingDao(super.db);
 
-  Future<InteractionsTuple> getInteractions(String id) async {
+  Future<List<MessageSeenEntry>> getSeenEntries(String id) async {
     final seenQuery = inAppMessageSeenDates.select() //
       ..where((tbl) => tbl.message.equals(id));
-    final interactionQuery = inAppMessageInteractions.select() //
-      ..where((tbl) => tbl.message.equals(id));
 
-    final seenDates = await seenQuery
-        .get()
-        .then((value) => value.map((e) => e.seen).toList());
-    final interactions = await interactionQuery.getSingleOrNull();
+    final seenEntries = await seenQuery.get();
 
-    return (
-      seenDates: seenDates,
-      additional: interactions?.interactions ?? {},
-    );
+    return seenEntries
+        .map(
+          (e) => MessageSeenEntry(
+            date: e.seen,
+            trigger: e.trigger,
+            triggerProperties: e.triggerProperties != null
+                ? jsonDecode(e.triggerProperties!)
+                : null,
+          ),
+        )
+        .toList();
   }
 
-  Future<void> interact<T>(String id, String key, T data) async {
+  Future<void> interact<T>({
+    required String id,
+    required String key,
+    required T data,
+    required String trigger,
+    required Map<String, dynamic> triggerProperties,
+  }) async {
     final interactionQuery = inAppMessageInteractions.select() //
       ..where((tbl) => tbl.message.equals(id));
 
@@ -46,10 +53,24 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
     await into(inAppMessageInteractions).insertOnConflictUpdate(updated);
   }
 
-  Future<void> markSeen(String id) async {
+  Future<void> markSeen({
+    required String id,
+    String? trigger,
+    Map<String, dynamic>? triggerProperties,
+  }) async {
+    String? sTriggerProperties;
+    try {
+      sTriggerProperties = jsonEncode(triggerProperties);
+    } catch (e) {
+      log('failed to serialize trigger properties');
+      sTriggerProperties = null;
+    }
+
     final data = InAppMessageSeenDatesCompanion.insert(
       message: id,
       seen: DateTime.now(),
+      trigger: Value(trigger),
+      triggerProperties: Value(sTriggerProperties),
     );
 
     await into(inAppMessageSeenDates).insert(data);

@@ -8,9 +8,11 @@ abstract interface class MessageGateway {
     Map<String, dynamic> properties,
   );
 
-  FutureOr<void> interact<T>(String id, String key, T data);
-
-  FutureOr<void> markSeen(String id);
+  FutureOr<void> markSeen({
+    required String id,
+    String? trigger,
+    Map<String, dynamic>? triggerProperties,
+  });
 
   FutureOr<void> setUserProperty(String key, String? value);
 

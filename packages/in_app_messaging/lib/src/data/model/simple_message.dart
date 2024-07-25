@@ -1,7 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:in_app_messaging/src/core/typedefs.dart';
 import '../../../in_app_messaging.dart';
 
 part 'simple_message.freezed.dart';
+part 'simple_message.g.dart';
 
 @freezed
 class SimpleMessage with _$SimpleMessage implements DynamicMessage {
@@ -10,15 +12,19 @@ class SimpleMessage with _$SimpleMessage implements DynamicMessage {
     required bool enabled,
     required MessageType type,
 
-    //
+    // display settings
     required DateTime start,
-    required DateTime? end,
+    DateTime? end,
+    @Default(0) int priority,
 
     // triggers and conditions
     required List<MessageTrigger> triggers,
-    required MessageCondition? condition,
+    JsonMap? condition,
 
     // custom properties
-    required Map<String, dynamic> data,
+    required JsonMap data,
   }) = _SimpleMessage;
+
+  factory SimpleMessage.fromJson(Map<String, dynamic> json) =>
+      _$SimpleMessageFromJson(json);
 }
