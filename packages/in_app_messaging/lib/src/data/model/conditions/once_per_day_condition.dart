@@ -19,7 +19,7 @@ class OncePerDayCondition extends MessageCondition {
             {
               'date.truncate': [
                 {
-                  'var': ['interactions.last_seen']
+                  'var': ['interactions.last_seen.date']
                 },
                 "days"
               ]

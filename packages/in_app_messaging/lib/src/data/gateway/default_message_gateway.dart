@@ -184,7 +184,7 @@ class DefaultMessageGateway implements MessageGateway {
     final conditionContext = {
       'event': {
         ...properties,
-        'name': event,
+        'event_name': event,
       },
       'user': context.user.toJson(),
       'device': context.device.toJson(),

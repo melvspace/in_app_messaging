@@ -1,3 +1,11 @@
+## 0.0.13
+
+- fix once conditions for new last_seen structure
+
+## 0.0.12
+
+- Add `distinct` property to `OncePerEventPropertiesCondition`
+
 ## 0.0.11
 
 - Fix trigger properties lost

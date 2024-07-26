@@ -25,7 +25,7 @@ class OncePerTimeCondition extends MessageCondition {
                 'microseconds'
               ]
             },
-            {'var': 'interactions.last_seen'}
+            {'var': 'interactions.last_seen.date'}
           ]
         }
       ]

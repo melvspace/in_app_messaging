@@ -109,11 +109,11 @@ void datetimeTests(JsonLogic jl) {
       'date.truncate -> false',
       '''{
         "<": [
-          {"date.truncate": [{"var": ["interactions.last_seen"]}, "days"]},
+          {"date.truncate": [{"var": ["interactions.last_seen.date"]}, "days"]},
           {"date.truncate": [{"now": []}, "days"]}
         ]
       }''',
-      '{}',
+      '{"interactions.last_seen.date": "2024-01-12T00:00:00"}',
       false,
     ),
   ];
