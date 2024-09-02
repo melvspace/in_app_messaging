@@ -1,3 +1,7 @@
+## 0.0.15
+
+- add context to `canShow` method
+
 ## 0.0.14
 
 - add `canShow` method to message handler

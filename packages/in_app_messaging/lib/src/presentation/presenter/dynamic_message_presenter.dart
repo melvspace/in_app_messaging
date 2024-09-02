@@ -112,7 +112,7 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
 
     final active = this.active = builder(tuple);
 
-    _completers.remove(message)?.complete(active.canShow(message));
+    _completers.remove(message)?.complete(active.canShow(context));
   }
 
   @override

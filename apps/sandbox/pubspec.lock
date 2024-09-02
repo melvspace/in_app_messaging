@@ -359,18 +359,18 @@ packages:
     dependency: "direct main"
     description:
       name: in_app_messaging
-      sha256: "0133c95a0c42b47f8435fa13d3c7feb7ee09d8c3ac79eaadc761906d3b4542d9"
+      sha256: "75f04fa3949983b98959145c0d3e65cf4a2ed2572a52a5dee7d454cae441fd5a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.14"
+    version: "0.0.15"
   in_app_messaging_drift:
     dependency: "direct main"
     description:
       name: in_app_messaging_drift
-      sha256: "064ce17ad2c0debfe24c5932e9b55902ee2774e7fd1f4913193f685cc15a68d0"
+      sha256: "096e8d493f7f42ac71f26f5e2c75f25131b8b19c792c4ef5e288b81b6b4bf314"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.13"
+    version: "0.0.15"
   in_app_messaging_json_logic:
     dependency: transitive
     description:

@@ -1,3 +1,7 @@
+## 0.0.15
+
+- sync with in_app_messaging
+
 ## 0.0.13
 
 - sync with in_app_messaging
