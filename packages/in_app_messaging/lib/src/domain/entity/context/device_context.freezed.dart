@@ -25,8 +25,12 @@ mixin _$DeviceContext {
   String get versionNumber => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
 
+  /// Serializes this DeviceContext to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeviceContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeviceContextCopyWith<DeviceContext> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$DeviceContextCopyWithImpl<$Res, $Val extends DeviceContext>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeviceContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$DeviceContextImplCopyWithImpl<$Res>
       _$DeviceContextImpl _value, $Res Function(_$DeviceContextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeviceContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -170,12 +178,14 @@ class _$DeviceContextImpl extends _DeviceContext {
                 other.language == language));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, platform, version, versionNumber, language);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeviceContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeviceContextImplCopyWith<_$DeviceContextImpl> get copyWith =>
@@ -208,8 +218,11 @@ abstract class _DeviceContext extends DeviceContext {
   String get versionNumber;
   @override
   String get language;
+
+  /// Create a copy of DeviceContext
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeviceContextImplCopyWith<_$DeviceContextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

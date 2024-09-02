@@ -27,8 +27,12 @@ mixin _$UserContext {
   String? get language => throw _privateConstructorUsedError;
   Map<String, String> get extra => throw _privateConstructorUsedError;
 
+  /// Serializes this UserContext to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserContextCopyWith<UserContext> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$UserContextCopyWithImpl<$Res, $Val extends UserContext>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$UserContextImplCopyWithImpl<$Res>
       _$UserContextImpl _value, $Res Function(_$UserContextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -215,12 +223,14 @@ class _$UserContextImpl extends _UserContext {
             const DeepCollectionEquality().equals(other._extra, _extra));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, email, phone, language,
       const DeepCollectionEquality().hash(_extra));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserContextImplCopyWith<_$UserContextImpl> get copyWith =>
@@ -259,8 +269,11 @@ abstract class _UserContext extends UserContext {
   String? get language;
   @override
   Map<String, String> get extra;
+
+  /// Create a copy of UserContext
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserContextImplCopyWith<_$UserContextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

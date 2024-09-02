@@ -58,8 +58,7 @@ class DefaultMessageGateway implements MessageGateway {
         message: message,
         trigger: eventTrigger,
         interactions: interactions,
-        user: await _contextSource.getUser(),
-        device: await _contextSource.getDevice(),
+        context: _contextSource.context,
       );
 
       final result = message.condition != null
@@ -92,16 +91,6 @@ class DefaultMessageGateway implements MessageGateway {
       trigger: trigger,
       triggerProperties: triggerProperties,
     );
-  }
-
-  @override
-  FutureOr<void> setDeviceProperty(String key, String? value) {
-    return _contextSource.updateDeviceProperty(key, value);
-  }
-
-  @override
-  FutureOr<void> setUserProperty(String key, String? value) {
-    return _contextSource.updateUserProperty(key, value);
   }
 
   /// it is not working properly
@@ -156,8 +145,7 @@ class DefaultMessageGateway implements MessageGateway {
             message: message,
             trigger: trigger,
             interactions: interactions,
-            user: await _contextSource.getUser(),
-            device: await _contextSource.getDevice(),
+            context: _contextSource.context,
           );
 
           final result = message.condition != null
@@ -176,7 +164,7 @@ class DefaultMessageGateway implements MessageGateway {
     return null;
   }
 
-  Map<String, Map<String, Object?>> _buildConditionContext(
+  Map<String, dynamic> _buildConditionContext(
     Map<String, dynamic> properties,
     String event,
     DynamicMessageContext context,
@@ -186,8 +174,7 @@ class DefaultMessageGateway implements MessageGateway {
         ...properties,
         'event_name': event,
       },
-      'user': context.user.toJson(),
-      'device': context.device.toJson(),
+      ...context.context,
       'interactions': {
         'last_seen': context.interactions.seenEntries.lastOrNull //
             ?.toJson(),
@@ -198,5 +185,17 @@ class DefaultMessageGateway implements MessageGateway {
     };
 
     return conditionContext;
+  }
+
+  @override
+  FutureOr<void> setDeviceProperty(String key, String? value) {
+    // TODO: implement setDeviceProperty
+    throw UnimplementedError();
+  }
+
+  @override
+  FutureOr<void> setUserProperty(String key, String? value) {
+    // TODO: implement setUserProperty
+    throw UnimplementedError();
   }
 }

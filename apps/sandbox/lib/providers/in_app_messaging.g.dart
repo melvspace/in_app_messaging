@@ -6,7 +6,7 @@ part of 'in_app_messaging.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$inAppMessagingHash() => r'60982461702abea86c5223a802a0d9a75e217a08';
+String _$inAppMessagingHash() => r'16c611fbf8567883ecdd15a70cf12026fff5b7c8';
 
 /// See also [inAppMessaging].
 @ProviderFor(inAppMessaging)

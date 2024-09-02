@@ -33,8 +33,12 @@ mixin _$SimpleMessage {
       throw _privateConstructorUsedError; // custom properties
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this SimpleMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SimpleMessageCopyWith<SimpleMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -69,6 +73,8 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
     ) as $Val);
   }
 
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MessageTypeCopyWith<$Res> get type {
@@ -162,6 +170,8 @@ class __$$SimpleMessageImplCopyWithImpl<$Res>
       _$SimpleMessageImpl _value, $Res Function(_$SimpleMessageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -303,7 +313,7 @@ class _$SimpleMessageImpl implements _SimpleMessage {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -317,7 +327,9 @@ class _$SimpleMessageImpl implements _SimpleMessage {
       const DeepCollectionEquality().hash(_condition),
       const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SimpleMessageImplCopyWith<_$SimpleMessageImpl> get copyWith =>
@@ -351,21 +363,24 @@ abstract class _SimpleMessage implements SimpleMessage {
   @override
   bool get enabled;
   @override
-  MessageType get type;
-  @override // display settings
+  MessageType get type; // display settings
+  @override
   DateTime get start;
   @override
   DateTime? get end;
   @override
-  int get priority;
-  @override // triggers and conditions
+  int get priority; // triggers and conditions
+  @override
   List<MessageTrigger> get triggers;
   @override
-  Map<String, dynamic>? get condition;
-  @override // custom properties
-  Map<String, dynamic> get data;
+  Map<String, dynamic>? get condition; // custom properties
   @override
-  @JsonKey(ignore: true)
+  Map<String, dynamic> get data;
+
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SimpleMessageImplCopyWith<_$SimpleMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,38 +25,25 @@ mixin _$MessageContext {
   MessageInteractions get interactions => throw _privateConstructorUsedError;
 
   /// For Interactions conditions
-  UserContext get user => throw _privateConstructorUsedError;
-  DeviceContext get device => throw _privateConstructorUsedError;
+  Map<String, dynamic> get context => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
+    required TResult Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)
         dynamic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
+    TResult? Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)?
         dynamic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
+    TResult Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)?
         dynamic,
     required TResult orElse(),
   }) =>
@@ -78,7 +65,9 @@ mixin _$MessageContext {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageContextCopyWith<MessageContext> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -93,13 +82,10 @@ abstract class $MessageContextCopyWith<$Res> {
       {DynamicMessage message,
       MessageTrigger trigger,
       MessageInteractions interactions,
-      UserContext user,
-      DeviceContext device});
+      Map<String, dynamic> context});
 
   $MessageTriggerCopyWith<$Res> get trigger;
   $MessageInteractionsCopyWith<$Res> get interactions;
-  $UserContextCopyWith<$Res> get user;
-  $DeviceContextCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -112,14 +98,15 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? trigger = null,
     Object? interactions = null,
-    Object? user = null,
-    Object? device = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
@@ -134,17 +121,15 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
           ? _value.interactions
           : interactions // ignore: cast_nullable_to_non_nullable
               as MessageInteractions,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserContext,
-      device: null == device
-          ? _value.device
-          : device // ignore: cast_nullable_to_non_nullable
-              as DeviceContext,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MessageTriggerCopyWith<$Res> get trigger {
@@ -153,27 +138,13 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
     });
   }
 
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MessageInteractionsCopyWith<$Res> get interactions {
     return $MessageInteractionsCopyWith<$Res>(_value.interactions, (value) {
       return _then(_value.copyWith(interactions: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserContextCopyWith<$Res> get user {
-    return $UserContextCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DeviceContextCopyWith<$Res> get device {
-    return $DeviceContextCopyWith<$Res>(_value.device, (value) {
-      return _then(_value.copyWith(device: value) as $Val);
     });
   }
 }
@@ -191,17 +162,12 @@ abstract class _$$DynamicMessageContextImplCopyWith<$Res>
       {DynamicMessage message,
       MessageTrigger trigger,
       MessageInteractions interactions,
-      UserContext user,
-      DeviceContext device});
+      Map<String, dynamic> context});
 
   @override
   $MessageTriggerCopyWith<$Res> get trigger;
   @override
   $MessageInteractionsCopyWith<$Res> get interactions;
-  @override
-  $UserContextCopyWith<$Res> get user;
-  @override
-  $DeviceContextCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -212,14 +178,15 @@ class __$$DynamicMessageContextImplCopyWithImpl<$Res>
       $Res Function(_$DynamicMessageContextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? trigger = null,
     Object? interactions = null,
-    Object? user = null,
-    Object? device = null,
+    Object? context = null,
   }) {
     return _then(_$DynamicMessageContextImpl(
       message: null == message
@@ -234,14 +201,10 @@ class __$$DynamicMessageContextImplCopyWithImpl<$Res>
           ? _value.interactions
           : interactions // ignore: cast_nullable_to_non_nullable
               as MessageInteractions,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserContext,
-      device: null == device
-          ? _value.device
-          : device // ignore: cast_nullable_to_non_nullable
-              as DeviceContext,
+      context: null == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -253,9 +216,9 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
       {required this.message,
       required this.trigger,
       required this.interactions,
-      required this.user,
-      required this.device})
-      : super._();
+      required final Map<String, dynamic> context})
+      : _context = context,
+        super._();
 
   @override
   final DynamicMessage message;
@@ -269,14 +232,19 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   final MessageInteractions interactions;
 
   /// For Interactions conditions
+  final Map<String, dynamic> _context;
+
+  /// For Interactions conditions
   @override
-  final UserContext user;
-  @override
-  final DeviceContext device;
+  Map<String, dynamic> get context {
+    if (_context is EqualUnmodifiableMapView) return _context;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_context);
+  }
 
   @override
   String toString() {
-    return 'MessageContext.dynamic(message: $message, trigger: $trigger, interactions: $interactions, user: $user, device: $device)';
+    return 'MessageContext.dynamic(message: $message, trigger: $trigger, interactions: $interactions, context: $context)';
   }
 
   @override
@@ -288,15 +256,16 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
             (identical(other.trigger, trigger) || other.trigger == trigger) &&
             (identical(other.interactions, interactions) ||
                 other.interactions == interactions) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.device, device) || other.device == device));
+            const DeepCollectionEquality().equals(other._context, _context));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, message, trigger, interactions, user, device);
+  int get hashCode => Object.hash(runtimeType, message, trigger, interactions,
+      const DeepCollectionEquality().hash(_context));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DynamicMessageContextImplCopyWith<_$DynamicMessageContextImpl>
@@ -306,45 +275,33 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
+    required TResult Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)
         dynamic,
   }) {
-    return dynamic(message, trigger, interactions, user, device);
+    return dynamic(message, trigger, interactions, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
+    TResult? Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)?
         dynamic,
   }) {
-    return dynamic?.call(message, trigger, interactions, user, device);
+    return dynamic?.call(message, trigger, interactions, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
+    TResult Function(DynamicMessage message, MessageTrigger trigger,
+            MessageInteractions interactions, Map<String, dynamic> context)?
         dynamic,
     required TResult orElse(),
   }) {
     if (dynamic != null) {
-      return dynamic(message, trigger, interactions, user, device);
+      return dynamic(message, trigger, interactions, context);
     }
     return orElse();
   }
@@ -380,31 +337,32 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
 
 abstract class DynamicMessageContext extends MessageContext {
   const factory DynamicMessageContext(
-      {required final DynamicMessage message,
-      required final MessageTrigger trigger,
-      required final MessageInteractions interactions,
-      required final UserContext user,
-      required final DeviceContext device}) = _$DynamicMessageContextImpl;
+          {required final DynamicMessage message,
+          required final MessageTrigger trigger,
+          required final MessageInteractions interactions,
+          required final Map<String, dynamic> context}) =
+      _$DynamicMessageContextImpl;
   const DynamicMessageContext._() : super._();
 
   @override
   DynamicMessage get message;
-  @override
 
   /// For Trigger conditions
+  @override
   MessageTrigger get trigger;
-  @override
 
   /// For Interactions conditions
+  @override
   MessageInteractions get interactions;
-  @override
 
   /// For Interactions conditions
-  UserContext get user;
   @override
-  DeviceContext get device;
+  Map<String, dynamic> get context;
+
+  /// Create a copy of MessageContext
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DynamicMessageContextImplCopyWith<_$DynamicMessageContextImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

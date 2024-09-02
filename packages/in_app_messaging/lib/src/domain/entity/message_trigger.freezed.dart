@@ -81,6 +81,8 @@ mixin _$MessageTrigger {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this MessageTrigger to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -100,6 +102,9 @@ class _$MessageTriggerCopyWithImpl<$Res, $Val extends MessageTrigger>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -119,6 +124,8 @@ class __$$MessageCronTriggerImplCopyWithImpl<$Res>
       $Res Function(_$MessageCronTriggerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,11 +185,13 @@ class _$MessageCronTriggerImpl extends MessageCronTrigger {
             (identical(other.event, event) || other.event == event));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, cron, event);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageCronTriggerImplCopyWith<_$MessageCronTriggerImpl> get copyWith =>
@@ -288,7 +297,10 @@ abstract class MessageCronTrigger extends MessageTrigger {
   ///
   /// If event provided then event will be sent. Can be used for event sequences.
   String? get event;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageCronTriggerImplCopyWith<_$MessageCronTriggerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -310,6 +322,8 @@ class __$$MessageEventTriggerImplCopyWithImpl<$Res>
       $Res Function(_$MessageEventTriggerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -377,12 +391,14 @@ class _$MessageEventTriggerImpl extends MessageEventTrigger {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, event, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageEventTriggerImplCopyWith<_$MessageEventTriggerImpl> get copyWith =>
@@ -484,7 +500,10 @@ abstract class MessageEventTrigger extends MessageTrigger {
 
   /// Optional trigger payload
   Map<String, dynamic>? get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageEventTriggerImplCopyWith<_$MessageEventTriggerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -509,6 +528,8 @@ class __$$MessageEventSequenceTriggerImplCopyWithImpl<$Res>
       $Res Function(_$MessageEventSequenceTriggerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -581,14 +602,16 @@ class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_events),
       const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageEventSequenceTriggerImplCopyWith<_$MessageEventSequenceTriggerImpl>
@@ -691,7 +714,10 @@ abstract class MessageEventSequenceTrigger extends MessageTrigger {
 
   /// Optional trigger payload
   List<Map<String, dynamic>?> get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageEventSequenceTriggerImplCopyWith<_$MessageEventSequenceTriggerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

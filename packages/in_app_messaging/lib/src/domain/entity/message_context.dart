@@ -18,7 +18,6 @@ class MessageContext with _$MessageContext {
     required MessageInteractions interactions,
 
     /// For Interactions conditions
-    required UserContext user,
-    required DeviceContext device,
+    required Map<String, dynamic> context,
   }) = DynamicMessageContext;
 }

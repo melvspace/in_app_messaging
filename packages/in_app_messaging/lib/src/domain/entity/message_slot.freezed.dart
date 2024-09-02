@@ -22,8 +22,12 @@ MessageSlot _$MessageSlotFromJson(Map<String, dynamic> json) {
 mixin _$MessageSlot {
   String get id => throw _privateConstructorUsedError;
 
+  /// Serializes this MessageSlot to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageSlot
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageSlotCopyWith<MessageSlot> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$MessageSlotCopyWithImpl<$Res, $Val extends MessageSlot>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageSlot
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$MessageSlotImplCopyWithImpl<$Res>
       _$MessageSlotImpl _value, $Res Function(_$MessageSlotImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageSlot
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$MessageSlotImpl implements _MessageSlot {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageSlot
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageSlotImplCopyWith<_$MessageSlotImpl> get copyWith =>
@@ -144,8 +154,11 @@ abstract class _MessageSlot implements MessageSlot {
 
   @override
   String get id;
+
+  /// Create a copy of MessageSlot
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageSlotImplCopyWith<_$MessageSlotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

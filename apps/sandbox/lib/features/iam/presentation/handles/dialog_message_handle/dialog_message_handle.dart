@@ -17,7 +17,7 @@ class DialogMessageHandle extends DynamicMessageHandle {
       : data = DialogMessageData.fromJson(context.message.data);
 
   @override
-  FutureOr<bool> canShow(DynamicMessage message) {
+  FutureOr<bool> canShow(BuildContext context) {
     return true;
   }
 

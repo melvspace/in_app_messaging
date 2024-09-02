@@ -22,8 +22,12 @@ MessageType _$MessageTypeFromJson(Map<String, dynamic> json) {
 mixin _$MessageType {
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this MessageType to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageTypeCopyWith<MessageType> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$MessageTypeCopyWithImpl<$Res, $Val extends MessageType>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageType
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$MessageTypeImplCopyWithImpl<$Res>
       _$MessageTypeImpl _value, $Res Function(_$MessageTypeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageType
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$MessageTypeImpl implements _MessageType {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageTypeImplCopyWith<_$MessageTypeImpl> get copyWith =>
@@ -144,8 +154,11 @@ abstract class _MessageType implements MessageType {
 
   @override
   String get name;
+
+  /// Create a copy of MessageType
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageTypeImplCopyWith<_$MessageTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

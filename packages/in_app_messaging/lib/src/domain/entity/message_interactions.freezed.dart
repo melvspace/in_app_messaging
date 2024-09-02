@@ -26,8 +26,12 @@ mixin _$MessageInteractions {
   /// dates when user seend this message
   List<MessageSeenEntry> get seenEntries => throw _privateConstructorUsedError;
 
+  /// Serializes this MessageInteractions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageInteractions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageInteractionsCopyWith<MessageInteractions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$MessageInteractionsCopyWithImpl<$Res, $Val extends MessageInteractions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageInteractions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +95,8 @@ class __$$MessageInteractionsImplCopyWithImpl<$Res>
       $Res Function(_$MessageInteractionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageInteractions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,12 +168,14 @@ class _$MessageInteractionsImpl
                 .equals(other._seenEntries, _seenEntries));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, message, const DeepCollectionEquality().hash(_seenEntries));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageInteractions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageInteractionsImplCopyWith<_$MessageInteractionsImpl> get copyWith =>
@@ -189,16 +199,18 @@ abstract class _MessageInteractions implements MessageInteractions {
   factory _MessageInteractions.fromJson(Map<String, dynamic> json) =
       _$MessageInteractionsImpl.fromJson;
 
-  @override
-
   /// message id
-  String get message;
   @override
+  String get message;
 
   /// dates when user seend this message
-  List<MessageSeenEntry> get seenEntries;
   @override
-  @JsonKey(ignore: true)
+  List<MessageSeenEntry> get seenEntries;
+
+  /// Create a copy of MessageInteractions
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageInteractionsImplCopyWith<_$MessageInteractionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

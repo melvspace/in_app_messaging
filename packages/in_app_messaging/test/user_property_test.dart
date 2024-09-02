@@ -5,13 +5,15 @@ import 'package:test/test.dart';
 void main() {
   test('set user property works fine', () async {
     final context = MemoryContextSource(
-      device: const DeviceContext(
-        platform: 'platform',
-        version: 'version',
-        versionNumber: 'versionNumber',
-        language: 'language',
-      ),
-      user: const UserContext(),
+      context: {
+        "device": {
+          'platform': 'platform',
+          'version': 'version',
+          'versionNumber': 'versionNumber',
+          'language': 'language',
+        },
+        "user": {},
+      },
     );
 
     await check(Future(() => context.updateUserProperty('app_language', 'en')))

@@ -31,13 +31,15 @@ void main() {
           ]),
           interactionSource: MemoryInteractionSource(),
           contextSource: MemoryContextSource(
-            device: const DeviceContext(
-              platform: 'platform',
-              version: 'version',
-              versionNumber: 'versionNumber',
-              language: 'language',
-            ),
-            user: const UserContext(),
+            context: {
+              'device': {
+                'platform': 'platform',
+                'version': 'version',
+                'versionNumber': 'versionNumber',
+                'language': 'language',
+              },
+              "user": {}
+            },
           ),
         ),
       );

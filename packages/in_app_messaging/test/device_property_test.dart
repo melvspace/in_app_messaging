@@ -5,13 +5,15 @@ import 'package:test/test.dart';
 void main() {
   test('set device property works fine', () async {
     final context = MemoryContextSource(
-      device: const DeviceContext(
-        platform: 'platform',
-        version: 'version',
-        versionNumber: 'versionNumber',
-        language: 'language',
-      ),
-      user: const UserContext(),
+      context: {
+        "device": {
+          "platform": 'platform',
+          "version": 'version',
+          "version_number": 'versionNumber',
+          "language": 'language',
+        },
+        "user": {}
+      },
     );
 
     await check(Future(() => context.updateDeviceProperty('platform', 'other')))

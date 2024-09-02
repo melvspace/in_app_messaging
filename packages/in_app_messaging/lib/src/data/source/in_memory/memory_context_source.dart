@@ -1,37 +1,41 @@
-import 'dart:async';
-import 'dart:developer';
+import 'dart:collection';
 
+import 'package:flutter/widgets.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 
 class MemoryContextSource implements ContextSource {
-  DeviceContext _device;
-  UserContext _user;
+  Map<String, dynamic> _context;
 
   MemoryContextSource({
-    required DeviceContext device,
-    required UserContext user,
-  })  : _device = device,
-        _user = user;
+    required Map<String, dynamic> context,
+  }) : _context = context;
 
-  @override
-  FutureOr<DeviceContext> getDevice() {
-    return _device;
+  @visibleForTesting
+  DeviceContext getDevice() {
+    return DeviceContext.fromJson(_context['device'].cast<String, dynamic>());
+  }
+
+  @visibleForTesting
+  UserContext getUser() {
+    return UserContext.fromJson(_context['user'].cast<String, dynamic>());
+  }
+
+  @visibleForTesting
+  void updateUserProperty(String key, dynamic value) {
+    _context = {
+      ..._context,
+      "user": {..._context['user'], key: value}
+    };
+  }
+
+  @visibleForTesting
+  void updateDeviceProperty(String key, dynamic value) {
+    _context = {
+      ..._context,
+      "device": {..._context['device'], key: value}
+    };
   }
 
   @override
-  FutureOr<UserContext> getUser() {
-    return _user;
-  }
-
-  @override
-  FutureOr<void> updateUserProperty(String key, dynamic value) {
-    _user = _user.change(key, value);
-    log('[MemoryContextSource.updateUserProperty]: user updated - ${_user.toJson()}');
-  }
-
-  @override
-  FutureOr<void> updateDeviceProperty(String key, dynamic value) {
-    _device = DeviceContext.fromJson(_device.toJson()..[key] = value);
-    log('[MemoryContextSource.updateDeviceProperty]: device updated - ${_device.toJson()}');
-  }
+  Map<String, dynamic> get context => UnmodifiableMapView(_context);
 }

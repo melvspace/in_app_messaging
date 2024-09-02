@@ -36,8 +36,12 @@ mixin _$EventSequenceItem {
   /// By default checked against infinite delay
   double? get maxDelay => throw _privateConstructorUsedError;
 
+  /// Serializes this EventSequenceItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EventSequenceItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EventSequenceItemCopyWith<EventSequenceItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$EventSequenceItemCopyWithImpl<$Res, $Val extends EventSequenceItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EventSequenceItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,6 +110,8 @@ class __$$EventSequenceItemImplCopyWithImpl<$Res>
       $Res Function(_$EventSequenceItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventSequenceItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -174,11 +182,13 @@ class _$EventSequenceItemImpl implements _EventSequenceItem {
                 other.maxDelay == maxDelay));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, expected, maxDelay);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventSequenceItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EventSequenceItemImplCopyWith<_$EventSequenceItemImpl> get copyWith =>
@@ -204,7 +214,6 @@ abstract class _EventSequenceItem implements EventSequenceItem {
 
   @override
   String get name;
-  @override
 
   /// Indicates that the event is expected in the sequence
   ///
@@ -213,15 +222,19 @@ abstract class _EventSequenceItem implements EventSequenceItem {
   /// Example:
   ///   - `exam_completed, exam_closed, !diploma_form_opened(for 2 seconds)`
   ///   - if `diploma_form_opened` occured in 2 seconds after `exam_closed` whole sequence is dropped
-  bool get expected;
   @override
+  bool get expected;
 
   /// Maximum delay since previous event in seconds
   ///
   /// By default checked against infinite delay
-  double? get maxDelay;
   @override
-  @JsonKey(ignore: true)
+  double? get maxDelay;
+
+  /// Create a copy of EventSequenceItem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EventSequenceItemImplCopyWith<_$EventSequenceItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

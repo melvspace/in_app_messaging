@@ -25,8 +25,12 @@ mixin _$MessageSeenEntry {
   Map<String, dynamic>? get triggerProperties =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this MessageSeenEntry to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MessageSeenEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MessageSeenEntryCopyWith<MessageSeenEntry> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$MessageSeenEntryCopyWithImpl<$Res, $Val extends MessageSeenEntry>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MessageSeenEntry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$MessageSeenEntryImplCopyWithImpl<$Res>
       $Res Function(_$MessageSeenEntryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MessageSeenEntry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,12 +174,14 @@ class _$MessageSeenEntryImpl implements _MessageSeenEntry {
                 .equals(other._triggerProperties, _triggerProperties));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, date, trigger,
       const DeepCollectionEquality().hash(_triggerProperties));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MessageSeenEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MessageSeenEntryImplCopyWith<_$MessageSeenEntryImpl> get copyWith =>
@@ -201,8 +211,11 @@ abstract class _MessageSeenEntry implements MessageSeenEntry {
   String? get trigger;
   @override
   Map<String, dynamic>? get triggerProperties;
+
+  /// Create a copy of MessageSeenEntry
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MessageSeenEntryImplCopyWith<_$MessageSeenEntryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
