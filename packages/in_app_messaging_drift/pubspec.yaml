@@ -1,6 +1,6 @@
 name: in_app_messaging_drift
 description: In-App Messaging persistence layer with Drift
-version: 0.0.15
+version: 0.0.16
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:
