@@ -42,13 +42,26 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
   DynamicMessageHandle? _active;
   DynamicMessageHandle? get active => _active;
   set active(DynamicMessageHandle? value) {
-    if (_active != value && mounted) {
-      value?.onShow(context, widget.navigatorKey?.currentState).then(
-        (value) {
-          log('[InAppMessaging]: Message(${active?.context.message.id}) closed');
+    if (_active != value && value != null && mounted) {
+      Future.value(value.canShow(context)).then(
+        (canShow) {
+          _completers.remove(value.context.message)?.complete(canShow);
 
-          active = null;
-          _checkQueue();
+          if (canShow) {
+            value.onShow(context, widget.navigatorKey?.currentState).then(
+              (value) {
+                log('[InAppMessaging]: Message(${active?.context.message.id}) closed');
+
+                active = null;
+                _checkQueue();
+              },
+            );
+          } else {
+            log('[InAppMessaging]: Message(${active?.context.message.id}) skipped');
+
+            active = null;
+            _checkQueue();
+          }
         },
       );
     }
@@ -110,9 +123,7 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
       return;
     }
 
-    final active = this.active = builder(tuple);
-
-    _completers.remove(message)?.complete(active.canShow(context));
+    active = builder(tuple);
   }
 
   @override
