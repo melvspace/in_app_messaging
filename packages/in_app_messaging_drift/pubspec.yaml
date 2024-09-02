@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   # framework
-  in_app_messaging: ^0.0.13
+  in_app_messaging: ^0.0.14
 
   # utility
   path_provider: ^2.1.3

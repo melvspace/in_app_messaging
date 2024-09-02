@@ -140,6 +140,17 @@ class InAppMessageInteraction extends i0.DataClass
         message: message ?? this.message,
         interactions: interactions ?? this.interactions,
       );
+  InAppMessageInteraction copyWithCompanion(
+      i1.InAppMessageInteractionsCompanion data) {
+    return InAppMessageInteraction(
+      id: data.id.present ? data.id.value : this.id,
+      message: data.message.present ? data.message.value : this.message,
+      interactions: data.interactions.present
+          ? data.interactions.value
+          : this.interactions,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('InAppMessageInteraction(')
@@ -228,7 +239,7 @@ class InAppMessageInteractionsCompanion
   }
 }
 
-typedef $$InAppMessageInteractionsTableInsertCompanionBuilder
+typedef $$InAppMessageInteractionsTableCreateCompanionBuilder
     = i1.InAppMessageInteractionsCompanion Function({
   i0.Value<int> id,
   required String message,
@@ -247,8 +258,7 @@ class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
     i1.InAppMessageInteraction,
     i1.$$InAppMessageInteractionsTableFilterComposer,
     i1.$$InAppMessageInteractionsTableOrderingComposer,
-    $$InAppMessageInteractionsTableProcessedTableManager,
-    $$InAppMessageInteractionsTableInsertCompanionBuilder,
+    $$InAppMessageInteractionsTableCreateCompanionBuilder,
     $$InAppMessageInteractionsTableUpdateCompanionBuilder> {
   $$InAppMessageInteractionsTableTableManager(
       i0.GeneratedDatabase db, i1.$InAppMessageInteractionsTable table)
@@ -259,9 +269,7 @@ class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
               i0.ComposerState(db, table)),
           orderingComposer: i1.$$InAppMessageInteractionsTableOrderingComposer(
               i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$InAppMessageInteractionsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
+          updateCompanionCallback: ({
             i0.Value<int> id = const i0.Value.absent(),
             i0.Value<String> message = const i0.Value.absent(),
             i0.Value<Map<String, dynamic>> interactions =
@@ -272,7 +280,7 @@ class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
             message: message,
             interactions: interactions,
           ),
-          getInsertCompanionBuilder: ({
+          createCompanionCallback: ({
             i0.Value<int> id = const i0.Value.absent(),
             required String message,
             required Map<String, dynamic> interactions,
@@ -283,19 +291,6 @@ class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
             interactions: interactions,
           ),
         ));
-}
-
-class $$InAppMessageInteractionsTableProcessedTableManager
-    extends i0.ProcessedTableManager<
-        i0.GeneratedDatabase,
-        i1.$InAppMessageInteractionsTable,
-        i1.InAppMessageInteraction,
-        i1.$$InAppMessageInteractionsTableFilterComposer,
-        i1.$$InAppMessageInteractionsTableOrderingComposer,
-        $$InAppMessageInteractionsTableProcessedTableManager,
-        $$InAppMessageInteractionsTableInsertCompanionBuilder,
-        $$InAppMessageInteractionsTableUpdateCompanionBuilder> {
-  $$InAppMessageInteractionsTableProcessedTableManager(super.$state);
 }
 
 class $$InAppMessageInteractionsTableFilterComposer extends i0

@@ -1,3 +1,7 @@
+## 0.0.14
+
+- add `canShow` method to message handler
+
 ## 0.0.13
 
 - fix once conditions for new last_seen structure

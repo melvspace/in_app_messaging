@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MessageContext {
-  Message get message => throw _privateConstructorUsedError;
+  DynamicMessage get message => throw _privateConstructorUsedError;
+
+  /// For Trigger conditions
+  MessageTrigger get trigger => throw _privateConstructorUsedError;
 
   /// For Interactions conditions
   MessageInteractions get interactions => throw _privateConstructorUsedError;
@@ -26,13 +29,6 @@ mixin _$MessageContext {
   DeviceContext get device => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
-        static,
     required TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
@@ -45,13 +41,6 @@ mixin _$MessageContext {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
-    TResult? Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
@@ -62,13 +51,6 @@ mixin _$MessageContext {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
     TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
@@ -81,19 +63,16 @@ mixin _$MessageContext {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StaticMessageContext value) static,
     required TResult Function(DynamicMessageContext value) dynamic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StaticMessageContext value)? static,
     TResult? Function(DynamicMessageContext value)? dynamic,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StaticMessageContext value)? static,
     TResult Function(DynamicMessageContext value)? dynamic,
     required TResult orElse(),
   }) =>
@@ -111,10 +90,13 @@ abstract class $MessageContextCopyWith<$Res> {
       _$MessageContextCopyWithImpl<$Res, MessageContext>;
   @useResult
   $Res call(
-      {MessageInteractions interactions,
+      {DynamicMessage message,
+      MessageTrigger trigger,
+      MessageInteractions interactions,
       UserContext user,
       DeviceContext device});
 
+  $MessageTriggerCopyWith<$Res> get trigger;
   $MessageInteractionsCopyWith<$Res> get interactions;
   $UserContextCopyWith<$Res> get user;
   $DeviceContextCopyWith<$Res> get device;
@@ -133,11 +115,21 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? message = null,
+    Object? trigger = null,
     Object? interactions = null,
     Object? user = null,
     Object? device = null,
   }) {
     return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as DynamicMessage,
+      trigger: null == trigger
+          ? _value.trigger
+          : trigger // ignore: cast_nullable_to_non_nullable
+              as MessageTrigger,
       interactions: null == interactions
           ? _value.interactions
           : interactions // ignore: cast_nullable_to_non_nullable
@@ -151,6 +143,14 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
           : device // ignore: cast_nullable_to_non_nullable
               as DeviceContext,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageTriggerCopyWith<$Res> get trigger {
+    return $MessageTriggerCopyWith<$Res>(_value.trigger, (value) {
+      return _then(_value.copyWith(trigger: value) as $Val);
+    });
   }
 
   @override
@@ -179,268 +179,6 @@ class _$MessageContextCopyWithImpl<$Res, $Val extends MessageContext>
 }
 
 /// @nodoc
-abstract class _$$StaticMessageContextImplCopyWith<$Res>
-    implements $MessageContextCopyWith<$Res> {
-  factory _$$StaticMessageContextImplCopyWith(_$StaticMessageContextImpl value,
-          $Res Function(_$StaticMessageContextImpl) then) =
-      __$$StaticMessageContextImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {StaticMessage message,
-      MessageSlot slot,
-      MessageInteractions interactions,
-      UserContext user,
-      DeviceContext device});
-
-  $MessageSlotCopyWith<$Res> get slot;
-  @override
-  $MessageInteractionsCopyWith<$Res> get interactions;
-  @override
-  $UserContextCopyWith<$Res> get user;
-  @override
-  $DeviceContextCopyWith<$Res> get device;
-}
-
-/// @nodoc
-class __$$StaticMessageContextImplCopyWithImpl<$Res>
-    extends _$MessageContextCopyWithImpl<$Res, _$StaticMessageContextImpl>
-    implements _$$StaticMessageContextImplCopyWith<$Res> {
-  __$$StaticMessageContextImplCopyWithImpl(_$StaticMessageContextImpl _value,
-      $Res Function(_$StaticMessageContextImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-    Object? slot = null,
-    Object? interactions = null,
-    Object? user = null,
-    Object? device = null,
-  }) {
-    return _then(_$StaticMessageContextImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as StaticMessage,
-      slot: null == slot
-          ? _value.slot
-          : slot // ignore: cast_nullable_to_non_nullable
-              as MessageSlot,
-      interactions: null == interactions
-          ? _value.interactions
-          : interactions // ignore: cast_nullable_to_non_nullable
-              as MessageInteractions,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserContext,
-      device: null == device
-          ? _value.device
-          : device // ignore: cast_nullable_to_non_nullable
-              as DeviceContext,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MessageSlotCopyWith<$Res> get slot {
-    return $MessageSlotCopyWith<$Res>(_value.slot, (value) {
-      return _then(_value.copyWith(slot: value));
-    });
-  }
-}
-
-/// @nodoc
-
-@experimental
-class _$StaticMessageContextImpl extends StaticMessageContext {
-  const _$StaticMessageContextImpl(
-      {required this.message,
-      required this.slot,
-      required this.interactions,
-      required this.user,
-      required this.device})
-      : super._();
-
-  @override
-  final StaticMessage message;
-
-  /// For Trigger conditions
-  @override
-  final MessageSlot slot;
-
-  /// For Interactions conditions
-  @override
-  final MessageInteractions interactions;
-
-  /// For Interactions conditions
-  @override
-  final UserContext user;
-  @override
-  final DeviceContext device;
-
-  @override
-  String toString() {
-    return 'MessageContext.static(message: $message, slot: $slot, interactions: $interactions, user: $user, device: $device)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StaticMessageContextImpl &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.slot, slot) || other.slot == slot) &&
-            (identical(other.interactions, interactions) ||
-                other.interactions == interactions) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.device, device) || other.device == device));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, message, slot, interactions, user, device);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$StaticMessageContextImplCopyWith<_$StaticMessageContextImpl>
-      get copyWith =>
-          __$$StaticMessageContextImplCopyWithImpl<_$StaticMessageContextImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
-        static,
-    required TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
-        dynamic,
-  }) {
-    return static(message, slot, interactions, user, device);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
-    TResult? Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        dynamic,
-  }) {
-    return static?.call(message, slot, interactions, user, device);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
-    TResult Function(
-            DynamicMessage message,
-            MessageTrigger trigger,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        dynamic,
-    required TResult orElse(),
-  }) {
-    if (static != null) {
-      return static(message, slot, interactions, user, device);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(StaticMessageContext value) static,
-    required TResult Function(DynamicMessageContext value) dynamic,
-  }) {
-    return static(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StaticMessageContext value)? static,
-    TResult? Function(DynamicMessageContext value)? dynamic,
-  }) {
-    return static?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(StaticMessageContext value)? static,
-    TResult Function(DynamicMessageContext value)? dynamic,
-    required TResult orElse(),
-  }) {
-    if (static != null) {
-      return static(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class StaticMessageContext extends MessageContext {
-  const factory StaticMessageContext(
-      {required final StaticMessage message,
-      required final MessageSlot slot,
-      required final MessageInteractions interactions,
-      required final UserContext user,
-      required final DeviceContext device}) = _$StaticMessageContextImpl;
-  const StaticMessageContext._() : super._();
-
-  @override
-  StaticMessage get message;
-
-  /// For Trigger conditions
-  MessageSlot get slot;
-  @override
-
-  /// For Interactions conditions
-  MessageInteractions get interactions;
-  @override
-
-  /// For Interactions conditions
-  UserContext get user;
-  @override
-  DeviceContext get device;
-  @override
-  @JsonKey(ignore: true)
-  _$$StaticMessageContextImplCopyWith<_$StaticMessageContextImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$DynamicMessageContextImplCopyWith<$Res>
     implements $MessageContextCopyWith<$Res> {
   factory _$$DynamicMessageContextImplCopyWith(
@@ -456,6 +194,7 @@ abstract class _$$DynamicMessageContextImplCopyWith<$Res>
       UserContext user,
       DeviceContext device});
 
+  @override
   $MessageTriggerCopyWith<$Res> get trigger;
   @override
   $MessageInteractionsCopyWith<$Res> get interactions;
@@ -504,14 +243,6 @@ class __$$DynamicMessageContextImplCopyWithImpl<$Res>
           : device // ignore: cast_nullable_to_non_nullable
               as DeviceContext,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MessageTriggerCopyWith<$Res> get trigger {
-    return $MessageTriggerCopyWith<$Res>(_value.trigger, (value) {
-      return _then(_value.copyWith(trigger: value));
-    });
   }
 }
 
@@ -576,13 +307,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)
-        static,
-    required TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
@@ -597,13 +321,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
-    TResult? Function(
             DynamicMessage message,
             MessageTrigger trigger,
             MessageInteractions interactions,
@@ -617,13 +334,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            StaticMessage message,
-            MessageSlot slot,
-            MessageInteractions interactions,
-            UserContext user,
-            DeviceContext device)?
-        static,
     TResult Function(
             DynamicMessage message,
             MessageTrigger trigger,
@@ -642,7 +352,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StaticMessageContext value) static,
     required TResult Function(DynamicMessageContext value) dynamic,
   }) {
     return dynamic(this);
@@ -651,7 +360,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StaticMessageContext value)? static,
     TResult? Function(DynamicMessageContext value)? dynamic,
   }) {
     return dynamic?.call(this);
@@ -660,7 +368,6 @@ class _$DynamicMessageContextImpl extends DynamicMessageContext {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StaticMessageContext value)? static,
     TResult Function(DynamicMessageContext value)? dynamic,
     required TResult orElse(),
   }) {
@@ -682,6 +389,7 @@ abstract class DynamicMessageContext extends MessageContext {
 
   @override
   DynamicMessage get message;
+  @override
 
   /// For Trigger conditions
   MessageTrigger get trigger;

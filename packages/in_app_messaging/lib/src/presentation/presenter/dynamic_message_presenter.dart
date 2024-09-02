@@ -90,7 +90,7 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
       return;
     }
 
-    if (active != null) {
+    if (this.active != null) {
       log('[InAppMessagingPresenter.checkQueue]: Has active message, skipping queue check');
       return;
     }
@@ -110,9 +110,9 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
       return;
     }
 
-    active = builder(tuple);
+    final active = this.active = builder(tuple);
 
-    _completers.remove(message)?.complete(true);
+    _completers.remove(message)?.complete(active.canShow(message));
   }
 
   @override

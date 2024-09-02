@@ -8,24 +8,6 @@ part 'message_context.freezed.dart';
 class MessageContext with _$MessageContext {
   const MessageContext._();
 
-  @override
-  Message get message;
-
-  @experimental
-  const factory MessageContext.static({
-    required StaticMessage message,
-
-    /// For Trigger conditions
-    required MessageSlot slot,
-
-    /// For Interactions conditions
-    required MessageInteractions interactions,
-
-    /// For Interactions conditions
-    required UserContext user,
-    required DeviceContext device,
-  }) = StaticMessageContext;
-
   const factory MessageContext.dynamic({
     required DynamicMessage message,
 

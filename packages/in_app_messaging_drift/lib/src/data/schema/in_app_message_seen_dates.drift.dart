@@ -181,6 +181,19 @@ class InAppMessageSeenDate extends i0.DataClass
             ? triggerProperties.value
             : this.triggerProperties,
       );
+  InAppMessageSeenDate copyWithCompanion(
+      i1.InAppMessageSeenDatesCompanion data) {
+    return InAppMessageSeenDate(
+      id: data.id.present ? data.id.value : this.id,
+      message: data.message.present ? data.message.value : this.message,
+      seen: data.seen.present ? data.seen.value : this.seen,
+      trigger: data.trigger.present ? data.trigger.value : this.trigger,
+      triggerProperties: data.triggerProperties.present
+          ? data.triggerProperties.value
+          : this.triggerProperties,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('InAppMessageSeenDate(')
@@ -294,7 +307,7 @@ class InAppMessageSeenDatesCompanion
   }
 }
 
-typedef $$InAppMessageSeenDatesTableInsertCompanionBuilder
+typedef $$InAppMessageSeenDatesTableCreateCompanionBuilder
     = i1.InAppMessageSeenDatesCompanion Function({
   i0.Value<int> id,
   required String message,
@@ -317,8 +330,7 @@ class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
     i1.InAppMessageSeenDate,
     i1.$$InAppMessageSeenDatesTableFilterComposer,
     i1.$$InAppMessageSeenDatesTableOrderingComposer,
-    $$InAppMessageSeenDatesTableProcessedTableManager,
-    $$InAppMessageSeenDatesTableInsertCompanionBuilder,
+    $$InAppMessageSeenDatesTableCreateCompanionBuilder,
     $$InAppMessageSeenDatesTableUpdateCompanionBuilder> {
   $$InAppMessageSeenDatesTableTableManager(
       i0.GeneratedDatabase db, i1.$InAppMessageSeenDatesTable table)
@@ -329,9 +341,7 @@ class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
               i0.ComposerState(db, table)),
           orderingComposer: i1.$$InAppMessageSeenDatesTableOrderingComposer(
               i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$InAppMessageSeenDatesTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
+          updateCompanionCallback: ({
             i0.Value<int> id = const i0.Value.absent(),
             i0.Value<String> message = const i0.Value.absent(),
             i0.Value<DateTime> seen = const i0.Value.absent(),
@@ -345,7 +355,7 @@ class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
             trigger: trigger,
             triggerProperties: triggerProperties,
           ),
-          getInsertCompanionBuilder: ({
+          createCompanionCallback: ({
             i0.Value<int> id = const i0.Value.absent(),
             required String message,
             required DateTime seen,
@@ -360,19 +370,6 @@ class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
             triggerProperties: triggerProperties,
           ),
         ));
-}
-
-class $$InAppMessageSeenDatesTableProcessedTableManager
-    extends i0.ProcessedTableManager<
-        i0.GeneratedDatabase,
-        i1.$InAppMessageSeenDatesTable,
-        i1.InAppMessageSeenDate,
-        i1.$$InAppMessageSeenDatesTableFilterComposer,
-        i1.$$InAppMessageSeenDatesTableOrderingComposer,
-        $$InAppMessageSeenDatesTableProcessedTableManager,
-        $$InAppMessageSeenDatesTableInsertCompanionBuilder,
-        $$InAppMessageSeenDatesTableUpdateCompanionBuilder> {
-  $$InAppMessageSeenDatesTableProcessedTableManager(super.$state);
 }
 
 class $$InAppMessageSeenDatesTableFilterComposer extends i0

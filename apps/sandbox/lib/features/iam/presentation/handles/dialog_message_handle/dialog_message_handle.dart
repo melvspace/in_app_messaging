@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:sandbox/features/iam/presentation/handles/dialog_message_handle/dialog_message_data.dart';
@@ -13,6 +15,11 @@ class DialogMessageHandle extends DynamicMessageHandle {
 
   DialogMessageHandle({required super.context})
       : data = DialogMessageData.fromJson(context.message.data);
+
+  @override
+  FutureOr<bool> canShow(DynamicMessage message) {
+    return true;
+  }
 
   @override
   Future<void> onShow(BuildContext context, [NavigatorState? navigator]) {

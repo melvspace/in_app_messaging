@@ -9,5 +9,4 @@ export 'message_trigger.dart';
 export 'message_type.dart';
 export 'messages/dynamic_message.dart';
 export 'messages/message.dart';
-export 'messages/static_message.dart';
 export 'triggers/event_sequence_item.dart';

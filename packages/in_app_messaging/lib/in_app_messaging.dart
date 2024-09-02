@@ -67,7 +67,6 @@ class InAppMessaging {
       await gateway.markSeen(
         id: context.message.id,
         trigger: context.map(
-          static: (value) => value.slot.id,
           dynamic: (value) => value.trigger.mapOrNull(
             event: (value) => value.event,
           ),
