@@ -140,6 +140,17 @@ class InAppMessageInteraction extends i0.DataClass
         message: message ?? this.message,
         interactions: interactions ?? this.interactions,
       );
+  InAppMessageInteraction copyWithCompanion(
+      i1.InAppMessageInteractionsCompanion data) {
+    return InAppMessageInteraction(
+      id: data.id.present ? data.id.value : this.id,
+      message: data.message.present ? data.message.value : this.message,
+      interactions: data.interactions.present
+          ? data.interactions.value
+          : this.interactions,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('InAppMessageInteraction(')
@@ -228,7 +239,7 @@ class InAppMessageInteractionsCompanion
   }
 }
 
-typedef $$InAppMessageInteractionsTableInsertCompanionBuilder
+typedef $$InAppMessageInteractionsTableCreateCompanionBuilder
     = i1.InAppMessageInteractionsCompanion Function({
   i0.Value<int> id,
   required String message,
@@ -240,63 +251,6 @@ typedef $$InAppMessageInteractionsTableUpdateCompanionBuilder
   i0.Value<String> message,
   i0.Value<Map<String, dynamic>> interactions,
 });
-
-class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.$InAppMessageInteractionsTable,
-    i1.InAppMessageInteraction,
-    i1.$$InAppMessageInteractionsTableFilterComposer,
-    i1.$$InAppMessageInteractionsTableOrderingComposer,
-    $$InAppMessageInteractionsTableProcessedTableManager,
-    $$InAppMessageInteractionsTableInsertCompanionBuilder,
-    $$InAppMessageInteractionsTableUpdateCompanionBuilder> {
-  $$InAppMessageInteractionsTableTableManager(
-      i0.GeneratedDatabase db, i1.$InAppMessageInteractionsTable table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: i1.$$InAppMessageInteractionsTableFilterComposer(
-              i0.ComposerState(db, table)),
-          orderingComposer: i1.$$InAppMessageInteractionsTableOrderingComposer(
-              i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$InAppMessageInteractionsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> message = const i0.Value.absent(),
-            i0.Value<Map<String, dynamic>> interactions =
-                const i0.Value.absent(),
-          }) =>
-              i1.InAppMessageInteractionsCompanion(
-            id: id,
-            message: message,
-            interactions: interactions,
-          ),
-          getInsertCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String message,
-            required Map<String, dynamic> interactions,
-          }) =>
-              i1.InAppMessageInteractionsCompanion.insert(
-            id: id,
-            message: message,
-            interactions: interactions,
-          ),
-        ));
-}
-
-class $$InAppMessageInteractionsTableProcessedTableManager
-    extends i0.ProcessedTableManager<
-        i0.GeneratedDatabase,
-        i1.$InAppMessageInteractionsTable,
-        i1.InAppMessageInteraction,
-        i1.$$InAppMessageInteractionsTableFilterComposer,
-        i1.$$InAppMessageInteractionsTableOrderingComposer,
-        $$InAppMessageInteractionsTableProcessedTableManager,
-        $$InAppMessageInteractionsTableInsertCompanionBuilder,
-        $$InAppMessageInteractionsTableUpdateCompanionBuilder> {
-  $$InAppMessageInteractionsTableProcessedTableManager(super.$state);
-}
 
 class $$InAppMessageInteractionsTableFilterComposer extends i0
     .FilterComposer<i0.GeneratedDatabase, i1.$InAppMessageInteractionsTable> {
@@ -338,3 +292,72 @@ class $$InAppMessageInteractionsTableOrderingComposer extends i0
       builder: (column, joinBuilders) =>
           i0.ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class $$InAppMessageInteractionsTableTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.$InAppMessageInteractionsTable,
+    i1.InAppMessageInteraction,
+    i1.$$InAppMessageInteractionsTableFilterComposer,
+    i1.$$InAppMessageInteractionsTableOrderingComposer,
+    $$InAppMessageInteractionsTableCreateCompanionBuilder,
+    $$InAppMessageInteractionsTableUpdateCompanionBuilder,
+    (
+      i1.InAppMessageInteraction,
+      i0.BaseReferences<i0.GeneratedDatabase, i1.$InAppMessageInteractionsTable,
+          i1.InAppMessageInteraction>
+    ),
+    i1.InAppMessageInteraction,
+    i0.PrefetchHooks Function()> {
+  $$InAppMessageInteractionsTableTableManager(
+      i0.GeneratedDatabase db, i1.$InAppMessageInteractionsTable table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: i1.$$InAppMessageInteractionsTableFilterComposer(
+              i0.ComposerState(db, table)),
+          orderingComposer: i1.$$InAppMessageInteractionsTableOrderingComposer(
+              i0.ComposerState(db, table)),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> message = const i0.Value.absent(),
+            i0.Value<Map<String, dynamic>> interactions =
+                const i0.Value.absent(),
+          }) =>
+              i1.InAppMessageInteractionsCompanion(
+            id: id,
+            message: message,
+            interactions: interactions,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String message,
+            required Map<String, dynamic> interactions,
+          }) =>
+              i1.InAppMessageInteractionsCompanion.insert(
+            id: id,
+            message: message,
+            interactions: interactions,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$InAppMessageInteractionsTableProcessedTableManager
+    = i0.ProcessedTableManager<
+        i0.GeneratedDatabase,
+        i1.$InAppMessageInteractionsTable,
+        i1.InAppMessageInteraction,
+        i1.$$InAppMessageInteractionsTableFilterComposer,
+        i1.$$InAppMessageInteractionsTableOrderingComposer,
+        $$InAppMessageInteractionsTableCreateCompanionBuilder,
+        $$InAppMessageInteractionsTableUpdateCompanionBuilder,
+        (
+          i1.InAppMessageInteraction,
+          i0.BaseReferences<i0.GeneratedDatabase,
+              i1.$InAppMessageInteractionsTable, i1.InAppMessageInteraction>
+        ),
+        i1.InAppMessageInteraction,
+        i0.PrefetchHooks Function()>;

@@ -181,6 +181,19 @@ class InAppMessageSeenDate extends i0.DataClass
             ? triggerProperties.value
             : this.triggerProperties,
       );
+  InAppMessageSeenDate copyWithCompanion(
+      i1.InAppMessageSeenDatesCompanion data) {
+    return InAppMessageSeenDate(
+      id: data.id.present ? data.id.value : this.id,
+      message: data.message.present ? data.message.value : this.message,
+      seen: data.seen.present ? data.seen.value : this.seen,
+      trigger: data.trigger.present ? data.trigger.value : this.trigger,
+      triggerProperties: data.triggerProperties.present
+          ? data.triggerProperties.value
+          : this.triggerProperties,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('InAppMessageSeenDate(')
@@ -294,7 +307,7 @@ class InAppMessageSeenDatesCompanion
   }
 }
 
-typedef $$InAppMessageSeenDatesTableInsertCompanionBuilder
+typedef $$InAppMessageSeenDatesTableCreateCompanionBuilder
     = i1.InAppMessageSeenDatesCompanion Function({
   i0.Value<int> id,
   required String message,
@@ -310,70 +323,6 @@ typedef $$InAppMessageSeenDatesTableUpdateCompanionBuilder
   i0.Value<String?> trigger,
   i0.Value<String?> triggerProperties,
 });
-
-class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.$InAppMessageSeenDatesTable,
-    i1.InAppMessageSeenDate,
-    i1.$$InAppMessageSeenDatesTableFilterComposer,
-    i1.$$InAppMessageSeenDatesTableOrderingComposer,
-    $$InAppMessageSeenDatesTableProcessedTableManager,
-    $$InAppMessageSeenDatesTableInsertCompanionBuilder,
-    $$InAppMessageSeenDatesTableUpdateCompanionBuilder> {
-  $$InAppMessageSeenDatesTableTableManager(
-      i0.GeneratedDatabase db, i1.$InAppMessageSeenDatesTable table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: i1.$$InAppMessageSeenDatesTableFilterComposer(
-              i0.ComposerState(db, table)),
-          orderingComposer: i1.$$InAppMessageSeenDatesTableOrderingComposer(
-              i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$InAppMessageSeenDatesTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> message = const i0.Value.absent(),
-            i0.Value<DateTime> seen = const i0.Value.absent(),
-            i0.Value<String?> trigger = const i0.Value.absent(),
-            i0.Value<String?> triggerProperties = const i0.Value.absent(),
-          }) =>
-              i1.InAppMessageSeenDatesCompanion(
-            id: id,
-            message: message,
-            seen: seen,
-            trigger: trigger,
-            triggerProperties: triggerProperties,
-          ),
-          getInsertCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String message,
-            required DateTime seen,
-            i0.Value<String?> trigger = const i0.Value.absent(),
-            i0.Value<String?> triggerProperties = const i0.Value.absent(),
-          }) =>
-              i1.InAppMessageSeenDatesCompanion.insert(
-            id: id,
-            message: message,
-            seen: seen,
-            trigger: trigger,
-            triggerProperties: triggerProperties,
-          ),
-        ));
-}
-
-class $$InAppMessageSeenDatesTableProcessedTableManager
-    extends i0.ProcessedTableManager<
-        i0.GeneratedDatabase,
-        i1.$InAppMessageSeenDatesTable,
-        i1.InAppMessageSeenDate,
-        i1.$$InAppMessageSeenDatesTableFilterComposer,
-        i1.$$InAppMessageSeenDatesTableOrderingComposer,
-        $$InAppMessageSeenDatesTableProcessedTableManager,
-        $$InAppMessageSeenDatesTableInsertCompanionBuilder,
-        $$InAppMessageSeenDatesTableUpdateCompanionBuilder> {
-  $$InAppMessageSeenDatesTableProcessedTableManager(super.$state);
-}
 
 class $$InAppMessageSeenDatesTableFilterComposer extends i0
     .FilterComposer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
@@ -432,3 +381,79 @@ class $$InAppMessageSeenDatesTableOrderingComposer extends i0
       builder: (column, joinBuilders) =>
           i0.ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.$InAppMessageSeenDatesTable,
+    i1.InAppMessageSeenDate,
+    i1.$$InAppMessageSeenDatesTableFilterComposer,
+    i1.$$InAppMessageSeenDatesTableOrderingComposer,
+    $$InAppMessageSeenDatesTableCreateCompanionBuilder,
+    $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
+    (
+      i1.InAppMessageSeenDate,
+      i0.BaseReferences<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable,
+          i1.InAppMessageSeenDate>
+    ),
+    i1.InAppMessageSeenDate,
+    i0.PrefetchHooks Function()> {
+  $$InAppMessageSeenDatesTableTableManager(
+      i0.GeneratedDatabase db, i1.$InAppMessageSeenDatesTable table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: i1.$$InAppMessageSeenDatesTableFilterComposer(
+              i0.ComposerState(db, table)),
+          orderingComposer: i1.$$InAppMessageSeenDatesTableOrderingComposer(
+              i0.ComposerState(db, table)),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> message = const i0.Value.absent(),
+            i0.Value<DateTime> seen = const i0.Value.absent(),
+            i0.Value<String?> trigger = const i0.Value.absent(),
+            i0.Value<String?> triggerProperties = const i0.Value.absent(),
+          }) =>
+              i1.InAppMessageSeenDatesCompanion(
+            id: id,
+            message: message,
+            seen: seen,
+            trigger: trigger,
+            triggerProperties: triggerProperties,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String message,
+            required DateTime seen,
+            i0.Value<String?> trigger = const i0.Value.absent(),
+            i0.Value<String?> triggerProperties = const i0.Value.absent(),
+          }) =>
+              i1.InAppMessageSeenDatesCompanion.insert(
+            id: id,
+            message: message,
+            seen: seen,
+            trigger: trigger,
+            triggerProperties: triggerProperties,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$InAppMessageSeenDatesTableProcessedTableManager
+    = i0.ProcessedTableManager<
+        i0.GeneratedDatabase,
+        i1.$InAppMessageSeenDatesTable,
+        i1.InAppMessageSeenDate,
+        i1.$$InAppMessageSeenDatesTableFilterComposer,
+        i1.$$InAppMessageSeenDatesTableOrderingComposer,
+        $$InAppMessageSeenDatesTableCreateCompanionBuilder,
+        $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
+        (
+          i1.InAppMessageSeenDate,
+          i0.BaseReferences<i0.GeneratedDatabase,
+              i1.$InAppMessageSeenDatesTable, i1.InAppMessageSeenDate>
+        ),
+        i1.InAppMessageSeenDate,
+        i0.PrefetchHooks Function()>;
