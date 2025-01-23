@@ -1,6 +1,6 @@
+// dart format width=80
 // GENERATED CODE, DO NOT EDIT BY HAND.
 // ignore_for_file: type=lint
-//@dart=2.12
 import 'package:drift/drift.dart';
 import 'package:drift/internal/migrations.dart';
 import 'schema_v0.dart' as v0;
@@ -18,7 +18,9 @@ class GeneratedHelper implements SchemaInstantiationHelper {
       case 2:
         return v2.DatabaseAtV2(db);
       default:
-        throw MissingSchemaException(version, const {0, 1, 2});
+        throw MissingSchemaException(version, versions);
     }
   }
+
+  static const versions = const [0, 1, 2];
 }

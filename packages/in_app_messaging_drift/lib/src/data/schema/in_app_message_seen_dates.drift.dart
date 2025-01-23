@@ -1,9 +1,187 @@
+// dart format width=80
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
 import 'package:in_app_messaging_drift/src/data/schema/in_app_message_seen_dates.drift.dart'
     as i1;
 import 'package:in_app_messaging_drift/src/data/schema/in_app_message_seen_dates.dart'
     as i2;
+
+typedef $$InAppMessageSeenDatesTableCreateCompanionBuilder
+    = i1.InAppMessageSeenDatesCompanion Function({
+  i0.Value<int> id,
+  required String message,
+  required DateTime seen,
+  i0.Value<String?> trigger,
+  i0.Value<String?> triggerProperties,
+});
+typedef $$InAppMessageSeenDatesTableUpdateCompanionBuilder
+    = i1.InAppMessageSeenDatesCompanion Function({
+  i0.Value<int> id,
+  i0.Value<String> message,
+  i0.Value<DateTime> seen,
+  i0.Value<String?> trigger,
+  i0.Value<String?> triggerProperties,
+});
+
+class $$InAppMessageSeenDatesTableFilterComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
+  $$InAppMessageSeenDatesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get message => $composableBuilder(
+      column: $table.message, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<DateTime> get seen => $composableBuilder(
+      column: $table.seen, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get trigger => $composableBuilder(
+      column: $table.trigger, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get triggerProperties => $composableBuilder(
+      column: $table.triggerProperties,
+      builder: (column) => i0.ColumnFilters(column));
+}
+
+class $$InAppMessageSeenDatesTableOrderingComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
+  $$InAppMessageSeenDatesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get message => $composableBuilder(
+      column: $table.message, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<DateTime> get seen => $composableBuilder(
+      column: $table.seen, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get trigger => $composableBuilder(
+      column: $table.trigger, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get triggerProperties => $composableBuilder(
+      column: $table.triggerProperties,
+      builder: (column) => i0.ColumnOrderings(column));
+}
+
+class $$InAppMessageSeenDatesTableAnnotationComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
+  $$InAppMessageSeenDatesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get message =>
+      $composableBuilder(column: $table.message, builder: (column) => column);
+
+  i0.GeneratedColumn<DateTime> get seen =>
+      $composableBuilder(column: $table.seen, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get trigger =>
+      $composableBuilder(column: $table.trigger, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get triggerProperties => $composableBuilder(
+      column: $table.triggerProperties, builder: (column) => column);
+}
+
+class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.$InAppMessageSeenDatesTable,
+    i1.InAppMessageSeenDate,
+    i1.$$InAppMessageSeenDatesTableFilterComposer,
+    i1.$$InAppMessageSeenDatesTableOrderingComposer,
+    i1.$$InAppMessageSeenDatesTableAnnotationComposer,
+    $$InAppMessageSeenDatesTableCreateCompanionBuilder,
+    $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
+    (
+      i1.InAppMessageSeenDate,
+      i0.BaseReferences<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable,
+          i1.InAppMessageSeenDate>
+    ),
+    i1.InAppMessageSeenDate,
+    i0.PrefetchHooks Function()> {
+  $$InAppMessageSeenDatesTableTableManager(
+      i0.GeneratedDatabase db, i1.$InAppMessageSeenDatesTable table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              i1.$$InAppMessageSeenDatesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              i1.$$InAppMessageSeenDatesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              i1.$$InAppMessageSeenDatesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> message = const i0.Value.absent(),
+            i0.Value<DateTime> seen = const i0.Value.absent(),
+            i0.Value<String?> trigger = const i0.Value.absent(),
+            i0.Value<String?> triggerProperties = const i0.Value.absent(),
+          }) =>
+              i1.InAppMessageSeenDatesCompanion(
+            id: id,
+            message: message,
+            seen: seen,
+            trigger: trigger,
+            triggerProperties: triggerProperties,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String message,
+            required DateTime seen,
+            i0.Value<String?> trigger = const i0.Value.absent(),
+            i0.Value<String?> triggerProperties = const i0.Value.absent(),
+          }) =>
+              i1.InAppMessageSeenDatesCompanion.insert(
+            id: id,
+            message: message,
+            seen: seen,
+            trigger: trigger,
+            triggerProperties: triggerProperties,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$InAppMessageSeenDatesTableProcessedTableManager
+    = i0.ProcessedTableManager<
+        i0.GeneratedDatabase,
+        i1.$InAppMessageSeenDatesTable,
+        i1.InAppMessageSeenDate,
+        i1.$$InAppMessageSeenDatesTableFilterComposer,
+        i1.$$InAppMessageSeenDatesTableOrderingComposer,
+        i1.$$InAppMessageSeenDatesTableAnnotationComposer,
+        $$InAppMessageSeenDatesTableCreateCompanionBuilder,
+        $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
+        (
+          i1.InAppMessageSeenDate,
+          i0.BaseReferences<i0.GeneratedDatabase,
+              i1.$InAppMessageSeenDatesTable, i1.InAppMessageSeenDate>
+        ),
+        i1.InAppMessageSeenDate,
+        i0.PrefetchHooks Function()>;
 
 class $InAppMessageSeenDatesTable extends i2.InAppMessageSeenDates
     with i0.TableInfo<$InAppMessageSeenDatesTable, i1.InAppMessageSeenDate> {
@@ -306,154 +484,3 @@ class InAppMessageSeenDatesCompanion
         .toString();
   }
 }
-
-typedef $$InAppMessageSeenDatesTableCreateCompanionBuilder
-    = i1.InAppMessageSeenDatesCompanion Function({
-  i0.Value<int> id,
-  required String message,
-  required DateTime seen,
-  i0.Value<String?> trigger,
-  i0.Value<String?> triggerProperties,
-});
-typedef $$InAppMessageSeenDatesTableUpdateCompanionBuilder
-    = i1.InAppMessageSeenDatesCompanion Function({
-  i0.Value<int> id,
-  i0.Value<String> message,
-  i0.Value<DateTime> seen,
-  i0.Value<String?> trigger,
-  i0.Value<String?> triggerProperties,
-});
-
-class $$InAppMessageSeenDatesTableFilterComposer extends i0
-    .FilterComposer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
-  $$InAppMessageSeenDatesTableFilterComposer(super.$state);
-  i0.ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get message => $state.composableBuilder(
-      column: $state.table.message,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<DateTime> get seen => $state.composableBuilder(
-      column: $state.table.seen,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get trigger => $state.composableBuilder(
-      column: $state.table.trigger,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get triggerProperties => $state.composableBuilder(
-      column: $state.table.triggerProperties,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$InAppMessageSeenDatesTableOrderingComposer extends i0
-    .OrderingComposer<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable> {
-  $$InAppMessageSeenDatesTableOrderingComposer(super.$state);
-  i0.ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get message => $state.composableBuilder(
-      column: $state.table.message,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<DateTime> get seen => $state.composableBuilder(
-      column: $state.table.seen,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get trigger => $state.composableBuilder(
-      column: $state.table.trigger,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get triggerProperties => $state.composableBuilder(
-      column: $state.table.triggerProperties,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class $$InAppMessageSeenDatesTableTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.$InAppMessageSeenDatesTable,
-    i1.InAppMessageSeenDate,
-    i1.$$InAppMessageSeenDatesTableFilterComposer,
-    i1.$$InAppMessageSeenDatesTableOrderingComposer,
-    $$InAppMessageSeenDatesTableCreateCompanionBuilder,
-    $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
-    (
-      i1.InAppMessageSeenDate,
-      i0.BaseReferences<i0.GeneratedDatabase, i1.$InAppMessageSeenDatesTable,
-          i1.InAppMessageSeenDate>
-    ),
-    i1.InAppMessageSeenDate,
-    i0.PrefetchHooks Function()> {
-  $$InAppMessageSeenDatesTableTableManager(
-      i0.GeneratedDatabase db, i1.$InAppMessageSeenDatesTable table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: i1.$$InAppMessageSeenDatesTableFilterComposer(
-              i0.ComposerState(db, table)),
-          orderingComposer: i1.$$InAppMessageSeenDatesTableOrderingComposer(
-              i0.ComposerState(db, table)),
-          updateCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> message = const i0.Value.absent(),
-            i0.Value<DateTime> seen = const i0.Value.absent(),
-            i0.Value<String?> trigger = const i0.Value.absent(),
-            i0.Value<String?> triggerProperties = const i0.Value.absent(),
-          }) =>
-              i1.InAppMessageSeenDatesCompanion(
-            id: id,
-            message: message,
-            seen: seen,
-            trigger: trigger,
-            triggerProperties: triggerProperties,
-          ),
-          createCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String message,
-            required DateTime seen,
-            i0.Value<String?> trigger = const i0.Value.absent(),
-            i0.Value<String?> triggerProperties = const i0.Value.absent(),
-          }) =>
-              i1.InAppMessageSeenDatesCompanion.insert(
-            id: id,
-            message: message,
-            seen: seen,
-            trigger: trigger,
-            triggerProperties: triggerProperties,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $$InAppMessageSeenDatesTableProcessedTableManager
-    = i0.ProcessedTableManager<
-        i0.GeneratedDatabase,
-        i1.$InAppMessageSeenDatesTable,
-        i1.InAppMessageSeenDate,
-        i1.$$InAppMessageSeenDatesTableFilterComposer,
-        i1.$$InAppMessageSeenDatesTableOrderingComposer,
-        $$InAppMessageSeenDatesTableCreateCompanionBuilder,
-        $$InAppMessageSeenDatesTableUpdateCompanionBuilder,
-        (
-          i1.InAppMessageSeenDate,
-          i0.BaseReferences<i0.GeneratedDatabase,
-              i1.$InAppMessageSeenDatesTable, i1.InAppMessageSeenDate>
-        ),
-        i1.InAppMessageSeenDate,
-        i0.PrefetchHooks Function()>;

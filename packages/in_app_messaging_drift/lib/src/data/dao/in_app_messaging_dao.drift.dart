@@ -1,3 +1,4 @@
+// dart format width=80
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
 import 'package:in_app_messaging_drift/src/data/database/database.dart' as i1;

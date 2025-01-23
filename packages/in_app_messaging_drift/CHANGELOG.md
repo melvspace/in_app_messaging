@@ -1,3 +1,7 @@
+## 0.0.20
+
+- upgrade drift package to drift 2.23.1
+
 ## 0.0.15
 
 - sync with in_app_messaging

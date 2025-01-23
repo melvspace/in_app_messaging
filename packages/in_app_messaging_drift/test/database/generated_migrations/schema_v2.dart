@@ -1,6 +1,6 @@
+// dart format width=80
 // GENERATED CODE, DO NOT EDIT BY HAND.
 // ignore_for_file: type=lint
-//@dart=2.12
 import 'package:drift/drift.dart';
 
 class InAppMessageSeenDates extends Table with TableInfo {
@@ -14,7 +14,7 @@ class InAppMessageSeenDates extends Table with TableInfo {
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways(' PRIMARY KEY AUTOINCREMENT'));
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
   late final GeneratedColumn<String> message = GeneratedColumn<String>(
       'message', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
@@ -59,12 +59,12 @@ class InAppMessageInteractions extends Table with TableInfo {
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways(' PRIMARY KEY AUTOINCREMENT'));
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
   late final GeneratedColumn<String> message = GeneratedColumn<String>(
       'message', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(' UNIQUE'));
+      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
   late final GeneratedColumn<String> interactions = GeneratedColumn<String>(
       'interactions', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);

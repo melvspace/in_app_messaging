@@ -1,3 +1,4 @@
+// dart format width=80
 import 'package:drift/internal/versioned_schema.dart' as i0;
 import 'package:drift/drift.dart' as i1;
 import 'package:drift/drift.dart'; // ignore_for_file: type=lint,unused_import
@@ -95,11 +96,11 @@ final class Schema2 extends i0.VersionedSchema {
         isStrict: false,
         tableConstraints: [],
         columns: [
-          _column_5,
+          _column_0,
           _column_1,
           _column_2,
+          _column_5,
           _column_6,
-          _column_7,
         ],
         attachedDatabase: database,
       ),
@@ -111,8 +112,8 @@ final class Schema2 extends i0.VersionedSchema {
         isStrict: false,
         tableConstraints: [],
         columns: [
-          _column_5,
-          _column_8,
+          _column_0,
+          _column_3,
           _column_4,
         ],
         attachedDatabase: database,
@@ -134,22 +135,12 @@ class Shape2 extends i0.VersionedTable {
       columnsByName['trigger_properties']! as i1.GeneratedColumn<String>;
 }
 
-i1.GeneratedColumn<int> _column_5(String aliasedName) =>
-    i1.GeneratedColumn<int>('id', aliasedName, false,
-        hasAutoIncrement: true,
-        type: i1.DriftSqlType.int,
-        defaultConstraints: i1.GeneratedColumn.constraintIsAlways(
-            ' PRIMARY KEY AUTOINCREMENT'));
-i1.GeneratedColumn<String> _column_6(String aliasedName) =>
+i1.GeneratedColumn<String> _column_5(String aliasedName) =>
     i1.GeneratedColumn<String>('trigger', aliasedName, true,
         type: i1.DriftSqlType.string);
-i1.GeneratedColumn<String> _column_7(String aliasedName) =>
+i1.GeneratedColumn<String> _column_6(String aliasedName) =>
     i1.GeneratedColumn<String>('trigger_properties', aliasedName, true,
         type: i1.DriftSqlType.string);
-i1.GeneratedColumn<String> _column_8(String aliasedName) =>
-    i1.GeneratedColumn<String>('message', aliasedName, false,
-        type: i1.DriftSqlType.string,
-        defaultConstraints: i1.GeneratedColumn.constraintIsAlways(' UNIQUE'));
 i0.MigrationStepWithVersion migrationSteps({
   required Future<void> Function(i1.Migrator m, Schema1 schema) from0To1,
   required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
