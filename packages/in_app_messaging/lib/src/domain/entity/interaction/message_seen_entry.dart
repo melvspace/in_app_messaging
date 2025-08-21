@@ -4,7 +4,7 @@ part 'message_seen_entry.freezed.dart';
 part 'message_seen_entry.g.dart';
 
 @freezed
-class MessageSeenEntry with _$MessageSeenEntry {
+abstract class MessageSeenEntry with _$MessageSeenEntry {
   const factory MessageSeenEntry({
     required DateTime date,
     String? trigger,

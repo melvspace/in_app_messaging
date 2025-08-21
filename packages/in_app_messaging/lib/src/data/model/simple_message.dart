@@ -6,7 +6,7 @@ part 'simple_message.freezed.dart';
 part 'simple_message.g.dart';
 
 @freezed
-class SimpleMessage with _$SimpleMessage implements DynamicMessage {
+abstract class SimpleMessage with _$SimpleMessage implements DynamicMessage {
   const factory SimpleMessage({
     required String id,
     required bool enabled,

@@ -5,7 +5,7 @@ part 'event_sequence_item.g.dart';
 
 @freezed
 @experimental
-class EventSequenceItem with _$EventSequenceItem {
+abstract class EventSequenceItem with _$EventSequenceItem {
   const factory EventSequenceItem({
     required String name,
 

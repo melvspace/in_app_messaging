@@ -7,7 +7,7 @@ import "package:sandbox/providers/messages.dart";
 part "in_app_messaging.g.dart";
 
 @riverpod
-InAppMessaging inAppMessaging(InAppMessagingRef ref) {
+InAppMessaging inAppMessaging(Ref ref) {
   return InAppMessaging.initialize(
     gateway: DefaultMessageGateway(
       messageSource: MemoryMessageSource(

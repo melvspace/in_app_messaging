@@ -160,7 +160,7 @@ dynamic dateAddOperator(Applier applier, dynamic data, List params,
   }
 }
 
-dynamic dateTruncateOperator(applier, data, params) {
+dynamic dateTruncateOperator(dynamic applier, dynamic data, dynamic params) {
   if (params.length == 1) return applier(params[0], data);
 
   final rawDate = applier(params[0], data);

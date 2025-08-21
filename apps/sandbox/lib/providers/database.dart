@@ -4,6 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'database.g.dart';
 
 @Riverpod(keepAlive: true)
-InAppMessagingDatabase database(DatabaseRef ref) {
+InAppMessagingDatabase database(Ref ref) {
   return InAppMessagingDatabase();
 }

@@ -4,6 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'navigator.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey<NavigatorState> navigator(NavigatorRef ref) {
+GlobalKey<NavigatorState> navigator(Ref ref) {
   return GlobalKey();
 }

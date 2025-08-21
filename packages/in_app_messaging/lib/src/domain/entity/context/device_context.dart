@@ -4,7 +4,7 @@ part 'device_context.freezed.dart';
 part 'device_context.g.dart';
 
 @freezed
-class DeviceContext with _$DeviceContext {
+abstract class DeviceContext with _$DeviceContext {
   const DeviceContext._();
 
   const factory DeviceContext({

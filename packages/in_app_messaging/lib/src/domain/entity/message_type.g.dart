@@ -6,12 +6,11 @@ part of 'message_type.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MessageTypeImpl _$$MessageTypeImplFromJson(Map<String, dynamic> json) =>
-    _$MessageTypeImpl(
+_MessageType _$MessageTypeFromJson(Map<String, dynamic> json) => _MessageType(
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$MessageTypeImplToJson(_$MessageTypeImpl instance) =>
+Map<String, dynamic> _$MessageTypeToJson(_MessageType instance) =>
     <String, dynamic>{
       'name': instance.name,
     };

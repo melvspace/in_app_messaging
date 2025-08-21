@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,11 +9,8 @@ part of 'message_trigger.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 MessageTrigger _$MessageTriggerFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
     case 'cron':
@@ -31,24 +28,137 @@ MessageTrigger _$MessageTriggerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MessageTrigger {
+  /// Serializes this MessageTrigger to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is MessageTrigger);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'MessageTrigger()';
+  }
+}
+
+/// @nodoc
+class $MessageTriggerCopyWith<$Res> {
+  $MessageTriggerCopyWith(MessageTrigger _, $Res Function(MessageTrigger) __);
+}
+
+/// Adds pattern-matching-related methods to [MessageTrigger].
+extension MessageTriggerPatterns on MessageTrigger {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String cron, String? event) cron,
-    required TResult Function(String event, Map<String, dynamic>? data) event,
-    required TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)
-        eventSequence,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MessageCronTrigger value)? cron,
+    TResult Function(MessageEventTrigger value)? event,
+    TResult Function(MessageEventSequenceTrigger value)? eventSequence,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger() when cron != null:
+        return cron(_that);
+      case MessageEventTrigger() when event != null:
+        return event(_that);
+      case MessageEventSequenceTrigger() when eventSequence != null:
+        return eventSequence(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cron, String? event)? cron,
-    TResult? Function(String event, Map<String, dynamic>? data)? event,
-    TResult? Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult map<TResult extends Object?>({
+    required TResult Function(MessageCronTrigger value) cron,
+    required TResult Function(MessageEventTrigger value) event,
+    required TResult Function(MessageEventSequenceTrigger value) eventSequence,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger():
+        return cron(_that);
+      case MessageEventTrigger():
+        return event(_that);
+      case MessageEventSequenceTrigger():
+        return eventSequence(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MessageCronTrigger value)? cron,
+    TResult? Function(MessageEventTrigger value)? event,
+    TResult? Function(MessageEventSequenceTrigger value)? eventSequence,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger() when cron != null:
+        return cron(_that);
+      case MessageEventTrigger() when event != null:
+        return event(_that);
+      case MessageEventSequenceTrigger() when eventSequence != null:
+        return eventSequence(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String cron, String? event)? cron,
@@ -57,107 +167,97 @@ mixin _$MessageTrigger {
             List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
         eventSequence,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageCronTrigger value) cron,
-    required TResult Function(MessageEventTrigger value) event,
-    required TResult Function(MessageEventSequenceTrigger value) eventSequence,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageCronTrigger value)? cron,
-    TResult? Function(MessageEventTrigger value)? event,
-    TResult? Function(MessageEventSequenceTrigger value)? eventSequence,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageCronTrigger value)? cron,
-    TResult Function(MessageEventTrigger value)? event,
-    TResult Function(MessageEventSequenceTrigger value)? eventSequence,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this MessageTrigger to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MessageTriggerCopyWith<$Res> {
-  factory $MessageTriggerCopyWith(
-          MessageTrigger value, $Res Function(MessageTrigger) then) =
-      _$MessageTriggerCopyWithImpl<$Res, MessageTrigger>;
-}
-
-/// @nodoc
-class _$MessageTriggerCopyWithImpl<$Res, $Val extends MessageTrigger>
-    implements $MessageTriggerCopyWith<$Res> {
-  _$MessageTriggerCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$MessageCronTriggerImplCopyWith<$Res> {
-  factory _$$MessageCronTriggerImplCopyWith(_$MessageCronTriggerImpl value,
-          $Res Function(_$MessageCronTriggerImpl) then) =
-      __$$MessageCronTriggerImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String cron, String? event});
-}
-
-/// @nodoc
-class __$$MessageCronTriggerImplCopyWithImpl<$Res>
-    extends _$MessageTriggerCopyWithImpl<$Res, _$MessageCronTriggerImpl>
-    implements _$$MessageCronTriggerImplCopyWith<$Res> {
-  __$$MessageCronTriggerImplCopyWithImpl(_$MessageCronTriggerImpl _value,
-      $Res Function(_$MessageCronTriggerImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? cron = null,
-    Object? event = freezed,
   }) {
-    return _then(_$MessageCronTriggerImpl(
-      cron: null == cron
-          ? _value.cron
-          : cron // ignore: cast_nullable_to_non_nullable
-              as String,
-      event: freezed == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger() when cron != null:
+        return cron(_that.cron, _that.event);
+      case MessageEventTrigger() when event != null:
+        return event(_that.event, _that.data);
+      case MessageEventSequenceTrigger() when eventSequence != null:
+        return eventSequence(_that.events, _that.data);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String cron, String? event) cron,
+    required TResult Function(String event, Map<String, dynamic>? data) event,
+    required TResult Function(
+            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)
+        eventSequence,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger():
+        return cron(_that.cron, _that.event);
+      case MessageEventTrigger():
+        return event(_that.event, _that.data);
+      case MessageEventSequenceTrigger():
+        return eventSequence(_that.events, _that.data);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String cron, String? event)? cron,
+    TResult? Function(String event, Map<String, dynamic>? data)? event,
+    TResult? Function(
+            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
+        eventSequence,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case MessageCronTrigger() when cron != null:
+        return cron(_that.cron, _that.event);
+      case MessageEventTrigger() when event != null:
+        return event(_that.event, _that.data);
+      case MessageEventSequenceTrigger() when eventSequence != null:
+        return eventSequence(_that.events, _that.data);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 @experimental
-class _$MessageCronTriggerImpl extends MessageCronTrigger {
-  const _$MessageCronTriggerImpl(
+class MessageCronTrigger extends MessageTrigger {
+  const MessageCronTrigger(
       {required this.cron, this.event, final String? $type})
       : $type = $type ?? 'cron',
         super._();
+  factory MessageCronTrigger.fromJson(Map<String, dynamic> json) =>
+      _$MessageCronTriggerFromJson(json);
 
-  factory _$MessageCronTriggerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MessageCronTriggerImplFromJson(json);
-
-  @override
   final String cron;
 
   /// Event triggered when cron schedule activated
@@ -165,22 +265,30 @@ class _$MessageCronTriggerImpl extends MessageCronTrigger {
   /// By default message will be triggered when cron activated
   ///
   /// If event provided then event will be sent. Can be used for event sequences.
-  @override
   final String? event;
 
   @JsonKey(name: 'type')
   final String $type;
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $MessageCronTriggerCopyWith<MessageCronTrigger> get copyWith =>
+      _$MessageCronTriggerCopyWithImpl<MessageCronTrigger>(this, _$identity);
+
   @override
-  String toString() {
-    return 'MessageTrigger.cron(cron: $cron, event: $event)';
+  Map<String, dynamic> toJson() {
+    return _$MessageCronTriggerToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MessageCronTriggerImpl &&
+            other is MessageCronTrigger &&
             (identical(other.cron, cron) || other.cron == cron) &&
             (identical(other.event, event) || other.event == event));
   }
@@ -189,182 +297,69 @@ class _$MessageCronTriggerImpl extends MessageCronTrigger {
   @override
   int get hashCode => Object.hash(runtimeType, cron, event);
 
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MessageCronTriggerImplCopyWith<_$MessageCronTriggerImpl> get copyWith =>
-      __$$MessageCronTriggerImplCopyWithImpl<_$MessageCronTriggerImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String cron, String? event) cron,
-    required TResult Function(String event, Map<String, dynamic>? data) event,
-    required TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)
-        eventSequence,
-  }) {
-    return cron(this.cron, this.event);
+  String toString() {
+    return 'MessageTrigger.cron(cron: $cron, event: $event)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cron, String? event)? cron,
-    TResult? Function(String event, Map<String, dynamic>? data)? event,
-    TResult? Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-  }) {
-    return cron?.call(this.cron, this.event);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cron, String? event)? cron,
-    TResult Function(String event, Map<String, dynamic>? data)? event,
-    TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-    required TResult orElse(),
-  }) {
-    if (cron != null) {
-      return cron(this.cron, this.event);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageCronTrigger value) cron,
-    required TResult Function(MessageEventTrigger value) event,
-    required TResult Function(MessageEventSequenceTrigger value) eventSequence,
-  }) {
-    return cron(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageCronTrigger value)? cron,
-    TResult? Function(MessageEventTrigger value)? event,
-    TResult? Function(MessageEventSequenceTrigger value)? eventSequence,
-  }) {
-    return cron?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageCronTrigger value)? cron,
-    TResult Function(MessageEventTrigger value)? event,
-    TResult Function(MessageEventSequenceTrigger value)? eventSequence,
-    required TResult orElse(),
-  }) {
-    if (cron != null) {
-      return cron(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MessageCronTriggerImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class MessageCronTrigger extends MessageTrigger {
-  const factory MessageCronTrigger(
-      {required final String cron,
-      final String? event}) = _$MessageCronTriggerImpl;
-  const MessageCronTrigger._() : super._();
-
-  factory MessageCronTrigger.fromJson(Map<String, dynamic> json) =
-      _$MessageCronTriggerImpl.fromJson;
-
-  String get cron;
-
-  /// Event triggered when cron schedule activated
-  ///
-  /// By default message will be triggered when cron activated
-  ///
-  /// If event provided then event will be sent. Can be used for event sequences.
-  String? get event;
-
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageCronTriggerImplCopyWith<_$MessageCronTriggerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MessageEventTriggerImplCopyWith<$Res> {
-  factory _$$MessageEventTriggerImplCopyWith(_$MessageEventTriggerImpl value,
-          $Res Function(_$MessageEventTriggerImpl) then) =
-      __$$MessageEventTriggerImplCopyWithImpl<$Res>;
+abstract mixin class $MessageCronTriggerCopyWith<$Res>
+    implements $MessageTriggerCopyWith<$Res> {
+  factory $MessageCronTriggerCopyWith(
+          MessageCronTrigger value, $Res Function(MessageCronTrigger) _then) =
+      _$MessageCronTriggerCopyWithImpl;
   @useResult
-  $Res call({String event, Map<String, dynamic>? data});
+  $Res call({String cron, String? event});
 }
 
 /// @nodoc
-class __$$MessageEventTriggerImplCopyWithImpl<$Res>
-    extends _$MessageTriggerCopyWithImpl<$Res, _$MessageEventTriggerImpl>
-    implements _$$MessageEventTriggerImplCopyWith<$Res> {
-  __$$MessageEventTriggerImplCopyWithImpl(_$MessageEventTriggerImpl _value,
-      $Res Function(_$MessageEventTriggerImpl) _then)
-      : super(_value, _then);
+class _$MessageCronTriggerCopyWithImpl<$Res>
+    implements $MessageCronTriggerCopyWith<$Res> {
+  _$MessageCronTriggerCopyWithImpl(this._self, this._then);
+
+  final MessageCronTrigger _self;
+  final $Res Function(MessageCronTrigger) _then;
 
   /// Create a copy of MessageTrigger
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? event = null,
-    Object? data = freezed,
+    Object? cron = null,
+    Object? event = freezed,
   }) {
-    return _then(_$MessageEventTriggerImpl(
-      event: null == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
+    return _then(MessageCronTrigger(
+      cron: null == cron
+          ? _self.cron
+          : cron // ignore: cast_nullable_to_non_nullable
               as String,
-      data: freezed == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+      event: freezed == event
+          ? _self.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$MessageEventTriggerImpl extends MessageEventTrigger {
-  const _$MessageEventTriggerImpl(
+class MessageEventTrigger extends MessageTrigger {
+  const MessageEventTrigger(
       {required this.event,
       final Map<String, dynamic>? data = const {},
       final String? $type})
       : _data = data,
         $type = $type ?? 'event',
         super._();
+  factory MessageEventTrigger.fromJson(Map<String, dynamic> json) =>
+      _$MessageEventTriggerFromJson(json);
 
-  factory _$MessageEventTriggerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MessageEventTriggerImplFromJson(json);
-
-  @override
   final String event;
 
   /// Optional trigger payload
   final Map<String, dynamic>? _data;
 
   /// Optional trigger payload
-  @override
   @JsonKey()
   Map<String, dynamic>? get data {
     final value = _data;
@@ -377,16 +372,25 @@ class _$MessageEventTriggerImpl extends MessageEventTrigger {
   @JsonKey(name: 'type')
   final String $type;
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $MessageEventTriggerCopyWith<MessageEventTrigger> get copyWith =>
+      _$MessageEventTriggerCopyWithImpl<MessageEventTrigger>(this, _$identity);
+
   @override
-  String toString() {
-    return 'MessageTrigger.event(event: $event, data: $data)';
+  Map<String, dynamic> toJson() {
+    return _$MessageEventTriggerToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MessageEventTriggerImpl &&
+            other is MessageEventTrigger &&
             (identical(other.event, event) || other.event == event) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
@@ -396,155 +400,46 @@ class _$MessageEventTriggerImpl extends MessageEventTrigger {
   int get hashCode => Object.hash(
       runtimeType, event, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MessageEventTriggerImplCopyWith<_$MessageEventTriggerImpl> get copyWith =>
-      __$$MessageEventTriggerImplCopyWithImpl<_$MessageEventTriggerImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String cron, String? event) cron,
-    required TResult Function(String event, Map<String, dynamic>? data) event,
-    required TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)
-        eventSequence,
-  }) {
-    return event(this.event, data);
+  String toString() {
+    return 'MessageTrigger.event(event: $event, data: $data)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cron, String? event)? cron,
-    TResult? Function(String event, Map<String, dynamic>? data)? event,
-    TResult? Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-  }) {
-    return event?.call(this.event, data);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cron, String? event)? cron,
-    TResult Function(String event, Map<String, dynamic>? data)? event,
-    TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-    required TResult orElse(),
-  }) {
-    if (event != null) {
-      return event(this.event, data);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageCronTrigger value) cron,
-    required TResult Function(MessageEventTrigger value) event,
-    required TResult Function(MessageEventSequenceTrigger value) eventSequence,
-  }) {
-    return event(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageCronTrigger value)? cron,
-    TResult? Function(MessageEventTrigger value)? event,
-    TResult? Function(MessageEventSequenceTrigger value)? eventSequence,
-  }) {
-    return event?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageCronTrigger value)? cron,
-    TResult Function(MessageEventTrigger value)? event,
-    TResult Function(MessageEventSequenceTrigger value)? eventSequence,
-    required TResult orElse(),
-  }) {
-    if (event != null) {
-      return event(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MessageEventTriggerImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class MessageEventTrigger extends MessageTrigger {
-  const factory MessageEventTrigger(
-      {required final String event,
-      final Map<String, dynamic>? data}) = _$MessageEventTriggerImpl;
-  const MessageEventTrigger._() : super._();
-
-  factory MessageEventTrigger.fromJson(Map<String, dynamic> json) =
-      _$MessageEventTriggerImpl.fromJson;
-
-  String get event;
-
-  /// Optional trigger payload
-  Map<String, dynamic>? get data;
-
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageEventTriggerImplCopyWith<_$MessageEventTriggerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MessageEventSequenceTriggerImplCopyWith<$Res> {
-  factory _$$MessageEventSequenceTriggerImplCopyWith(
-          _$MessageEventSequenceTriggerImpl value,
-          $Res Function(_$MessageEventSequenceTriggerImpl) then) =
-      __$$MessageEventSequenceTriggerImplCopyWithImpl<$Res>;
+abstract mixin class $MessageEventTriggerCopyWith<$Res>
+    implements $MessageTriggerCopyWith<$Res> {
+  factory $MessageEventTriggerCopyWith(
+          MessageEventTrigger value, $Res Function(MessageEventTrigger) _then) =
+      _$MessageEventTriggerCopyWithImpl;
   @useResult
-  $Res call({List<EventSequenceItem> events, List<Map<String, dynamic>?> data});
+  $Res call({String event, Map<String, dynamic>? data});
 }
 
 /// @nodoc
-class __$$MessageEventSequenceTriggerImplCopyWithImpl<$Res>
-    extends _$MessageTriggerCopyWithImpl<$Res,
-        _$MessageEventSequenceTriggerImpl>
-    implements _$$MessageEventSequenceTriggerImplCopyWith<$Res> {
-  __$$MessageEventSequenceTriggerImplCopyWithImpl(
-      _$MessageEventSequenceTriggerImpl _value,
-      $Res Function(_$MessageEventSequenceTriggerImpl) _then)
-      : super(_value, _then);
+class _$MessageEventTriggerCopyWithImpl<$Res>
+    implements $MessageEventTriggerCopyWith<$Res> {
+  _$MessageEventTriggerCopyWithImpl(this._self, this._then);
+
+  final MessageEventTrigger _self;
+  final $Res Function(MessageEventTrigger) _then;
 
   /// Create a copy of MessageTrigger
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? events = null,
-    Object? data = null,
+    Object? event = null,
+    Object? data = freezed,
   }) {
-    return _then(_$MessageEventSequenceTriggerImpl(
-      events: null == events
-          ? _value._events
-          : events // ignore: cast_nullable_to_non_nullable
-              as List<EventSequenceItem>,
-      data: null == data
-          ? _value._data
+    return _then(MessageEventTrigger(
+      event: null == event
+          ? _self.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: freezed == data
+          ? _self._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>?>,
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -552,8 +447,8 @@ class __$$MessageEventSequenceTriggerImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @experimental
-class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
-  const _$MessageEventSequenceTriggerImpl(
+class MessageEventSequenceTrigger extends MessageTrigger {
+  const MessageEventSequenceTrigger(
       {required final List<EventSequenceItem> events,
       required final List<Map<String, dynamic>?> data,
       final String? $type})
@@ -561,13 +456,10 @@ class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
         _data = data,
         $type = $type ?? 'eventSequence',
         super._();
-
-  factory _$MessageEventSequenceTriggerImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$MessageEventSequenceTriggerImplFromJson(json);
+  factory MessageEventSequenceTrigger.fromJson(Map<String, dynamic> json) =>
+      _$MessageEventSequenceTriggerFromJson(json);
 
   final List<EventSequenceItem> _events;
-  @override
   List<EventSequenceItem> get events {
     if (_events is EqualUnmodifiableListView) return _events;
     // ignore: implicit_dynamic_type
@@ -578,7 +470,6 @@ class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
   final List<Map<String, dynamic>?> _data;
 
   /// Optional trigger payload
-  @override
   List<Map<String, dynamic>?> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
@@ -588,16 +479,26 @@ class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
   @JsonKey(name: 'type')
   final String $type;
 
+  /// Create a copy of MessageTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $MessageEventSequenceTriggerCopyWith<MessageEventSequenceTrigger>
+      get copyWith => _$MessageEventSequenceTriggerCopyWithImpl<
+          MessageEventSequenceTrigger>(this, _$identity);
+
   @override
-  String toString() {
-    return 'MessageTrigger.eventSequence(events: $events, data: $data)';
+  Map<String, dynamic> toJson() {
+    return _$MessageEventSequenceTriggerToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MessageEventSequenceTriggerImpl &&
+            other is MessageEventSequenceTrigger &&
             const DeepCollectionEquality().equals(other._events, _events) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
@@ -609,115 +510,49 @@ class _$MessageEventSequenceTriggerImpl extends MessageEventSequenceTrigger {
       const DeepCollectionEquality().hash(_events),
       const DeepCollectionEquality().hash(_data));
 
+  @override
+  String toString() {
+    return 'MessageTrigger.eventSequence(events: $events, data: $data)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $MessageEventSequenceTriggerCopyWith<$Res>
+    implements $MessageTriggerCopyWith<$Res> {
+  factory $MessageEventSequenceTriggerCopyWith(
+          MessageEventSequenceTrigger value,
+          $Res Function(MessageEventSequenceTrigger) _then) =
+      _$MessageEventSequenceTriggerCopyWithImpl;
+  @useResult
+  $Res call({List<EventSequenceItem> events, List<Map<String, dynamic>?> data});
+}
+
+/// @nodoc
+class _$MessageEventSequenceTriggerCopyWithImpl<$Res>
+    implements $MessageEventSequenceTriggerCopyWith<$Res> {
+  _$MessageEventSequenceTriggerCopyWithImpl(this._self, this._then);
+
+  final MessageEventSequenceTrigger _self;
+  final $Res Function(MessageEventSequenceTrigger) _then;
+
   /// Create a copy of MessageTrigger
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$MessageEventSequenceTriggerImplCopyWith<_$MessageEventSequenceTriggerImpl>
-      get copyWith => __$$MessageEventSequenceTriggerImplCopyWithImpl<
-          _$MessageEventSequenceTriggerImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String cron, String? event) cron,
-    required TResult Function(String event, Map<String, dynamic>? data) event,
-    required TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)
-        eventSequence,
+  $Res call({
+    Object? events = null,
+    Object? data = null,
   }) {
-    return eventSequence(events, data);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cron, String? event)? cron,
-    TResult? Function(String event, Map<String, dynamic>? data)? event,
-    TResult? Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-  }) {
-    return eventSequence?.call(events, data);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cron, String? event)? cron,
-    TResult Function(String event, Map<String, dynamic>? data)? event,
-    TResult Function(
-            List<EventSequenceItem> events, List<Map<String, dynamic>?> data)?
-        eventSequence,
-    required TResult orElse(),
-  }) {
-    if (eventSequence != null) {
-      return eventSequence(events, data);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MessageCronTrigger value) cron,
-    required TResult Function(MessageEventTrigger value) event,
-    required TResult Function(MessageEventSequenceTrigger value) eventSequence,
-  }) {
-    return eventSequence(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MessageCronTrigger value)? cron,
-    TResult? Function(MessageEventTrigger value)? event,
-    TResult? Function(MessageEventSequenceTrigger value)? eventSequence,
-  }) {
-    return eventSequence?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MessageCronTrigger value)? cron,
-    TResult Function(MessageEventTrigger value)? event,
-    TResult Function(MessageEventSequenceTrigger value)? eventSequence,
-    required TResult orElse(),
-  }) {
-    if (eventSequence != null) {
-      return eventSequence(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MessageEventSequenceTriggerImplToJson(
-      this,
-    );
+    return _then(MessageEventSequenceTrigger(
+      events: null == events
+          ? _self._events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<EventSequenceItem>,
+      data: null == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>?>,
+    ));
   }
 }
 
-abstract class MessageEventSequenceTrigger extends MessageTrigger {
-  const factory MessageEventSequenceTrigger(
-          {required final List<EventSequenceItem> events,
-          required final List<Map<String, dynamic>?> data}) =
-      _$MessageEventSequenceTriggerImpl;
-  const MessageEventSequenceTrigger._() : super._();
-
-  factory MessageEventSequenceTrigger.fromJson(Map<String, dynamic> json) =
-      _$MessageEventSequenceTriggerImpl.fromJson;
-
-  List<EventSequenceItem> get events;
-
-  /// Optional trigger payload
-  List<Map<String, dynamic>?> get data;
-
-  /// Create a copy of MessageTrigger
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageEventSequenceTriggerImplCopyWith<_$MessageEventSequenceTriggerImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

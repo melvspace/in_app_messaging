@@ -6,8 +6,7 @@ part of 'user_context.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserContextImpl _$$UserContextImplFromJson(Map<String, dynamic> json) =>
-    _$UserContextImpl(
+_UserContext _$UserContextFromJson(Map<String, dynamic> json) => _UserContext(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
@@ -19,7 +18,7 @@ _$UserContextImpl _$$UserContextImplFromJson(Map<String, dynamic> json) =>
           const {},
     );
 
-Map<String, dynamic> _$$UserContextImplToJson(_$UserContextImpl instance) =>
+Map<String, dynamic> _$UserContextToJson(_UserContext instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

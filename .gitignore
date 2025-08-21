@@ -31,3 +31,6 @@ build/
 pubspec_override.yaml
 .flutter-plugins
 .flutter-plugins-dependencies
+
+# FVM Version Cache
+.fvm/

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,45 +9,74 @@ part of 'simple_message.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SimpleMessage _$SimpleMessageFromJson(Map<String, dynamic> json) {
-  return _SimpleMessage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SimpleMessage {
-  String get id => throw _privateConstructorUsedError;
-  bool get enabled => throw _privateConstructorUsedError;
-  MessageType get type =>
-      throw _privateConstructorUsedError; // display settings
-  DateTime get start => throw _privateConstructorUsedError;
-  DateTime? get end => throw _privateConstructorUsedError;
-  int get priority =>
-      throw _privateConstructorUsedError; // triggers and conditions
-  List<MessageTrigger> get triggers => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get condition =>
-      throw _privateConstructorUsedError; // custom properties
-  Map<String, dynamic> get data => throw _privateConstructorUsedError;
-
-  /// Serializes this SimpleMessage to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  bool get enabled;
+  MessageType get type; // display settings
+  DateTime get start;
+  DateTime? get end;
+  int get priority; // triggers and conditions
+  List<MessageTrigger> get triggers;
+  JsonMap? get condition; // custom properties
+  JsonMap get data;
 
   /// Create a copy of SimpleMessage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SimpleMessageCopyWith<SimpleMessage> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$SimpleMessageCopyWithImpl<SimpleMessage>(
+          this as SimpleMessage, _$identity);
+
+  /// Serializes this SimpleMessage to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SimpleMessage &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.enabled, enabled) || other.enabled == enabled) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.start, start) || other.start == start) &&
+            (identical(other.end, end) || other.end == end) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            const DeepCollectionEquality().equals(other.triggers, triggers) &&
+            const DeepCollectionEquality().equals(other.condition, condition) &&
+            const DeepCollectionEquality().equals(other.data, data));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      enabled,
+      type,
+      start,
+      end,
+      priority,
+      const DeepCollectionEquality().hash(triggers),
+      const DeepCollectionEquality().hash(condition),
+      const DeepCollectionEquality().hash(data));
+
+  @override
+  String toString() {
+    return 'SimpleMessage(id: $id, enabled: $enabled, type: $type, start: $start, end: $end, priority: $priority, triggers: $triggers, condition: $condition, data: $data)';
+  }
 }
 
 /// @nodoc
-abstract class $SimpleMessageCopyWith<$Res> {
+abstract mixin class $SimpleMessageCopyWith<$Res> {
   factory $SimpleMessageCopyWith(
-          SimpleMessage value, $Res Function(SimpleMessage) then) =
-      _$SimpleMessageCopyWithImpl<$Res, SimpleMessage>;
+          SimpleMessage value, $Res Function(SimpleMessage) _then) =
+      _$SimpleMessageCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -57,21 +86,19 @@ abstract class $SimpleMessageCopyWith<$Res> {
       DateTime? end,
       int priority,
       List<MessageTrigger> triggers,
-      Map<String, dynamic>? condition,
-      Map<String, dynamic> data});
+      JsonMap? condition,
+      JsonMap data});
 
   $MessageTypeCopyWith<$Res> get type;
 }
 
 /// @nodoc
-class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
+class _$SimpleMessageCopyWithImpl<$Res>
     implements $SimpleMessageCopyWith<$Res> {
-  _$SimpleMessageCopyWithImpl(this._value, this._then);
+  _$SimpleMessageCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SimpleMessage _self;
+  final $Res Function(SimpleMessage) _then;
 
   /// Create a copy of SimpleMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -88,44 +115,44 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
     Object? condition = freezed,
     Object? data = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       enabled: null == enabled
-          ? _value.enabled
+          ? _self.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as bool,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
       start: null == start
-          ? _value.start
+          ? _self.start
           : start // ignore: cast_nullable_to_non_nullable
               as DateTime,
       end: freezed == end
-          ? _value.end
+          ? _self.end
           : end // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       priority: null == priority
-          ? _value.priority
+          ? _self.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as int,
       triggers: null == triggers
-          ? _value.triggers
+          ? _self.triggers
           : triggers // ignore: cast_nullable_to_non_nullable
               as List<MessageTrigger>,
       condition: freezed == condition
-          ? _value.condition
+          ? _self.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as JsonMap?,
       data: null == data
-          ? _value.data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ) as $Val);
+              as JsonMap,
+    ));
   }
 
   /// Create a copy of SimpleMessage
@@ -133,103 +160,230 @@ class _$SimpleMessageCopyWithImpl<$Res, $Val extends SimpleMessage>
   @override
   @pragma('vm:prefer-inline')
   $MessageTypeCopyWith<$Res> get type {
-    return $MessageTypeCopyWith<$Res>(_value.type, (value) {
-      return _then(_value.copyWith(type: value) as $Val);
+    return $MessageTypeCopyWith<$Res>(_self.type, (value) {
+      return _then(_self.copyWith(type: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$SimpleMessageImplCopyWith<$Res>
-    implements $SimpleMessageCopyWith<$Res> {
-  factory _$$SimpleMessageImplCopyWith(
-          _$SimpleMessageImpl value, $Res Function(_$SimpleMessageImpl) then) =
-      __$$SimpleMessageImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      bool enabled,
-      MessageType type,
-      DateTime start,
-      DateTime? end,
-      int priority,
-      List<MessageTrigger> triggers,
-      Map<String, dynamic>? condition,
-      Map<String, dynamic> data});
+/// Adds pattern-matching-related methods to [SimpleMessage].
+extension SimpleMessagePatterns on SimpleMessage {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $MessageTypeCopyWith<$Res> get type;
-}
-
-/// @nodoc
-class __$$SimpleMessageImplCopyWithImpl<$Res>
-    extends _$SimpleMessageCopyWithImpl<$Res, _$SimpleMessageImpl>
-    implements _$$SimpleMessageImplCopyWith<$Res> {
-  __$$SimpleMessageImplCopyWithImpl(
-      _$SimpleMessageImpl _value, $Res Function(_$SimpleMessageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SimpleMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? enabled = null,
-    Object? type = null,
-    Object? start = null,
-    Object? end = freezed,
-    Object? priority = null,
-    Object? triggers = null,
-    Object? condition = freezed,
-    Object? data = null,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SimpleMessage value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$SimpleMessageImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      enabled: null == enabled
-          ? _value.enabled
-          : enabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as MessageType,
-      start: null == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      priority: null == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as int,
-      triggers: null == triggers
-          ? _value._triggers
-          : triggers // ignore: cast_nullable_to_non_nullable
-              as List<MessageTrigger>,
-      condition: freezed == condition
-          ? _value._condition
-          : condition // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      data: null == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SimpleMessage value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SimpleMessage value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            bool enabled,
+            MessageType type,
+            DateTime start,
+            DateTime? end,
+            int priority,
+            List<MessageTrigger> triggers,
+            JsonMap? condition,
+            JsonMap data)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage() when $default != null:
+        return $default(
+            _that.id,
+            _that.enabled,
+            _that.type,
+            _that.start,
+            _that.end,
+            _that.priority,
+            _that.triggers,
+            _that.condition,
+            _that.data);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            bool enabled,
+            MessageType type,
+            DateTime start,
+            DateTime? end,
+            int priority,
+            List<MessageTrigger> triggers,
+            JsonMap? condition,
+            JsonMap data)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage():
+        return $default(
+            _that.id,
+            _that.enabled,
+            _that.type,
+            _that.start,
+            _that.end,
+            _that.priority,
+            _that.triggers,
+            _that.condition,
+            _that.data);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            bool enabled,
+            MessageType type,
+            DateTime start,
+            DateTime? end,
+            int priority,
+            List<MessageTrigger> triggers,
+            JsonMap? condition,
+            JsonMap data)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SimpleMessage() when $default != null:
+        return $default(
+            _that.id,
+            _that.enabled,
+            _that.type,
+            _that.start,
+            _that.end,
+            _that.priority,
+            _that.triggers,
+            _that.condition,
+            _that.data);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SimpleMessageImpl implements _SimpleMessage {
-  const _$SimpleMessageImpl(
+class _SimpleMessage implements SimpleMessage {
+  const _SimpleMessage(
       {required this.id,
       required this.enabled,
       required this.type,
@@ -237,14 +391,13 @@ class _$SimpleMessageImpl implements _SimpleMessage {
       this.end,
       this.priority = 0,
       required final List<MessageTrigger> triggers,
-      final Map<String, dynamic>? condition,
-      required final Map<String, dynamic> data})
+      final JsonMap? condition,
+      required final JsonMap data})
       : _triggers = triggers,
         _condition = condition,
         _data = data;
-
-  factory _$SimpleMessageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SimpleMessageImplFromJson(json);
+  factory _SimpleMessage.fromJson(Map<String, dynamic> json) =>
+      _$SimpleMessageFromJson(json);
 
   @override
   final String id;
@@ -270,9 +423,9 @@ class _$SimpleMessageImpl implements _SimpleMessage {
     return EqualUnmodifiableListView(_triggers);
   }
 
-  final Map<String, dynamic>? _condition;
+  final JsonMap? _condition;
   @override
-  Map<String, dynamic>? get condition {
+  JsonMap? get condition {
     final value = _condition;
     if (value == null) return null;
     if (_condition is EqualUnmodifiableMapView) return _condition;
@@ -281,25 +434,35 @@ class _$SimpleMessageImpl implements _SimpleMessage {
   }
 
 // custom properties
-  final Map<String, dynamic> _data;
+  final JsonMap _data;
 // custom properties
   @override
-  Map<String, dynamic> get data {
+  JsonMap get data {
     if (_data is EqualUnmodifiableMapView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_data);
   }
 
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SimpleMessage(id: $id, enabled: $enabled, type: $type, start: $start, end: $end, priority: $priority, triggers: $triggers, condition: $condition, data: $data)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SimpleMessageCopyWith<_SimpleMessage> get copyWith =>
+      __$SimpleMessageCopyWithImpl<_SimpleMessage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SimpleMessageToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SimpleMessageImpl &&
+            other is _SimpleMessage &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.enabled, enabled) || other.enabled == enabled) &&
             (identical(other.type, type) || other.type == type) &&
@@ -327,60 +490,107 @@ class _$SimpleMessageImpl implements _SimpleMessage {
       const DeepCollectionEquality().hash(_condition),
       const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of SimpleMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SimpleMessageImplCopyWith<_$SimpleMessageImpl> get copyWith =>
-      __$$SimpleMessageImplCopyWithImpl<_$SimpleMessageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SimpleMessageImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SimpleMessage(id: $id, enabled: $enabled, type: $type, start: $start, end: $end, priority: $priority, triggers: $triggers, condition: $condition, data: $data)';
   }
 }
 
-abstract class _SimpleMessage implements SimpleMessage {
-  const factory _SimpleMessage(
-      {required final String id,
-      required final bool enabled,
-      required final MessageType type,
-      required final DateTime start,
-      final DateTime? end,
-      final int priority,
-      required final List<MessageTrigger> triggers,
-      final Map<String, dynamic>? condition,
-      required final Map<String, dynamic> data}) = _$SimpleMessageImpl;
+/// @nodoc
+abstract mixin class _$SimpleMessageCopyWith<$Res>
+    implements $SimpleMessageCopyWith<$Res> {
+  factory _$SimpleMessageCopyWith(
+          _SimpleMessage value, $Res Function(_SimpleMessage) _then) =
+      __$SimpleMessageCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      bool enabled,
+      MessageType type,
+      DateTime start,
+      DateTime? end,
+      int priority,
+      List<MessageTrigger> triggers,
+      JsonMap? condition,
+      JsonMap data});
 
-  factory _SimpleMessage.fromJson(Map<String, dynamic> json) =
-      _$SimpleMessageImpl.fromJson;
+  @override
+  $MessageTypeCopyWith<$Res> get type;
+}
 
-  @override
-  String get id;
-  @override
-  bool get enabled;
-  @override
-  MessageType get type; // display settings
-  @override
-  DateTime get start;
-  @override
-  DateTime? get end;
-  @override
-  int get priority; // triggers and conditions
-  @override
-  List<MessageTrigger> get triggers;
-  @override
-  Map<String, dynamic>? get condition; // custom properties
-  @override
-  Map<String, dynamic> get data;
+/// @nodoc
+class __$SimpleMessageCopyWithImpl<$Res>
+    implements _$SimpleMessageCopyWith<$Res> {
+  __$SimpleMessageCopyWithImpl(this._self, this._then);
+
+  final _SimpleMessage _self;
+  final $Res Function(_SimpleMessage) _then;
 
   /// Create a copy of SimpleMessage
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SimpleMessageImplCopyWith<_$SimpleMessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? enabled = null,
+    Object? type = null,
+    Object? start = null,
+    Object? end = freezed,
+    Object? priority = null,
+    Object? triggers = null,
+    Object? condition = freezed,
+    Object? data = null,
+  }) {
+    return _then(_SimpleMessage(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      enabled: null == enabled
+          ? _self.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MessageType,
+      start: null == start
+          ? _self.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      end: freezed == end
+          ? _self.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      priority: null == priority
+          ? _self.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as int,
+      triggers: null == triggers
+          ? _self._triggers
+          : triggers // ignore: cast_nullable_to_non_nullable
+              as List<MessageTrigger>,
+      condition: freezed == condition
+          ? _self._condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as JsonMap?,
+      data: null == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as JsonMap,
+    ));
+  }
+
+  /// Create a copy of SimpleMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageTypeCopyWith<$Res> get type {
+    return $MessageTypeCopyWith<$Res>(_self.type, (value) {
+      return _then(_self.copyWith(type: value));
+    });
+  }
 }
+
+// dart format on

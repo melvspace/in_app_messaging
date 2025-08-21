@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:drift/drift.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging_drift/src/data/dao/in_app_messaging_dao.drift.dart';
 import 'package:in_app_messaging_drift/src/data/database/database.dart';
 import 'package:in_app_messaging_drift/src/data/schema/schema.dart';
+import 'package:in_app_messaging_drift/src/in_app_messaging_drift_logger.dart';
 
 @DriftAccessor(tables: [InAppMessageSeenDates, InAppMessageInteractions])
 class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
@@ -62,7 +62,7 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
     try {
       sTriggerProperties = jsonEncode(triggerProperties);
     } catch (e) {
-      log('failed to serialize trigger properties');
+      logger.info('failed to serialize trigger properties');
       sTriggerProperties = null;
     }
 

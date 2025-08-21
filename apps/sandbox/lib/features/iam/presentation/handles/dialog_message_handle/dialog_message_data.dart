@@ -4,7 +4,7 @@ part 'dialog_message_data.freezed.dart';
 part 'dialog_message_data.g.dart';
 
 @freezed
-class DialogMessageData with _$DialogMessageData {
+abstract class DialogMessageData with _$DialogMessageData {
   const factory DialogMessageData({
     required String title,
     String? body,
@@ -16,7 +16,7 @@ class DialogMessageData with _$DialogMessageData {
 }
 
 @freezed
-class DialogMessageAction with _$DialogMessageAction {
+abstract class DialogMessageAction with _$DialogMessageAction {
   const factory DialogMessageAction({
     required String text,
     DialogMessageDataClick? click,
@@ -28,7 +28,7 @@ class DialogMessageAction with _$DialogMessageAction {
 }
 
 @freezed
-class DialogMessageDataClick with _$DialogMessageDataClick {
+abstract class DialogMessageDataClick with _$DialogMessageDataClick {
   const factory DialogMessageDataClick.pop() = DialogPopClickAction;
 
   factory DialogMessageDataClick.fromJson(Map<String, dynamic> json) =>

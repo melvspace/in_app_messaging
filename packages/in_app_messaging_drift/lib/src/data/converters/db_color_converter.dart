@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:drift/drift.dart';
 
+// ignore: unintended_html_in_doc_comment
 /// Stores color list as '<int_color>,<int_color>';
 class DBColorListConverter extends TypeConverter<List<Color?>, String> {
   final DBColorConverter _inner;
@@ -11,12 +12,14 @@ class DBColorListConverter extends TypeConverter<List<Color?>, String> {
   @override
   List<Color?> fromSql(String fromDb) {
     final values = fromDb.split(',');
-    return values.map((e) => e == 'none' ? null : _inner.fromSql(int.parse(e))).toList();
+    return values
+        .map((e) => e == 'none' ? null : _inner.fromSql(int.parse(e)))
+        .toList();
   }
 
   @override
   String toSql(List<Color?> value) {
-    return value.map((e) => e?.value ?? 'none').join(',');
+    return value.map((e) => e?.toARGB32() ?? 'none').join(',');
   }
 }
 
@@ -31,6 +34,6 @@ class DBColorConverter extends TypeConverter<Color, int> {
 
   @override
   int toSql(Color value) {
-    return value.value;
+    return value.toARGB32();
   }
 }

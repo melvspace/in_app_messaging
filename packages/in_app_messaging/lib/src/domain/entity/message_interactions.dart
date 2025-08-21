@@ -7,7 +7,7 @@ part 'message_interactions.g.dart';
 
 /// Message persisted interactions
 @freezed
-class MessageInteractions with _$MessageInteractions {
+abstract class MessageInteractions with _$MessageInteractions {
   const factory MessageInteractions({
     /// message id
     required String message,

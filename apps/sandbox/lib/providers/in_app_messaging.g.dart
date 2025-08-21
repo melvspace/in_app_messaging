@@ -6,20 +6,46 @@ part of 'in_app_messaging.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$inAppMessagingHash() => r'16c611fbf8567883ecdd15a70cf12026fff5b7c8';
-
-/// See also [inAppMessaging].
 @ProviderFor(inAppMessaging)
-final inAppMessagingProvider = AutoDisposeProvider<InAppMessaging>.internal(
-  inAppMessaging,
-  name: r'inAppMessagingProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$inAppMessagingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const inAppMessagingProvider = InAppMessagingProvider._();
 
-typedef InAppMessagingRef = AutoDisposeProviderRef<InAppMessaging>;
+final class InAppMessagingProvider
+    extends $FunctionalProvider<InAppMessaging, InAppMessaging, InAppMessaging>
+    with $Provider<InAppMessaging> {
+  const InAppMessagingProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'inAppMessagingProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$inAppMessagingHash();
+
+  @$internal
+  @override
+  $ProviderElement<InAppMessaging> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  InAppMessaging create(Ref ref) {
+    return inAppMessaging(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(InAppMessaging value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<InAppMessaging>(value),
+    );
+  }
+}
+
+String _$inAppMessagingHash() => r'27a13c56ed3def13c59ec377ca887362a80bc044';
+
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

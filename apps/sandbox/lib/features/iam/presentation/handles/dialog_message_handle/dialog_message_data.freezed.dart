@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,89 +9,66 @@ part of 'dialog_message_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DialogMessageData _$DialogMessageDataFromJson(Map<String, dynamic> json) {
-  return _DialogMessageData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DialogMessageData {
-  String get title => throw _privateConstructorUsedError;
-  String? get body => throw _privateConstructorUsedError;
-  List<DialogMessageAction> get actions => throw _privateConstructorUsedError;
+  String get title;
+  String? get body;
+  List<DialogMessageAction> get actions;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DialogMessageDataCopyWith<DialogMessageData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DialogMessageDataCopyWith<$Res> {
-  factory $DialogMessageDataCopyWith(
-          DialogMessageData value, $Res Function(DialogMessageData) then) =
-      _$DialogMessageDataCopyWithImpl<$Res, DialogMessageData>;
-  @useResult
-  $Res call({String title, String? body, List<DialogMessageAction> actions});
-}
-
-/// @nodoc
-class _$DialogMessageDataCopyWithImpl<$Res, $Val extends DialogMessageData>
-    implements $DialogMessageDataCopyWith<$Res> {
-  _$DialogMessageDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of DialogMessageData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $DialogMessageDataCopyWith<DialogMessageData> get copyWith =>
+      _$DialogMessageDataCopyWithImpl<DialogMessageData>(
+          this as DialogMessageData, _$identity);
+
+  /// Serializes this DialogMessageData to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? title = null,
-    Object? body = freezed,
-    Object? actions = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      body: freezed == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String?,
-      actions: null == actions
-          ? _value.actions
-          : actions // ignore: cast_nullable_to_non_nullable
-              as List<DialogMessageAction>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DialogMessageData &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.body, body) || other.body == body) &&
+            const DeepCollectionEquality().equals(other.actions, actions));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, title, body, const DeepCollectionEquality().hash(actions));
+
+  @override
+  String toString() {
+    return 'DialogMessageData(title: $title, body: $body, actions: $actions)';
   }
 }
 
 /// @nodoc
-abstract class _$$DialogMessageDataImplCopyWith<$Res>
-    implements $DialogMessageDataCopyWith<$Res> {
-  factory _$$DialogMessageDataImplCopyWith(_$DialogMessageDataImpl value,
-          $Res Function(_$DialogMessageDataImpl) then) =
-      __$$DialogMessageDataImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DialogMessageDataCopyWith<$Res> {
+  factory $DialogMessageDataCopyWith(
+          DialogMessageData value, $Res Function(DialogMessageData) _then) =
+      _$DialogMessageDataCopyWithImpl;
   @useResult
   $Res call({String title, String? body, List<DialogMessageAction> actions});
 }
 
 /// @nodoc
-class __$$DialogMessageDataImplCopyWithImpl<$Res>
-    extends _$DialogMessageDataCopyWithImpl<$Res, _$DialogMessageDataImpl>
-    implements _$$DialogMessageDataImplCopyWith<$Res> {
-  __$$DialogMessageDataImplCopyWithImpl(_$DialogMessageDataImpl _value,
-      $Res Function(_$DialogMessageDataImpl) _then)
-      : super(_value, _then);
+class _$DialogMessageDataCopyWithImpl<$Res>
+    implements $DialogMessageDataCopyWith<$Res> {
+  _$DialogMessageDataCopyWithImpl(this._self, this._then);
 
+  final DialogMessageData _self;
+  final $Res Function(DialogMessageData) _then;
+
+  /// Create a copy of DialogMessageData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,34 +76,196 @@ class __$$DialogMessageDataImplCopyWithImpl<$Res>
     Object? body = freezed,
     Object? actions = null,
   }) {
-    return _then(_$DialogMessageDataImpl(
+    return _then(_self.copyWith(
       title: null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: freezed == body
-          ? _value.body
+          ? _self.body
           : body // ignore: cast_nullable_to_non_nullable
               as String?,
       actions: null == actions
-          ? _value._actions
+          ? _self.actions
           : actions // ignore: cast_nullable_to_non_nullable
               as List<DialogMessageAction>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [DialogMessageData].
+extension DialogMessageDataPatterns on DialogMessageData {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_DialogMessageData value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_DialogMessageData value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_DialogMessageData value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String title, String? body, List<DialogMessageAction> actions)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData() when $default != null:
+        return $default(_that.title, _that.body, _that.actions);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String title, String? body, List<DialogMessageAction> actions)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData():
+        return $default(_that.title, _that.body, _that.actions);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String title, String? body, List<DialogMessageAction> actions)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageData() when $default != null:
+        return $default(_that.title, _that.body, _that.actions);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$DialogMessageDataImpl implements _DialogMessageData {
-  const _$DialogMessageDataImpl(
+class _DialogMessageData implements DialogMessageData {
+  const _DialogMessageData(
       {required this.title,
       this.body,
       final List<DialogMessageAction> actions = const []})
       : _actions = actions;
-
-  factory _$DialogMessageDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DialogMessageDataImplFromJson(json);
+  factory _DialogMessageData.fromJson(Map<String, dynamic> json) =>
+      _$DialogMessageDataFromJson(json);
 
   @override
   final String title;
@@ -141,190 +280,355 @@ class _$DialogMessageDataImpl implements _DialogMessageData {
     return EqualUnmodifiableListView(_actions);
   }
 
+  /// Create a copy of DialogMessageData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DialogMessageData(title: $title, body: $body, actions: $actions)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DialogMessageDataCopyWith<_DialogMessageData> get copyWith =>
+      __$DialogMessageDataCopyWithImpl<_DialogMessageData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DialogMessageDataToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DialogMessageDataImpl &&
+            other is _DialogMessageData &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
             const DeepCollectionEquality().equals(other._actions, _actions));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, body, const DeepCollectionEquality().hash(_actions));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DialogMessageDataImplCopyWith<_$DialogMessageDataImpl> get copyWith =>
-      __$$DialogMessageDataImplCopyWithImpl<_$DialogMessageDataImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DialogMessageDataImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _DialogMessageData implements DialogMessageData {
-  const factory _DialogMessageData(
-      {required final String title,
-      final String? body,
-      final List<DialogMessageAction> actions}) = _$DialogMessageDataImpl;
-
-  factory _DialogMessageData.fromJson(Map<String, dynamic> json) =
-      _$DialogMessageDataImpl.fromJson;
-
-  @override
-  String get title;
-  @override
-  String? get body;
-  @override
-  List<DialogMessageAction> get actions;
-  @override
-  @JsonKey(ignore: true)
-  _$$DialogMessageDataImplCopyWith<_$DialogMessageDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-DialogMessageAction _$DialogMessageActionFromJson(Map<String, dynamic> json) {
-  return _DialogMessageAction.fromJson(json);
-}
-
-/// @nodoc
-mixin _$DialogMessageAction {
-  String get text => throw _privateConstructorUsedError;
-  DialogMessageDataClick? get click => throw _privateConstructorUsedError;
-  List<String> get events => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DialogMessageActionCopyWith<DialogMessageAction> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DialogMessageActionCopyWith<$Res> {
-  factory $DialogMessageActionCopyWith(
-          DialogMessageAction value, $Res Function(DialogMessageAction) then) =
-      _$DialogMessageActionCopyWithImpl<$Res, DialogMessageAction>;
-  @useResult
-  $Res call({String text, DialogMessageDataClick? click, List<String> events});
-
-  $DialogMessageDataClickCopyWith<$Res>? get click;
-}
-
-/// @nodoc
-class _$DialogMessageActionCopyWithImpl<$Res, $Val extends DialogMessageAction>
-    implements $DialogMessageActionCopyWith<$Res> {
-  _$DialogMessageActionCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? text = null,
-    Object? click = freezed,
-    Object? events = null,
-  }) {
-    return _then(_value.copyWith(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      click: freezed == click
-          ? _value.click
-          : click // ignore: cast_nullable_to_non_nullable
-              as DialogMessageDataClick?,
-      events: null == events
-          ? _value.events
-          : events // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DialogMessageDataClickCopyWith<$Res>? get click {
-    if (_value.click == null) {
-      return null;
-    }
-
-    return $DialogMessageDataClickCopyWith<$Res>(_value.click!, (value) {
-      return _then(_value.copyWith(click: value) as $Val);
-    });
+  String toString() {
+    return 'DialogMessageData(title: $title, body: $body, actions: $actions)';
   }
 }
 
 /// @nodoc
-abstract class _$$DialogMessageActionImplCopyWith<$Res>
-    implements $DialogMessageActionCopyWith<$Res> {
-  factory _$$DialogMessageActionImplCopyWith(_$DialogMessageActionImpl value,
-          $Res Function(_$DialogMessageActionImpl) then) =
-      __$$DialogMessageActionImplCopyWithImpl<$Res>;
+abstract mixin class _$DialogMessageDataCopyWith<$Res>
+    implements $DialogMessageDataCopyWith<$Res> {
+  factory _$DialogMessageDataCopyWith(
+          _DialogMessageData value, $Res Function(_DialogMessageData) _then) =
+      __$DialogMessageDataCopyWithImpl;
   @override
   @useResult
-  $Res call({String text, DialogMessageDataClick? click, List<String> events});
-
-  @override
-  $DialogMessageDataClickCopyWith<$Res>? get click;
+  $Res call({String title, String? body, List<DialogMessageAction> actions});
 }
 
 /// @nodoc
-class __$$DialogMessageActionImplCopyWithImpl<$Res>
-    extends _$DialogMessageActionCopyWithImpl<$Res, _$DialogMessageActionImpl>
-    implements _$$DialogMessageActionImplCopyWith<$Res> {
-  __$$DialogMessageActionImplCopyWithImpl(_$DialogMessageActionImpl _value,
-      $Res Function(_$DialogMessageActionImpl) _then)
-      : super(_value, _then);
+class __$DialogMessageDataCopyWithImpl<$Res>
+    implements _$DialogMessageDataCopyWith<$Res> {
+  __$DialogMessageDataCopyWithImpl(this._self, this._then);
 
-  @pragma('vm:prefer-inline')
+  final _DialogMessageData _self;
+  final $Res Function(_DialogMessageData) _then;
+
+  /// Create a copy of DialogMessageData
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? text = null,
-    Object? click = freezed,
-    Object? events = null,
+    Object? title = null,
+    Object? body = freezed,
+    Object? actions = null,
   }) {
-    return _then(_$DialogMessageActionImpl(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
+    return _then(_DialogMessageData(
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      click: freezed == click
-          ? _value.click
-          : click // ignore: cast_nullable_to_non_nullable
-              as DialogMessageDataClick?,
-      events: null == events
-          ? _value._events
-          : events // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      body: freezed == body
+          ? _self.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      actions: null == actions
+          ? _self._actions
+          : actions // ignore: cast_nullable_to_non_nullable
+              as List<DialogMessageAction>,
     ));
   }
 }
 
 /// @nodoc
+mixin _$DialogMessageAction {
+  String get text;
+  DialogMessageDataClick? get click;
+  List<String> get events;
+
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DialogMessageActionCopyWith<DialogMessageAction> get copyWith =>
+      _$DialogMessageActionCopyWithImpl<DialogMessageAction>(
+          this as DialogMessageAction, _$identity);
+
+  /// Serializes this DialogMessageAction to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DialogMessageAction &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.click, click) || other.click == click) &&
+            const DeepCollectionEquality().equals(other.events, events));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, text, click, const DeepCollectionEquality().hash(events));
+
+  @override
+  String toString() {
+    return 'DialogMessageAction(text: $text, click: $click, events: $events)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DialogMessageActionCopyWith<$Res> {
+  factory $DialogMessageActionCopyWith(
+          DialogMessageAction value, $Res Function(DialogMessageAction) _then) =
+      _$DialogMessageActionCopyWithImpl;
+  @useResult
+  $Res call({String text, DialogMessageDataClick? click, List<String> events});
+
+  $DialogMessageDataClickCopyWith<$Res>? get click;
+}
+
+/// @nodoc
+class _$DialogMessageActionCopyWithImpl<$Res>
+    implements $DialogMessageActionCopyWith<$Res> {
+  _$DialogMessageActionCopyWithImpl(this._self, this._then);
+
+  final DialogMessageAction _self;
+  final $Res Function(DialogMessageAction) _then;
+
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+    Object? click = freezed,
+    Object? events = null,
+  }) {
+    return _then(_self.copyWith(
+      text: null == text
+          ? _self.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      click: freezed == click
+          ? _self.click
+          : click // ignore: cast_nullable_to_non_nullable
+              as DialogMessageDataClick?,
+      events: null == events
+          ? _self.events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DialogMessageDataClickCopyWith<$Res>? get click {
+    if (_self.click == null) {
+      return null;
+    }
+
+    return $DialogMessageDataClickCopyWith<$Res>(_self.click!, (value) {
+      return _then(_self.copyWith(click: value));
+    });
+  }
+}
+
+/// Adds pattern-matching-related methods to [DialogMessageAction].
+extension DialogMessageActionPatterns on DialogMessageAction {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_DialogMessageAction value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_DialogMessageAction value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_DialogMessageAction value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String text, DialogMessageDataClick? click, List<String> events)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction() when $default != null:
+        return $default(_that.text, _that.click, _that.events);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String text, DialogMessageDataClick? click, List<String> events)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction():
+        return $default(_that.text, _that.click, _that.events);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String text, DialogMessageDataClick? click, List<String> events)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DialogMessageAction() when $default != null:
+        return $default(_that.text, _that.click, _that.events);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
 @JsonSerializable()
-class _$DialogMessageActionImpl implements _DialogMessageAction {
-  const _$DialogMessageActionImpl(
+class _DialogMessageAction implements DialogMessageAction {
+  const _DialogMessageAction(
       {required this.text, this.click, final List<String> events = const []})
       : _events = events;
-
-  factory _$DialogMessageActionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DialogMessageActionImplFromJson(json);
+  factory _DialogMessageAction.fromJson(Map<String, dynamic> json) =>
+      _$DialogMessageActionFromJson(json);
 
   @override
   final String text;
@@ -339,60 +643,103 @@ class _$DialogMessageActionImpl implements _DialogMessageAction {
     return EqualUnmodifiableListView(_events);
   }
 
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DialogMessageAction(text: $text, click: $click, events: $events)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DialogMessageActionCopyWith<_DialogMessageAction> get copyWith =>
+      __$DialogMessageActionCopyWithImpl<_DialogMessageAction>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DialogMessageActionToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DialogMessageActionImpl &&
+            other is _DialogMessageAction &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.click, click) || other.click == click) &&
             const DeepCollectionEquality().equals(other._events, _events));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, text, click, const DeepCollectionEquality().hash(_events));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DialogMessageActionImplCopyWith<_$DialogMessageActionImpl> get copyWith =>
-      __$$DialogMessageActionImplCopyWithImpl<_$DialogMessageActionImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DialogMessageActionImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DialogMessageAction(text: $text, click: $click, events: $events)';
   }
 }
 
-abstract class _DialogMessageAction implements DialogMessageAction {
-  const factory _DialogMessageAction(
-      {required final String text,
-      final DialogMessageDataClick? click,
-      final List<String> events}) = _$DialogMessageActionImpl;
+/// @nodoc
+abstract mixin class _$DialogMessageActionCopyWith<$Res>
+    implements $DialogMessageActionCopyWith<$Res> {
+  factory _$DialogMessageActionCopyWith(_DialogMessageAction value,
+          $Res Function(_DialogMessageAction) _then) =
+      __$DialogMessageActionCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String text, DialogMessageDataClick? click, List<String> events});
 
-  factory _DialogMessageAction.fromJson(Map<String, dynamic> json) =
-      _$DialogMessageActionImpl.fromJson;
+  @override
+  $DialogMessageDataClickCopyWith<$Res>? get click;
+}
 
+/// @nodoc
+class __$DialogMessageActionCopyWithImpl<$Res>
+    implements _$DialogMessageActionCopyWith<$Res> {
+  __$DialogMessageActionCopyWithImpl(this._self, this._then);
+
+  final _DialogMessageAction _self;
+  final $Res Function(_DialogMessageAction) _then;
+
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String get text;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? text = null,
+    Object? click = freezed,
+    Object? events = null,
+  }) {
+    return _then(_DialogMessageAction(
+      text: null == text
+          ? _self.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      click: freezed == click
+          ? _self.click
+          : click // ignore: cast_nullable_to_non_nullable
+              as DialogMessageDataClick?,
+      events: null == events
+          ? _self._events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+
+  /// Create a copy of DialogMessageAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  DialogMessageDataClick? get click;
-  @override
-  List<String> get events;
-  @override
-  @JsonKey(ignore: true)
-  _$$DialogMessageActionImplCopyWith<_$DialogMessageActionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $DialogMessageDataClickCopyWith<$Res>? get click {
+    if (_self.click == null) {
+      return null;
+    }
+
+    return $DialogMessageDataClickCopyWith<$Res>(_self.click!, (value) {
+      return _then(_self.copyWith(click: value));
+    });
+  }
 }
 
 DialogMessageDataClick _$DialogMessageDataClickFromJson(
@@ -402,168 +749,216 @@ DialogMessageDataClick _$DialogMessageDataClickFromJson(
 
 /// @nodoc
 mixin _$DialogMessageDataClick {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() pop,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pop,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pop,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DialogPopClickAction value) pop,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DialogPopClickAction value)? pop,
-  }) =>
-      throw _privateConstructorUsedError;
+  /// Serializes this DialogMessageDataClick to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DialogMessageDataClick);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'DialogMessageDataClick()';
+  }
+}
+
+/// @nodoc
+class $DialogMessageDataClickCopyWith<$Res> {
+  $DialogMessageDataClickCopyWith(
+      DialogMessageDataClick _, $Res Function(DialogMessageDataClick) __);
+}
+
+/// Adds pattern-matching-related methods to [DialogMessageDataClick].
+extension DialogMessageDataClickPatterns on DialogMessageDataClick {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DialogPopClickAction value)? pop,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction() when pop != null:
+        return pop(_that);
+      case _:
+        return orElse();
+    }
+  }
 
-/// @nodoc
-abstract class $DialogMessageDataClickCopyWith<$Res> {
-  factory $DialogMessageDataClickCopyWith(DialogMessageDataClick value,
-          $Res Function(DialogMessageDataClick) then) =
-      _$DialogMessageDataClickCopyWithImpl<$Res, DialogMessageDataClick>;
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-class _$DialogMessageDataClickCopyWithImpl<$Res,
-        $Val extends DialogMessageDataClick>
-    implements $DialogMessageDataClickCopyWith<$Res> {
-  _$DialogMessageDataClickCopyWithImpl(this._value, this._then);
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DialogPopClickAction value) pop,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction():
+        return pop(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
 
-/// @nodoc
-abstract class _$$DialogPopClickActionImplCopyWith<$Res> {
-  factory _$$DialogPopClickActionImplCopyWith(_$DialogPopClickActionImpl value,
-          $Res Function(_$DialogPopClickActionImpl) then) =
-      __$$DialogPopClickActionImplCopyWithImpl<$Res>;
-}
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DialogPopClickAction value)? pop,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction() when pop != null:
+        return pop(_that);
+      case _:
+        return null;
+    }
+  }
 
-/// @nodoc
-class __$$DialogPopClickActionImplCopyWithImpl<$Res>
-    extends _$DialogMessageDataClickCopyWithImpl<$Res,
-        _$DialogPopClickActionImpl>
-    implements _$$DialogPopClickActionImplCopyWith<$Res> {
-  __$$DialogPopClickActionImplCopyWithImpl(_$DialogPopClickActionImpl _value,
-      $Res Function(_$DialogPopClickActionImpl) _then)
-      : super(_value, _then);
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pop,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction() when pop != null:
+        return pop();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pop,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction():
+        return pop();
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pop,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DialogPopClickAction() when pop != null:
+        return pop();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DialogPopClickActionImpl implements DialogPopClickAction {
-  const _$DialogPopClickActionImpl();
-
-  factory _$DialogPopClickActionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DialogPopClickActionImplFromJson(json);
+class DialogPopClickAction implements DialogMessageDataClick {
+  const DialogPopClickAction();
+  factory DialogPopClickAction.fromJson(Map<String, dynamic> json) =>
+      _$DialogPopClickActionFromJson(json);
 
   @override
-  String toString() {
-    return 'DialogMessageDataClick.pop()';
+  Map<String, dynamic> toJson() {
+    return _$DialogPopClickActionToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DialogPopClickActionImpl);
+        (other.runtimeType == runtimeType && other is DialogPopClickAction);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() pop,
-  }) {
-    return pop();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pop,
-  }) {
-    return pop?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pop,
-    required TResult orElse(),
-  }) {
-    if (pop != null) {
-      return pop();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DialogPopClickAction value) pop,
-  }) {
-    return pop(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DialogPopClickAction value)? pop,
-  }) {
-    return pop?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DialogPopClickAction value)? pop,
-    required TResult orElse(),
-  }) {
-    if (pop != null) {
-      return pop(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DialogPopClickActionImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DialogMessageDataClick.pop()';
   }
 }
 
-abstract class DialogPopClickAction implements DialogMessageDataClick {
-  const factory DialogPopClickAction() = _$DialogPopClickActionImpl;
-
-  factory DialogPopClickAction.fromJson(Map<String, dynamic> json) =
-      _$DialogPopClickActionImpl.fromJson;
-}
+// dart format on

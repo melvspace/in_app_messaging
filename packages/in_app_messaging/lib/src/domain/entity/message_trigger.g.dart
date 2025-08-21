@@ -6,41 +6,38 @@ part of 'message_trigger.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MessageCronTriggerImpl _$$MessageCronTriggerImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MessageCronTriggerImpl(
+MessageCronTrigger _$MessageCronTriggerFromJson(Map<String, dynamic> json) =>
+    MessageCronTrigger(
       cron: json['cron'] as String,
       event: json['event'] as String?,
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MessageCronTriggerImplToJson(
-        _$MessageCronTriggerImpl instance) =>
+Map<String, dynamic> _$MessageCronTriggerToJson(MessageCronTrigger instance) =>
     <String, dynamic>{
       'cron': instance.cron,
       'event': instance.event,
       'type': instance.$type,
     };
 
-_$MessageEventTriggerImpl _$$MessageEventTriggerImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MessageEventTriggerImpl(
+MessageEventTrigger _$MessageEventTriggerFromJson(Map<String, dynamic> json) =>
+    MessageEventTrigger(
       event: json['event'] as String,
       data: json['data'] as Map<String, dynamic>? ?? const {},
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MessageEventTriggerImplToJson(
-        _$MessageEventTriggerImpl instance) =>
+Map<String, dynamic> _$MessageEventTriggerToJson(
+        MessageEventTrigger instance) =>
     <String, dynamic>{
       'event': instance.event,
       'data': instance.data,
       'type': instance.$type,
     };
 
-_$MessageEventSequenceTriggerImpl _$$MessageEventSequenceTriggerImplFromJson(
+MessageEventSequenceTrigger _$MessageEventSequenceTriggerFromJson(
         Map<String, dynamic> json) =>
-    _$MessageEventSequenceTriggerImpl(
+    MessageEventSequenceTrigger(
       events: (json['events'] as List<dynamic>)
           .map((e) => EventSequenceItem.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -50,8 +47,8 @@ _$MessageEventSequenceTriggerImpl _$$MessageEventSequenceTriggerImplFromJson(
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MessageEventSequenceTriggerImplToJson(
-        _$MessageEventSequenceTriggerImpl instance) =>
+Map<String, dynamic> _$MessageEventSequenceTriggerToJson(
+        MessageEventSequenceTrigger instance) =>
     <String, dynamic>{
       'events': instance.events,
       'data': instance.data,

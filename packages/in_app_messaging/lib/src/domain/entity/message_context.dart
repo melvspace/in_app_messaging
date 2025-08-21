@@ -5,7 +5,7 @@ part 'message_context.freezed.dart';
 
 /// MessageContext used to evaluate expression and possibly fill templates
 @Freezed(unionKey: 'type')
-class MessageContext with _$MessageContext {
+sealed class MessageContext with _$MessageContext {
   const MessageContext._();
 
   const factory MessageContext.dynamic({

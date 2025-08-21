@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
+import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
 import 'in_app_message_presenter_key.dart';
 
 typedef DynamicMessageHandleFactories
@@ -45,19 +45,26 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     if (_active != value && value != null && mounted) {
       Future.value(value.canShow(context)).then(
         (canShow) {
+          final context = this.context;
           _completers.remove(value.context.message)?.complete(canShow);
 
           if (canShow) {
+            if (!context.mounted) {
+              logger.warning('DynamicMessagePresenter was unmounted and '
+                  'message cannot be delivered');
+              return;
+            }
+
             value.onShow(context, widget.navigatorKey?.currentState).then(
               (value) {
-                log('[InAppMessaging]: Message(${active?.context.message.id}) closed');
+                logger.info('Message(${active?.context.message.id}) closed');
 
                 active = null;
                 _checkQueue();
               },
             );
           } else {
-            log('[InAppMessaging]: Message(${active?.context.message.id}) skipped');
+            logger.info('Message(${active?.context.message.id}) skipped');
 
             active = null;
             _checkQueue();
@@ -70,7 +77,7 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
   }
 
   void setSuppressed(bool value) {
-    log('[InAppMessagingPresenter]: Suppressed - $value');
+    logger.info('[Presenter]: Suppressed - $value');
     _suppressed = value;
 
     if (!value) {
@@ -99,17 +106,19 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
 
   void _checkQueue() {
     if (_suppressed) {
-      log('[InAppMessagingPresenter.checkQueue]: Suppressed, skipping queue check');
+      logger.info('[Presenter.checkQueue]: Suppressed, skipping queue check');
       return;
     }
 
-    if (this.active != null) {
-      log('[InAppMessagingPresenter.checkQueue]: Has active message, skipping queue check');
+    if (active != null) {
+      logger.info(
+          '[Presenter.checkQueue]: Has active message, skipping queue check');
       return;
     }
 
     if (pending.isEmpty) {
-      log('[InAppMessagingPresenter.checkQueue]: Queue is empty, skipping queue check');
+      logger
+          .info('[Presenter.checkQueue]: Queue is empty, skipping queue check');
       return;
     }
 
@@ -118,7 +127,8 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
 
     final builder = widget.builders[tuple.message.type];
     if (builder == null) {
-      log('[InAppMessagingPresenter.checkQueue]: No builder found for ${message.type} type, skipping message');
+      logger.info(
+          '[Presenter.checkQueue]: No builder found for ${message.type} type, skipping message');
       _completers.remove(message)?.complete(false);
       return;
     }

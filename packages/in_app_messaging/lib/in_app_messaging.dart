@@ -1,9 +1,7 @@
-library in_app_messaging;
-
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:in_app_messaging/in_app_messaging.dart';
+import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
 
 import 'src/presentation/presenter/in_app_message_presenter_key.dart';
 export 'src/data/data.dart';
@@ -19,24 +17,27 @@ class InAppMessaging {
 
   factory InAppMessaging.initialize({required MessageGateway gateway}) {
     _instance?.dispose();
-    log('[InAppMessaging]: Instance initialized');
+    logger.info('Instance initialized');
     return _instance = InAppMessaging._(gateway: gateway);
   }
 
   static InAppMessaging get instance => _instance!;
 
   Future<bool> trigger(String event, Map<String, dynamic> properties) async {
-    log('[InAppMessaging]: trigger received - $event');
+    logger.info('Trigger received - $event');
     final context = await gateway.evaluate(event, properties);
 
     final message = context?.message;
 
     if (context == null || message == null) {
-      log('[InAppMessaging]: No message triggered for $event');
+      logger.info('No message triggered for $event');
       return Future.value(false);
     }
 
-    log('[InAppMessaging]: Message(${message.id}) of ${message.type.runtimeType} type triggered and enqueued');
+    logger.info(
+      'Message(${message.id}) of ${message.type.runtimeType} type triggered and enqueued',
+    );
+
     return inAppMessagePresenterKey.currentState //
             ?.enqueue(context)
             .then((value) => _markSeen(value, context))
@@ -54,9 +55,11 @@ class InAppMessaging {
 
   bool _logSeen(bool seen, Message message) {
     if (seen) {
-      log('[InAppMessaging]: Message(${message.id}) of ${message.type.runtimeType} type delivered');
+      logger.info(
+          'Message(${message.id}) of ${message.type.runtimeType} type delivered');
     } else {
-      log('[InAppMessaging]: Message(${message.id}) of ${message.type.runtimeType} type cancelled');
+      logger.info(
+          'Message(${message.id}) of ${message.type.runtimeType} type cancelled');
     }
 
     return seen;

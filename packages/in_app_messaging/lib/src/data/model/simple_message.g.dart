@@ -6,8 +6,8 @@ part of 'simple_message.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SimpleMessageImpl _$$SimpleMessageImplFromJson(Map<String, dynamic> json) =>
-    _$SimpleMessageImpl(
+_SimpleMessage _$SimpleMessageFromJson(Map<String, dynamic> json) =>
+    _SimpleMessage(
       id: json['id'] as String,
       enabled: json['enabled'] as bool,
       type: MessageType.fromJson(json['type'] as Map<String, dynamic>),
@@ -21,7 +21,7 @@ _$SimpleMessageImpl _$$SimpleMessageImplFromJson(Map<String, dynamic> json) =>
       data: json['data'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$SimpleMessageImplToJson(_$SimpleMessageImpl instance) =>
+Map<String, dynamic> _$SimpleMessageToJson(_SimpleMessage instance) =>
     <String, dynamic>{
       'id': instance.id,
       'enabled': instance.enabled,

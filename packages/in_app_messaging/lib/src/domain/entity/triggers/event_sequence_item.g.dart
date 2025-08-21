@@ -6,16 +6,14 @@ part of 'event_sequence_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$EventSequenceItemImpl _$$EventSequenceItemImplFromJson(
-        Map<String, dynamic> json) =>
-    _$EventSequenceItemImpl(
+_EventSequenceItem _$EventSequenceItemFromJson(Map<String, dynamic> json) =>
+    _EventSequenceItem(
       name: json['name'] as String,
       expected: json['expected'] as bool? ?? true,
       maxDelay: (json['max_delay'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$EventSequenceItemImplToJson(
-        _$EventSequenceItemImpl instance) =>
+Map<String, dynamic> _$EventSequenceItemToJson(_EventSequenceItem instance) =>
     <String, dynamic>{
       'name': instance.name,
       'expected': instance.expected,

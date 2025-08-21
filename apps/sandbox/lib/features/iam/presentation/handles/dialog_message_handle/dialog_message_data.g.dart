@@ -6,9 +6,8 @@ part of 'dialog_message_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DialogMessageDataImpl _$$DialogMessageDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DialogMessageDataImpl(
+_DialogMessageData _$DialogMessageDataFromJson(Map<String, dynamic> json) =>
+    _DialogMessageData(
       title: json['title'] as String,
       body: json['body'] as String?,
       actions: (json['actions'] as List<dynamic>?)
@@ -18,17 +17,15 @@ _$DialogMessageDataImpl _$$DialogMessageDataImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$DialogMessageDataImplToJson(
-        _$DialogMessageDataImpl instance) =>
+Map<String, dynamic> _$DialogMessageDataToJson(_DialogMessageData instance) =>
     <String, dynamic>{
       'title': instance.title,
       'body': instance.body,
       'actions': instance.actions,
     };
 
-_$DialogMessageActionImpl _$$DialogMessageActionImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DialogMessageActionImpl(
+_DialogMessageAction _$DialogMessageActionFromJson(Map<String, dynamic> json) =>
+    _DialogMessageAction(
       text: json['text'] as String,
       click: json['click'] == null
           ? null
@@ -40,18 +37,18 @@ _$DialogMessageActionImpl _$$DialogMessageActionImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$DialogMessageActionImplToJson(
-        _$DialogMessageActionImpl instance) =>
+Map<String, dynamic> _$DialogMessageActionToJson(
+        _DialogMessageAction instance) =>
     <String, dynamic>{
       'text': instance.text,
       'click': instance.click,
       'events': instance.events,
     };
 
-_$DialogPopClickActionImpl _$$DialogPopClickActionImplFromJson(
+DialogPopClickAction _$DialogPopClickActionFromJson(
         Map<String, dynamic> json) =>
-    _$DialogPopClickActionImpl();
+    DialogPopClickAction();
 
-Map<String, dynamic> _$$DialogPopClickActionImplToJson(
-        _$DialogPopClickActionImpl instance) =>
+Map<String, dynamic> _$DialogPopClickActionToJson(
+        DialogPopClickAction instance) =>
     <String, dynamic>{};

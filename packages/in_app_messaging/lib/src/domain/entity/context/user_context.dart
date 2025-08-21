@@ -4,7 +4,7 @@ part 'user_context.freezed.dart';
 part 'user_context.g.dart';
 
 @freezed
-class UserContext with _$UserContext {
+abstract class UserContext with _$UserContext {
   const UserContext._();
 
   const factory UserContext({

@@ -5,7 +5,7 @@ import 'package:sandbox/features/iam/presentation/handles/dialog_message_handle/
 part 'messages.g.dart';
 
 @riverpod
-List<Message> iamMessages(IamMessagesRef ref) {
+List<Message> iamMessages(Ref ref) {
   return [
     SimpleMessage(
       id: 'Cron Message',

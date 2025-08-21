@@ -6,12 +6,11 @@ part of 'message_slot.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MessageSlotImpl _$$MessageSlotImplFromJson(Map<String, dynamic> json) =>
-    _$MessageSlotImpl(
+_MessageSlot _$MessageSlotFromJson(Map<String, dynamic> json) => _MessageSlot(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$MessageSlotImplToJson(_$MessageSlotImpl instance) =>
+Map<String, dynamic> _$MessageSlotToJson(_MessageSlot instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

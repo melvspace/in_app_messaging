@@ -184,8 +184,6 @@ class $InAppMessageInteractionsTable extends i2.InAppMessageInteractions
       type: i0.DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints: i0.GeneratedColumn.constraintIsAlways('UNIQUE'));
-  static const i0.VerificationMeta _interactionsMeta =
-      const i0.VerificationMeta('interactions');
   @override
   late final i0.GeneratedColumnWithTypeConverter<Map<String, dynamic>, String>
       interactions = i0.GeneratedColumn<String>(
@@ -215,7 +213,6 @@ class $InAppMessageInteractionsTable extends i2.InAppMessageInteractions
     } else if (isInserting) {
       context.missing(_messageMeta);
     }
-    context.handle(_interactionsMeta, const i0.VerificationResult.success());
     return context;
   }
 
