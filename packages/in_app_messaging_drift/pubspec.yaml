@@ -1,7 +1,7 @@
 name: in_app_messaging_drift
 resolution: workspace
 description: In-App Messaging persistence layer with Drift
-version: 0.0.20
+version: 0.0.21
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:
@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   # framework
-  in_app_messaging: ^0.0.17
+  in_app_messaging: ^0.0.20
 
   # utility
   logging: ^1.0.0

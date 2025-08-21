@@ -1,7 +1,7 @@
 name: in_app_messaging
 resolution: workspace
 description: "Simple In-App Messaging for your application"
-version: 0.0.19
+version: 0.0.20
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   # framework
-  in_app_messaging_json_logic: ^2.1.0
+  in_app_messaging_json_logic: ^2.2.0
 
   # utility
   version: ^3.0.0

@@ -1,7 +1,7 @@
 name: in_app_messaging_json_logic
 resolution: workspace
 description: jsonlogic is dart implementation of JsonLogic, which applies logic rules on JSON.
-version: 2.1.1
+version: 2.2.0
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:

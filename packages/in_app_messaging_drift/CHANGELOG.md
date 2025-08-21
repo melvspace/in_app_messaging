@@ -1,3 +1,13 @@
+## 0.0.21
+
+ - **FIX**: fix once conditions.
+ - **FEAT**(deps): upgrade dependencies and sdk.
+ - **FEAT**: adjust dynamic message presenter.
+ - **FEAT**: use json-logic for conditions, make messages serializable, add more conditions.
+ - **FEAT**: add interaction table.
+ - **FEAT**: add user and device conditions.
+ - **DOCS**(iam_drift): add todos.
+
 ## 0.0.20
 
 - upgrade drift package to drift 2.23.1

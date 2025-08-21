@@ -1,3 +1,9 @@
+## 2.2.0
+
+ - **FIX**: fix once conditions.
+ - **FEAT**(deps): upgrade dependencies and sdk.
+ - **FEAT**: use json-logic for conditions, make messages serializable, add more conditions.
+
 # Changelog
 
 ## [2.1.1]
