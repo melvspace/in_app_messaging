@@ -1,3 +1,17 @@
+## 0.0.21
+
+ - **FIX**: fix once conditions.
+ - **FIX**: fix property updates.
+ - **FIX**: add missing exports.
+ - **FEAT**: add keyed suppression with buffer duration and InAppMessagingSuppressor widget.
+ - **FEAT**(deps): upgrade dependencies and sdk.
+ - **FEAT**: adjust dynamic message presenter.
+ - **FEAT**: change context logic.
+ - **FEAT**: use json-logic for conditions, make messages serializable, add more conditions.
+ - **FEAT**: make condition combining with nulls.
+ - **FEAT**: add once condition.
+ - **FEAT**: add user and device conditions.
+
 ## 0.0.20
 
  - **FIX**: fix once conditions.
