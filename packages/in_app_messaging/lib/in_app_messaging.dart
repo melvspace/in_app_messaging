@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
+
+import 'src/domain/domain.dart';
 
 import 'src/presentation/presenter/in_app_message_presenter_key.dart';
 export 'src/data/data.dart';
@@ -45,8 +46,16 @@ class InAppMessaging {
         Future.value(false);
   }
 
-  void setSuppressed(bool value) {
-    inAppMessagePresenterKey.currentState?.setSuppressed(value);
+  void setSuppressed(
+    bool value, {
+    Duration bufferDuration = Duration.zero,
+    String key = 'default',
+  }) {
+    inAppMessagePresenterKey.currentState?.setSuppressed(
+      value,
+      bufferDuration: bufferDuration,
+      key: key,
+    );
   }
 
   FutureOr<void> dispose() async {

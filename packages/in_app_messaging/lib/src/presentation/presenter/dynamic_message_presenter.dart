@@ -37,8 +37,6 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
   final Queue<DynamicMessageContext> pending = Queue();
   final Map<DynamicMessage, Completer<bool>> _completers = {};
 
-  late bool _suppressed = widget.initiallySuppressed;
-
   DynamicMessageHandle? _active;
   DynamicMessageHandle? get active => _active;
   set active(DynamicMessageHandle? value) {
@@ -56,15 +54,15 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
             }
 
             value.onShow(context, widget.navigatorKey?.currentState).then(
-              (value) {
-                logger.info('Message(${active?.context.message.id}) closed');
+              (_) {
+                logger.info('Message(${value.context.message.id}) closed');
 
                 active = null;
                 _checkQueue();
               },
             );
           } else {
-            logger.info('Message(${active?.context.message.id}) skipped');
+            logger.info('Message(${value.context.message.id}) skipped');
 
             active = null;
             _checkQueue();
@@ -76,18 +74,121 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     _active = value;
   }
 
-  void setSuppressed(bool value) {
-    logger.info('[Presenter]: Suppressed - $value');
-    _suppressed = value;
+  final Set<String> _suppressKeys = {};
+  final Map<String, Timer> _unsuppressTimers = {};
 
-    if (!value) {
+  bool get _suppressed => _suppressKeys.isNotEmpty;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initiallySuppressed) {
+      _suppressKeys.add('default');
+    }
+  }
+
+  /// Controls whether message presentation is suppressed ( paused ).
+  ///
+  /// When [value] is `true`, the presenter stops processing the pending queue
+  /// and no messages are shown until unsuppressed.
+  ///
+  /// When [value] is `false`, suppression ends and the queue is processed.
+  /// Use [bufferDuration] to delay unsuppression by that amount of time.
+  ///
+  /// **Why [bufferDuration] is needed:**
+  /// During navigation (e.g. returning to a screen), you typically want to:
+  /// - Suppress messages immediately when leaving.
+  /// - Unsuppress when returning, but *not* immediately — otherwise a message
+  ///   can flash or overlap with route/transition animations.
+  /// [bufferDuration] provides a short delay so the UI can settle (transitions
+  /// finish, overlays mount) before messages are shown again.
+  ///
+  /// If [bufferDuration] is set while a previous timer is still active, the
+  /// call is ignored to avoid conflicting schedules.
+  void setSuppressed(
+    bool value, {
+    Duration bufferDuration = Duration.zero,
+    String key = 'default',
+  }) {
+    var unsuppressTimer = _unsuppressTimers[key];
+    if (unsuppressTimer?.isActive == false) {
+      _unsuppressTimers.remove(key);
+      unsuppressTimer = null;
+    }
+
+    if (!value && unsuppressTimer != null) {
+      logger.finest('setSuppressed(false): unsuppressTimer is not null, '
+          'bufferDuration: $bufferDuration, key: $key');
+      return;
+    }
+
+    if (!value && bufferDuration > Duration.zero) {
+      logger.finest('setSuppressed(false): start unsuppressTimer with '
+          'bufferDuration: $bufferDuration, key: $key');
+
+      _unsuppressTimers[key] = Timer(bufferDuration, () {
+        logger.finest('setSuppressed(false): unsuppressTimer expired, '
+            'unsuppress messages, key: $key');
+
+        _suppressKeys.remove(key);
+        _unsuppressTimers.remove(key);
+
+        if (!_suppressed) {
+          logger.fine('[Presenter]: Suppressed - false');
+          _checkQueue();
+        }
+      });
+
+      return;
+    }
+
+    if (value && unsuppressTimer != null) {
+      logger.finest('setSuppressed(true): cancel unsuppressTimer, key: $key');
+      _unsuppressTimers[key]?.cancel();
+      _unsuppressTimers.remove(key);
+    }
+
+    if (value) {
+      _suppressKeys.add(key);
+
+      logger.fine('[Presenter]: Suppressed - true, '
+          'keys - ${_suppressKeys.join(', ')}');
+    } else {
+      _suppressKeys.remove(key);
+    }
+
+    if (!_suppressed) {
+      logger.fine('[Presenter]: Suppressed - false');
       _checkQueue();
     }
   }
 
   void clear() {
     pending.clear();
-    active = null;
+
+    for (final completer in _completers.values) {
+      if (!completer.isCompleted) completer.complete(false);
+    }
+
+    _completers.clear();
+    _active = null;
+  }
+
+  @override
+  void dispose() {
+    for (final timer in _unsuppressTimers.values) {
+      timer.cancel();
+    }
+
+    _unsuppressTimers.clear();
+    for (final completer in _completers.values) {
+      if (!completer.isCompleted) completer.complete(false);
+    }
+
+    _completers.clear();
+    pending.clear();
+
+    super.dispose();
   }
 
   /// Returns future which ends with true if message was delivered and seen.
