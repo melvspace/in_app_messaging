@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`in_app_messaging` - `v0.0.22`](#in_app_messaging---v0022)
+ - [`in_app_messaging_drift` - `v0.0.23`](#in_app_messaging_drift---v0023)
+
+---
+
+#### `in_app_messaging` - `v0.0.22`
+
+ - **FIX**: fix simple message condition type.
+
+#### `in_app_messaging_drift` - `v0.0.23`
+
+ - **FIX**: fix simple message condition type.
+
+
 ## 2026-03-16
 
 ### Changes

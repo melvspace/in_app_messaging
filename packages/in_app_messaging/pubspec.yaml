@@ -1,7 +1,7 @@
 name: in_app_messaging
 resolution: workspace
 description: "Simple In-App Messaging for your application"
-version: 0.0.21
+version: 0.0.22
 repository: https://github.com/rIIh/in_app_messaging
 
 environment:

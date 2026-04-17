@@ -1,3 +1,7 @@
+## 0.0.22
+
+ - **FIX**: fix simple message condition type.
+
 ## 0.0.21
 
  - **FIX**: fix once conditions.
