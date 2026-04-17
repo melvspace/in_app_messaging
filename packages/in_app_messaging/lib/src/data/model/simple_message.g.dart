@@ -17,7 +17,7 @@ _SimpleMessage _$SimpleMessageFromJson(Map<String, dynamic> json) =>
       triggers: (json['triggers'] as List<dynamic>)
           .map((e) => MessageTrigger.fromJson(e as Map<String, dynamic>))
           .toList(),
-      condition: json['condition'] as Map<String, dynamic>?,
+      condition: json['condition'],
       data: json['data'] as Map<String, dynamic>,
     );
 

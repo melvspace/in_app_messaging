@@ -6,6 +6,9 @@ part of 'in_app_messaging.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(inAppMessaging)
 const inAppMessagingProvider = InAppMessagingProvider._();
 
@@ -45,7 +48,4 @@ final class InAppMessagingProvider
   }
 }
 
-String _$inAppMessagingHash() => r'27a13c56ed3def13c59ec377ca887362a80bc044';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+String _$inAppMessagingHash() => r'5314814c84a584953e0b1c8a6d838fc9a4379228';

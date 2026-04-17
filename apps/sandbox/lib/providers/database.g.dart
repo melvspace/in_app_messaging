@@ -6,6 +6,9 @@ part of 'database.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(database)
 const databaseProvider = DatabaseProvider._();
 
@@ -47,7 +50,4 @@ final class DatabaseProvider extends $FunctionalProvider<
   }
 }
 
-String _$databaseHash() => r'f03f4788ce85997daa3b46fe95111dd679099a34';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+String _$databaseHash() => r'831f6082987160e574be131e11b20f1b965fab7e';

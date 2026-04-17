@@ -6,6 +6,9 @@ part of 'navigator.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(navigator)
 const navigatorProvider = NavigatorProvider._();
 
@@ -47,7 +50,4 @@ final class NavigatorProvider extends $FunctionalProvider<
   }
 }
 
-String _$navigatorHash() => r'088ba84932aaf4c8652061faf9ef1e0190171287';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+String _$navigatorHash() => r'9cdacaf680df998d23ffa136e7358ef2b8d3a4b4';

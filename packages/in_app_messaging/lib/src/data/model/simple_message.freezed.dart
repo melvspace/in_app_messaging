@@ -21,7 +21,11 @@ mixin _$SimpleMessage {
   DateTime? get end;
   int get priority; // triggers and conditions
   List<MessageTrigger> get triggers;
-  JsonMap? get condition; // custom properties
+
+  /// JSON Logic object
+  ///
+  /// See https://jsonlogic.com/
+  dynamic get condition; // custom properties
   JsonMap get data;
 
   /// Create a copy of SimpleMessage
@@ -86,7 +90,7 @@ abstract mixin class $SimpleMessageCopyWith<$Res> {
       DateTime? end,
       int priority,
       List<MessageTrigger> triggers,
-      JsonMap? condition,
+      dynamic condition,
       JsonMap data});
 
   $MessageTypeCopyWith<$Res> get type;
@@ -147,7 +151,7 @@ class _$SimpleMessageCopyWithImpl<$Res>
       condition: freezed == condition
           ? _self.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as JsonMap?,
+              as dynamic,
       data: null == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -267,7 +271,7 @@ extension SimpleMessagePatterns on SimpleMessage {
             DateTime? end,
             int priority,
             List<MessageTrigger> triggers,
-            JsonMap? condition,
+            dynamic condition,
             JsonMap data)?
         $default, {
     required TResult orElse(),
@@ -313,7 +317,7 @@ extension SimpleMessagePatterns on SimpleMessage {
             DateTime? end,
             int priority,
             List<MessageTrigger> triggers,
-            JsonMap? condition,
+            dynamic condition,
             JsonMap data)
         $default,
   ) {
@@ -357,7 +361,7 @@ extension SimpleMessagePatterns on SimpleMessage {
             DateTime? end,
             int priority,
             List<MessageTrigger> triggers,
-            JsonMap? condition,
+            dynamic condition,
             JsonMap data)?
         $default,
   ) {
@@ -391,10 +395,9 @@ class _SimpleMessage implements SimpleMessage {
       this.end,
       this.priority = 0,
       required final List<MessageTrigger> triggers,
-      final JsonMap? condition,
+      this.condition,
       required final JsonMap data})
       : _triggers = triggers,
-        _condition = condition,
         _data = data;
   factory _SimpleMessage.fromJson(Map<String, dynamic> json) =>
       _$SimpleMessageFromJson(json);
@@ -423,16 +426,11 @@ class _SimpleMessage implements SimpleMessage {
     return EqualUnmodifiableListView(_triggers);
   }
 
-  final JsonMap? _condition;
+  /// JSON Logic object
+  ///
+  /// See https://jsonlogic.com/
   @override
-  JsonMap? get condition {
-    final value = _condition;
-    if (value == null) return null;
-    if (_condition is EqualUnmodifiableMapView) return _condition;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
+  final dynamic condition;
 // custom properties
   final JsonMap _data;
 // custom properties
@@ -471,8 +469,7 @@ class _SimpleMessage implements SimpleMessage {
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
             const DeepCollectionEquality().equals(other._triggers, _triggers) &&
-            const DeepCollectionEquality()
-                .equals(other._condition, _condition) &&
+            const DeepCollectionEquality().equals(other.condition, condition) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
@@ -487,7 +484,7 @@ class _SimpleMessage implements SimpleMessage {
       end,
       priority,
       const DeepCollectionEquality().hash(_triggers),
-      const DeepCollectionEquality().hash(_condition),
+      const DeepCollectionEquality().hash(condition),
       const DeepCollectionEquality().hash(_data));
 
   @override
@@ -512,7 +509,7 @@ abstract mixin class _$SimpleMessageCopyWith<$Res>
       DateTime? end,
       int priority,
       List<MessageTrigger> triggers,
-      JsonMap? condition,
+      dynamic condition,
       JsonMap data});
 
   @override
@@ -572,9 +569,9 @@ class __$SimpleMessageCopyWithImpl<$Res>
           : triggers // ignore: cast_nullable_to_non_nullable
               as List<MessageTrigger>,
       condition: freezed == condition
-          ? _self._condition
+          ? _self.condition
           : condition // ignore: cast_nullable_to_non_nullable
-              as JsonMap?,
+              as dynamic,
       data: null == data
           ? _self._data
           : data // ignore: cast_nullable_to_non_nullable

@@ -18,4 +18,16 @@ mixin $InAppMessagingDaoMixin
       i3.ReadDatabaseContainer(attachedDatabase)
           .resultSet<i4.$InAppMessageInteractionsTable>(
               'in_app_message_interactions');
+  InAppMessagingDaoManager get managers => InAppMessagingDaoManager(this);
+}
+
+class InAppMessagingDaoManager {
+  final $InAppMessagingDaoMixin _db;
+  InAppMessagingDaoManager(this._db);
+  i2.$$InAppMessageSeenDatesTableTableManager get inAppMessageSeenDates =>
+      i2.$$InAppMessageSeenDatesTableTableManager(
+          _db.attachedDatabase, _db.inAppMessageSeenDates);
+  i4.$$InAppMessageInteractionsTableTableManager get inAppMessageInteractions =>
+      i4.$$InAppMessageInteractionsTableTableManager(
+          _db.attachedDatabase, _db.inAppMessageInteractions);
 }

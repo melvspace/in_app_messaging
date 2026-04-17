@@ -19,7 +19,11 @@ abstract class SimpleMessage with _$SimpleMessage implements DynamicMessage {
 
     // triggers and conditions
     required List<MessageTrigger> triggers,
-    JsonMap? condition,
+
+    /// JSON Logic object
+    ///
+    /// See https://jsonlogic.com/
+    dynamic condition,
 
     // custom properties
     required JsonMap data,

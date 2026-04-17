@@ -10,7 +10,7 @@ abstract class Message {
   DateTime get start;
   DateTime? get end;
 
-  JsonMap? get condition;
+  dynamic get condition;
 
   JsonMap get data;
 
