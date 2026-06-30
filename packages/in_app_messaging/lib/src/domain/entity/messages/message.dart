@@ -4,8 +4,8 @@ import 'package:in_app_messaging/src/core/typedefs.dart';
 /// A campaign definition that can become an in-app message.
 ///
 /// A message is considered for display only when it is enabled, inside its
-/// display window, matched by the current trigger, allowed by targeting, and
-/// not blocked by recorded interaction history.
+/// display window, matched by the current trigger, and allowed by its
+/// targeting or recurrence condition.
 abstract class Message {
   /// Stable campaign key used to associate interaction history with this message.
   ///
@@ -25,18 +25,22 @@ abstract class Message {
   /// [PresentationNotShownReason.missingHandle] and no seen entry is recorded.
   MessageType get type;
 
-  /// Earliest instant when this message can be considered for display.
+  /// Lower bound of the display window.
+  ///
+  /// The message is considered only after this instant has passed.
   DateTime get start;
 
-  /// Instant after which this message is no longer considered for display.
+  /// Upper bound of the display window.
   ///
-  /// A null value leaves the display window open-ended after [start].
+  /// The message is considered only before this instant. A null value leaves the
+  /// display window open-ended after [start].
   DateTime? get end;
 
-  /// Targeting rule evaluated after trigger and time-window matching.
+  /// JsonLogic-compatible targeting and recurrence rule for this message.
   ///
-  /// A null condition means the message relies only on trigger, schedule, and
-  /// interaction checks.
+  /// The rule is evaluated after trigger and time-window matching with event
+  /// payload, context data, and seen history available. A null condition adds no
+  /// extra targeting or recurrence constraint.
   dynamic get condition;
 
   /// Opaque payload consumed by the presentation handle for [type].

@@ -25,24 +25,30 @@ abstract class SimpleMessage with _$SimpleMessage implements DynamicMessage {
     /// Lookup key for the presentation handle that knows how to render [data].
     required MessageType type,
 
-    /// Earliest instant when this message can be considered for display.
+    /// Lower bound of the display window.
+    ///
+    /// The message is considered only after this instant has passed.
     required DateTime start,
 
-    /// Instant after which this message is no longer considered for display.
+    /// Upper bound of the display window.
     ///
-    /// A null value leaves the display window open-ended after [start].
+    /// The message is considered only before this instant. A null value leaves the
+    /// display window open-ended after [start].
     DateTime? end,
 
-    /// Priority used when multiple messages are eligible for the same event.
+    /// Ordering value used when multiple messages are eligible for the same event.
+    ///
+    /// Lower values are evaluated first. The default priority is 0.
     @Default(0) int priority,
 
     /// Runtime triggers that can make this message eligible for display.
     required List<MessageTrigger> triggers,
 
-    /// Targeting rule evaluated after trigger and time-window matching.
+    /// JsonLogic-compatible targeting and recurrence rule for this message.
     ///
-    /// A null condition means the message relies only on trigger, schedule, and
-    /// interaction checks.
+    /// The rule is evaluated after trigger and time-window matching with event
+    /// payload, context data, and seen history available. A null condition adds no
+    /// extra targeting or recurrence constraint.
     dynamic condition,
 
     /// Opaque payload consumed by the presentation handle for [type].
