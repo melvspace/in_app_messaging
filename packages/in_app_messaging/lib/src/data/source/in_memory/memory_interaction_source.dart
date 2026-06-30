@@ -5,11 +5,16 @@ import 'package:in_app_messaging/src/domain/entity/interaction/message_seen_entr
 import '../interaction_source.dart';
 import '../../../domain/entity/message_interactions.dart';
 
-/// Volatile interaction source for tests and demos.
+/// In-memory interaction source whose history lasts for this source instance.
+///
+/// Use this for tests, demos, and sandbox flows where seen history should not
+/// survive app restart or source replacement.
 class MemoryInteractionSource implements InteractionSource {
   final Map<String, List<MessageSeenEntry>> _seenEntries = {};
 
-  /// Returns seen entries recorded for [id].
+  /// Loads seen entries recorded on this instance for [id].
+  ///
+  /// Returns empty history when no visible presentation has been recorded.
   @override
   FutureOr<MessageInteractions> getInteractions(String id) {
     return MessageInteractions(
@@ -18,7 +23,7 @@ class MemoryInteractionSource implements InteractionSource {
     );
   }
 
-  /// Records a visible presentation for [id].
+  /// Records a visible presentation for [id] using the current wall-clock time.
   @override
   FutureOr<void> markSeen({
     required String id,

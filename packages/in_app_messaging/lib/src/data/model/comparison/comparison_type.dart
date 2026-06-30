@@ -46,9 +46,12 @@ enum ComparisonType {
         return left is String && right is String && !left.contains(right);
 
       case ComparisonType.containsRegex:
-        return left is String &&
-            right is String &&
-            !left.contains(RegExp(right));
+        if (left is! String || right is! String) return false;
+        try {
+          return RegExp(right).hasMatch(left);
+        } on FormatException {
+          return false;
+        }
 
       case ComparisonType.equals:
       case ComparisonType.notEquals:

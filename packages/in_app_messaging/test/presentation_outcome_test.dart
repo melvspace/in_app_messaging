@@ -340,12 +340,6 @@ class _Gateway implements MessageGateway {
   }) {
     markedSeen.add(id);
   }
-
-  @override
-  FutureOr<void> setDeviceProperty(String key, String? value) {}
-
-  @override
-  FutureOr<void> setUserProperty(String key, String? value) {}
 }
 
 class _ShownHandle extends DynamicMessageHandle {

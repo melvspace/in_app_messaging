@@ -5,30 +5,38 @@ import '../../../in_app_messaging.dart';
 part 'simple_message.freezed.dart';
 part 'simple_message.g.dart';
 
-/// JSON-serializable dynamic message model for configured campaigns.
+/// JSON-backed campaign definition for runtime-triggered messages.
 @freezed
 abstract class SimpleMessage with _$SimpleMessage implements DynamicMessage {
-  /// Creates a configured dynamic message.
+  /// Creates a campaign definition that can be loaded from JSON.
   const factory SimpleMessage({
-    /// Stable key for interaction history and presentation de-duplication.
+    /// Stable campaign key used to associate interaction history with this message.
+    ///
+    /// Reusing an id means existing seen records and frequency checks apply to
+    /// the new definition.
     required String id,
 
-    /// Active flag supplied by the message source.
+    /// Whether this message can be considered for display.
+    ///
+    /// Disabled messages are skipped even when their trigger, schedule, and
+    /// targeting match.
     required bool enabled,
 
-    /// Presentation handle lookup key.
+    /// Lookup key for the presentation handle that knows how to render [data].
     required MessageType type,
 
-    /// Start of the display window.
+    /// Earliest instant when this message can be considered for display.
     required DateTime start,
 
-    /// End of the display window, or null for no scheduled end.
+    /// Instant after which this message is no longer considered for display.
+    ///
+    /// A null value leaves the display window open-ended after [start].
     DateTime? end,
 
     /// Priority used when multiple messages are eligible for the same event.
     @Default(0) int priority,
 
-    /// Runtime triggers that can make this message a candidate.
+    /// Runtime triggers that can make this message eligible for display.
     required List<MessageTrigger> triggers,
 
     /// Targeting rule evaluated after trigger and time-window matching.

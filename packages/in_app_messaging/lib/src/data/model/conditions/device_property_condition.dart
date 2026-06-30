@@ -33,7 +33,7 @@ class DevicePropertyCondition extends MessageCondition {
       ComparisonType.exactlyMatches => '==',
       ComparisonType.contains => 'in',
       ComparisonType.doesNotContains => 'in',
-      ComparisonType.containsRegex => 'in',
+      ComparisonType.containsRegex => 'regex',
       ComparisonType.greater => '>',
       ComparisonType.greaterOrEquals => '>=',
       ComparisonType.less => '<',
@@ -42,10 +42,17 @@ class DevicePropertyCondition extends MessageCondition {
       ComparisonType.notEquals => '!=',
     };
 
-    final rule = [
-      {"var": 'device.$key'},
-      value
-    ];
+    final variable = {"var": 'device.$key'};
+    final rule = switch (type) {
+      ComparisonType.contains || ComparisonType.doesNotContains => [
+          value,
+          variable,
+        ],
+      _ => [
+          variable,
+          value,
+        ],
+    };
 
     return {
       if (negate) //

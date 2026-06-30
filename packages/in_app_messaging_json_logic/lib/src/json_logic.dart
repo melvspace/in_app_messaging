@@ -82,6 +82,7 @@ class JsonLogic {
     _ops['merge'] = mergeOperator;
     _ops['in'] = inOperator;
     _ops['substr'] = substrOperator;
+    _ops['regex'] = regexOperator;
     _ops['log'] = logOperator;
 
     // Dates - deprecated
@@ -94,7 +95,7 @@ class JsonLogic {
     _ops['date.current'] = currentDateOperator;
     _ops['date.truncate'] = dateTruncateOperator;
     _ops['date.add'] = dateAddOperator;
-    _ops['date.subtract'] = dateAddOperator;
+    _ops['date.subtract'] = dateSubtractOperator;
 
     // Versions
     _ops['version.current'] = currentVersionOperator;

@@ -53,6 +53,7 @@ class DefaultMessageGateway implements MessageGateway {
         .whereType<DynamicMessage>()
         .where(
           (message) =>
+              message.enabled &&
               now.isAfter(message.start) &&
               (message.end == null || now.isBefore(message.end!)) &&
               message.triggers.any(eventTrigger.contains),
@@ -192,19 +193,5 @@ class DefaultMessageGateway implements MessageGateway {
     };
 
     return conditionContext;
-  }
-
-  /// Device property writes are not implemented by this gateway yet.
-  @override
-  FutureOr<void> setDeviceProperty(String key, String? value) {
-    // TODO: implement setDeviceProperty
-    throw UnimplementedError();
-  }
-
-  /// User property writes are not implemented by this gateway yet.
-  @override
-  FutureOr<void> setUserProperty(String key, String? value) {
-    // TODO: implement setUserProperty
-    throw UnimplementedError();
   }
 }

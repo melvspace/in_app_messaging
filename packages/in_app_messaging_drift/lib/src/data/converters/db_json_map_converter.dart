@@ -29,7 +29,8 @@ class DBJsonListConverter
   /// Decodes stored JSON text into a list of maps.
   @override
   List<Map<String, dynamic>> fromSql(String fromDb) {
-    return jsonDecode(fromDb);
+    final decoded = jsonDecode(fromDb) as List<dynamic>;
+    return decoded.cast<Map<String, dynamic>>();
   }
 
   /// Encodes [value] as JSON text.

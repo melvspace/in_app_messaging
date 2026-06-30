@@ -1,3 +1,5 @@
+// ignore_for_file: experimental_member_use
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:sandbox/features/iam/presentation/handles/dialog_message_handle/dialog_message_handle.dart';

@@ -57,6 +57,7 @@ class InAppMessagingDatabase extends $InAppMessagingDatabase {
     for (final entity in entities) {
       final name = entity.read<String>('name');
       final type = entity.read<String>('type');
+      if (name.startsWith('sqlite_')) continue;
 
       await m.database
           .customStatement('DROP ${type.toUpperCase()} IF EXISTS $name;');

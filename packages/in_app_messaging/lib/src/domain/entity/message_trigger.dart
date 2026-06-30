@@ -4,15 +4,15 @@ import 'package:in_app_messaging/src/domain/entity/triggers/event_sequence_item.
 part 'message_trigger.freezed.dart';
 part 'message_trigger.g.dart';
 
-/// A rule that can turn runtime activity into a message candidate.
+/// A trigger definition that can make a campaign eligible for display.
 @Freezed(unionKey: 'type')
 sealed class MessageTrigger with _$MessageTrigger {
   const MessageTrigger._();
 
-  /// Selects a message from a cron schedule.
+  /// Makes a message eligible from a scheduled activation.
   @experimental
   const factory MessageTrigger.cron({
-    /// Cron expression for the schedule.
+    /// Cron expression for the planned activation time.
     required String cron,
 
     /// Event emitted when the schedule fires instead of showing directly.
@@ -22,27 +22,27 @@ sealed class MessageTrigger with _$MessageTrigger {
     String? event,
   }) = MessageCronTrigger;
 
-  /// Selects a message from an application event.
+  /// Makes a message eligible when a matching application event is triggered.
   const factory MessageTrigger.event({
-    /// Event name to match.
+    /// Event name that must match the runtime trigger.
     required String event,
 
-    /// Payload subset that must match the runtime event payload.
+    /// Payload subset required from the runtime event.
     ///
     /// Runtime events may include additional keys. Only keys present here are
     /// compared by [contains].
     @Default({}) Map<String, dynamic>? data,
   }) = MessageEventTrigger;
 
-  /// Selects a message after a configured event sequence has been observed.
+  /// Makes a message eligible after a configured event sequence is observed.
   ///
   /// Event-sequence matching is experimental and may change.
   @experimental
   const factory MessageTrigger.eventSequence({
-    /// Ordered events that must be observed.
+    /// Ordered events that must be observed before the message is eligible.
     required List<EventSequenceItem> events,
 
-    /// Optional payload constraints associated with [events].
+    /// Payload constraints carried with the sequence definition.
     required List<Map<String, dynamic>?> data,
   }) = MessageEventSequenceTrigger;
 

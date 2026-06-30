@@ -17,7 +17,8 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
   /// Loads seen entries for [id] and decodes trigger payload JSON.
   Future<List<MessageSeenEntry>> getSeenEntries(String id) async {
     final seenQuery = inAppMessageSeenDates.select() //
-      ..where((tbl) => tbl.message.equals(id));
+      ..where((tbl) => tbl.message.equals(id))
+      ..orderBy([(tbl) => OrderingTerm.asc(tbl.seen)]);
 
     final seenEntries = await seenQuery.get();
 
@@ -56,7 +57,13 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
       },
     );
 
-    await into(inAppMessageInteractions).insertOnConflictUpdate(updated);
+    await into(inAppMessageInteractions).insert(
+      updated,
+      onConflict: DoUpdate(
+        (_) => updated,
+        target: [inAppMessageInteractions.message],
+      ),
+    );
   }
 
   /// Records that [id] became visible.

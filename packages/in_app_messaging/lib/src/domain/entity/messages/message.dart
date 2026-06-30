@@ -1,16 +1,22 @@
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging/src/core/typedefs.dart';
 
-/// A configured in-app message candidate.
+/// A campaign definition that can become an in-app message.
 ///
-/// Message sources provide these definitions to the gateway. The gateway
-/// evaluates their trigger, time window, condition, and interaction history
-/// before handing an eligible message to presentation code.
+/// A message is considered for display only when it is enabled, inside its
+/// display window, matched by the current trigger, allowed by targeting, and
+/// not blocked by recorded interaction history.
 abstract class Message {
-  /// Stable key used for interaction history and presentation de-duplication.
+  /// Stable campaign key used to associate interaction history with this message.
+  ///
+  /// Reusing an id means existing seen records and frequency checks apply to
+  /// the new definition.
   String get id;
 
-  /// Whether the upstream source considers the message active.
+  /// Whether this message can be considered for display.
+  ///
+  /// Disabled messages are skipped even when their trigger, schedule, and
+  /// targeting match.
   bool get enabled;
 
   /// Lookup key for the presentation handle that knows how to render [data].
@@ -19,10 +25,12 @@ abstract class Message {
   /// [PresentationNotShownReason.missingHandle] and no seen entry is recorded.
   MessageType get type;
 
-  /// Start of the message's display window.
+  /// Earliest instant when this message can be considered for display.
   DateTime get start;
 
-  /// End of the message's display window, or null for no scheduled end.
+  /// Instant after which this message is no longer considered for display.
+  ///
+  /// A null value leaves the display window open-ended after [start].
   DateTime? get end;
 
   /// Targeting rule evaluated after trigger and time-window matching.
@@ -36,6 +44,6 @@ abstract class Message {
   /// The core package does not inspect this map.
   JsonMap get data;
 
-  /// Serializes the complete message definition.
+  /// Serializes the message definition for storage or transport.
   JsonMap toJson();
 }

@@ -18,7 +18,7 @@ melos:
       melos exec -c 1 --order-dependents --depends-on=build_runner -- dart run build_runner build -d
 
     test: |
-      melos exec --dir-exists test --depends-on=test --flutter -- flutter test
+      melos exec -c 1 --dir-exists test --depends-on=flutter_test --flutter -- flutter test
       melos exec --dir-exists test --depends-on=test --no-flutter -- dart test
     
     generate:drift:

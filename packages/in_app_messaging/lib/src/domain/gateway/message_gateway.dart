@@ -16,10 +16,4 @@ abstract interface class MessageGateway {
     String? trigger,
     Map<String, dynamic>? triggerProperties,
   });
-
-  /// Updates a user property used by future condition evaluations.
-  FutureOr<void> setUserProperty(String key, String? value);
-
-  /// Updates a device property used by future condition evaluations.
-  FutureOr<void> setDeviceProperty(String key, String? value);
 }

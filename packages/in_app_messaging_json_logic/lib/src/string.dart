@@ -70,6 +70,25 @@ dynamic substrOperator(Applier applier, dynamic data, List params) {
   }
 }
 
+/// Tests a string against a regular expression pattern.
+dynamic regexOperator(Applier applier, dynamic data, List params) {
+  if (params.length != 2) {
+    return false;
+  }
+
+  final input = applier(params[0], data);
+  final pattern = applier(params[1], data);
+  if (input is! String || pattern is! String) {
+    return false;
+  }
+
+  try {
+    return RegExp(pattern).hasMatch(input);
+  } on FormatException {
+    return false;
+  }
+}
+
 /// Prints the first parameter and returns it unchanged.
 dynamic logOperator(Applier applier, dynamic data, List params) {
   var v = applier(params[0], data);
