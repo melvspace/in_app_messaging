@@ -31,6 +31,8 @@ Dependency direction must stay stable: the Drift adapter depends on the core pac
 - Preserve invariants instead of adding defensive fallbacks everywhere. Validate at boundaries and rely on internal contracts after that.
 - Avoid workaround layers, compatibility shims for unshipped code, undocumented flags, private API calls, and environment-specific hacks.
 - Keep public contracts readable. Add doc comments when lifecycle, units, persistence semantics, or error behavior are not obvious.
+- Write doc comments for every public Dart member in package sources. Keep them precise and behavior-focused.
+  Explain product semantics, lifecycle, units, persistence meaning, side effects, and error behavior; avoid restating the signature or exposing implementation details.
 
 ## Build, Test, and Development Commands
 

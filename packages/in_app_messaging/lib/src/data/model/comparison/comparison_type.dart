@@ -1,20 +1,39 @@
 import 'package:version/version.dart';
 
+/// Comparison operations available to property-based targeting conditions.
 enum ComparisonType {
+  /// Compares values without parsing or coercion.
   exactlyMatches,
+
+  /// Requires the runtime string to contain the configured string.
   contains,
+
+  /// Requires the runtime string not to contain the configured string.
   doesNotContains,
+
+  /// Tests the runtime string against the configured regular expression.
   containsRegex,
 
-  // numeric comparison
+  /// Parses comparable values and requires runtime value to be greater.
   greater,
+
+  /// Parses comparable values and allows equality at the lower bound.
   greaterOrEquals,
+
+  /// Parses comparable values and requires runtime value to be less.
   less,
+
+  /// Parses comparable values and allows equality at the upper bound.
   lessOrEquals,
+
+  /// Parses versions, numbers, then strings and requires equality.
   equals,
+
+  /// Parses versions, numbers, then strings and requires inequality.
   notEquals;
 
   // TODO(@melvspace): 07/05/24 compares semver
+  /// Compares [left] and [right] using the parsing strategy for this value.
   bool compare(dynamic left, dynamic right) {
     switch (this) {
       case ComparisonType.exactlyMatches:
@@ -43,6 +62,7 @@ enum ComparisonType {
     }
   }
 
+  /// Compares semantic-version strings using [type].
   bool compareVersions(String left, String right, ComparisonType type) {
     try {
       Version leftVersion = Version.parse(left);
@@ -75,6 +95,7 @@ enum ComparisonType {
     }
   }
 
+  /// Compares number strings using [type].
   bool compareNumbers(String left, String right, ComparisonType type) {
     try {
       num leftNum = num.parse(left);
@@ -107,6 +128,7 @@ enum ComparisonType {
     }
   }
 
+  /// Compares strings with equality operators only.
   bool compareStrings(String left, String right, ComparisonType type) {
     try {
       switch (type) {

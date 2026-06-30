@@ -4,47 +4,52 @@ import 'package:in_app_messaging/src/domain/entity/triggers/event_sequence_item.
 part 'message_trigger.freezed.dart';
 part 'message_trigger.g.dart';
 
+/// A rule that can turn runtime activity into a message candidate.
 @Freezed(unionKey: 'type')
 sealed class MessageTrigger with _$MessageTrigger {
   const MessageTrigger._();
 
+  /// Selects a message from a cron schedule.
   @experimental
   const factory MessageTrigger.cron({
+    /// Cron expression for the schedule.
     required String cron,
 
-    /// Event triggered when cron schedule activated
+    /// Event emitted when the schedule fires instead of showing directly.
     ///
-    /// By default message will be triggered when cron activated
-    ///
-    /// If event provided then event will be sent. Can be used for event sequences.
+    /// Use this when a scheduled activation should feed an event sequence.
+    /// When null, the cron trigger selects the message directly.
     String? event,
   }) = MessageCronTrigger;
 
+  /// Selects a message from an application event.
   const factory MessageTrigger.event({
+    /// Event name to match.
     required String event,
 
-    /// Optional trigger payload
+    /// Payload subset that must match the runtime event payload.
+    ///
+    /// Runtime events may include additional keys. Only keys present here are
+    /// compared by [contains].
     @Default({}) Map<String, dynamic>? data,
   }) = MessageEventTrigger;
 
-  /// Sequence of events
+  /// Selects a message after a configured event sequence has been observed.
   ///
-  /// Example:
-  ///   - exam_completed, exam_closed, diploma_form_opened, diploma_form_closed
-  ///   - exam_completed, exam_closed, !diploma_form_opened(for 2 seconds)
-  ///
-  /// TODO(@melvspace): 07/11/24 figure out how to persist events
+  /// Event-sequence matching is experimental and may change.
   @experimental
   const factory MessageTrigger.eventSequence({
+    /// Ordered events that must be observed.
     required List<EventSequenceItem> events,
 
-    /// Optional trigger payload
+    /// Optional payload constraints associated with [events].
     required List<Map<String, dynamic>?> data,
   }) = MessageEventSequenceTrigger;
 
-  /// Checks if [trigger] is inside of [this], i.e. [this] has all properties of [trigger]
+  /// Whether this runtime trigger satisfies a configured [trigger].
   ///
-  /// Useful to check if more complete trigger eligible for some concrete trigger
+  /// For event triggers, [data] is treated as a required subset: a runtime
+  /// event may have extra payload keys and still match.
   bool contains(MessageTrigger trigger) {
     if ((this, trigger)
         case (MessageEventTrigger it, MessageEventTrigger trigger)) {
@@ -60,6 +65,7 @@ sealed class MessageTrigger with _$MessageTrigger {
     return this == trigger;
   }
 
+  /// Parses a trigger from JSON.
   factory MessageTrigger.fromJson(Map<String, dynamic> json) =>
       _$MessageTriggerFromJson(json);
 }

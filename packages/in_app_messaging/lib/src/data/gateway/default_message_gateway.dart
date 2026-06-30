@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:in_app_messaging/src/core/jsonlogic.dart';
 import '../../../in_app_messaging.dart';
 
+/// Message gateway backed by pluggable message, context, and interaction sources.
 class DefaultMessageGateway implements MessageGateway {
   final MessageSource _messageSource;
   final InteractionSource _interactionSource;
@@ -17,6 +18,7 @@ class DefaultMessageGateway implements MessageGateway {
 
   final _events = <(String, DateTime, Map<String, dynamic>)>[];
 
+  /// Creates a gateway using explicit data sources for each responsibility.
   DefaultMessageGateway({
     required MessageSource messageSource,
     required InteractionSource interactionSource,
@@ -27,6 +29,11 @@ class DefaultMessageGateway implements MessageGateway {
 
   // TODO(@melvspace): 07/05/24 return list of valid messages
   // TODO(@melvspace): 07/05/24 filter messages by concurrency priority?
+  /// Selects the first dynamic message matching [event].
+  ///
+  /// Selection considers the message display window, trigger payload
+  /// requirements, message priority, persisted interaction history, and the
+  /// message condition.
   @override
   FutureOr<DynamicMessageContext?> evaluate(
     String event,
@@ -76,10 +83,12 @@ class DefaultMessageGateway implements MessageGateway {
     return null;
   }
 
+  /// Loads interaction history used by recurrence conditions.
   FutureOr<MessageInteractions> getInteractions(String id) async {
     return _interactionSource.getInteractions(id);
   }
 
+  /// Records a visible presentation for the selected message.
   @override
   FutureOr<void> markSeen({
     required String id,
@@ -93,11 +102,9 @@ class DefaultMessageGateway implements MessageGateway {
     );
   }
 
-  /// it is not working properly
+  /// Attempts to match experimental event-sequence triggers.
   ///
-  /// How to handle event sequences?
-  ///
-  /// What rules?
+  /// Sequence semantics are still experimental and may change.
   @experimental
   Future<DynamicMessageContext?> handleSequences(
     String event,
@@ -187,12 +194,14 @@ class DefaultMessageGateway implements MessageGateway {
     return conditionContext;
   }
 
+  /// Device property writes are not implemented by this gateway yet.
   @override
   FutureOr<void> setDeviceProperty(String key, String? value) {
     // TODO: implement setDeviceProperty
     throw UnimplementedError();
   }
 
+  /// User property writes are not implemented by this gateway yet.
   @override
   FutureOr<void> setUserProperty(String key, String? value) {
     // TODO: implement setUserProperty

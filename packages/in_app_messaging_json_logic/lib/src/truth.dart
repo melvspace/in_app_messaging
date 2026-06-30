@@ -1,5 +1,6 @@
-// truth returns true for any truthy-value. null, false, 0, empty list or map
-// are false. Remaining values are all true.
+/// Whether [v] is truthy according to JsonLogic semantics.
+///
+/// Null, false, zero, empty strings, empty lists, and empty maps are false.
 bool truth(dynamic v) {
   if (v == null) {
     return false;

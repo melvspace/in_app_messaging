@@ -1,6 +1,7 @@
 import 'interface.dart';
 import 'dart:convert';
 
+/// Coerces values the way string operators expect.
 String toString(dynamic v) {
   if (v == null) {
     return '';
@@ -12,6 +13,7 @@ String toString(dynamic v) {
   return '$v';
 }
 
+/// Concatenates all parameters after string coercion.
 dynamic catOperator(Applier applier, dynamic data, List params) {
   var l = params.map((p) {
     var v = applier(p, data);
@@ -20,6 +22,7 @@ dynamic catOperator(Applier applier, dynamic data, List params) {
   return l.join();
 }
 
+/// Returns a substring with JsonLogic-compatible negative offsets.
 dynamic substrOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return '';
@@ -67,6 +70,7 @@ dynamic substrOperator(Applier applier, dynamic data, List params) {
   }
 }
 
+/// Prints the first parameter and returns it unchanged.
 dynamic logOperator(Applier applier, dynamic data, List params) {
   var v = applier(params[0], data);
   print('$v');

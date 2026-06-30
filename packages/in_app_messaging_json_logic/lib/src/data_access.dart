@@ -1,6 +1,10 @@
 import 'interface.dart';
 import 'logic.dart';
 
+/// Resolves a dotted object path or list index path in [data].
+///
+/// Returns a two-element list containing the value and a boolean that indicates
+/// whether the key was missing.
 List findVar(dynamic key, dynamic data) {
   var notFound = false;
   var keyList = <String>[];
@@ -44,6 +48,7 @@ List findVar(dynamic key, dynamic data) {
   return [d, notFound];
 }
 
+/// Reads a variable path and falls back to the optional default value.
 dynamic varOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) return data;
 
@@ -61,12 +66,14 @@ dynamic varOperator(Applier applier, dynamic data, List params) {
   return d;
 }
 
+/// Reads a quick-access variable and compares it with strict equality.
 dynamic varStrictEqualOperator(Applier applier, dynamic data, List params) {
   if (params.length < 2) return null;
   var result = varOperator(applier, data, params);
   return strictEqualOperator(applier, data, [result, params[1]]);
 }
 
+/// Returns the variable paths that are absent from [data].
 dynamic missingOperator(Applier applier, dynamic data, List params) {
   if (params.length == 1) {
     var v = applier(params[0], data);
@@ -92,6 +99,7 @@ dynamic missingOperator(Applier applier, dynamic data, List params) {
   return missing;
 }
 
+/// Returns missing paths unless the minimum required count is present.
 dynamic missingSomeOperator(Applier applier, dynamic data, List params) {
   if (params.length != 2) {
     return [];

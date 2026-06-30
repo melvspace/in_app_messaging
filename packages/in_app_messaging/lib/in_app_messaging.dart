@@ -1,3 +1,6 @@
+/// Public API for in-app messaging evaluation, persistence, and presentation.
+library;
+
 import 'dart:async';
 
 import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
@@ -10,21 +13,30 @@ export 'src/data/data.dart';
 export 'src/domain/domain.dart';
 export 'src/presentation/presentation.dart';
 
+/// Facade used by application code to trigger and suppress in-app messages.
 class InAppMessaging {
   static InAppMessaging? _instance;
 
+  /// Evaluates trigger events and persists seen entries.
   final MessageGateway gateway;
 
   InAppMessaging._({required this.gateway});
 
+  /// Replaces the active singleton and disposes any previous presenter state.
   factory InAppMessaging.initialize({required MessageGateway gateway}) {
     _instance?.dispose();
     logger.info('Instance initialized');
     return _instance = InAppMessaging._(gateway: gateway);
   }
 
+  /// Active singleton created by [InAppMessaging.initialize].
   static InAppMessaging get instance => _instance!;
 
+  /// Runs message selection for [event] and enqueues the selected message.
+  ///
+  /// Returns true only when presentation reported that the message became
+  /// visible. Seen history is recorded after visibility is confirmed, not when
+  /// a message is merely selected.
   Future<bool> trigger(String event, Map<String, dynamic> properties) async {
     logger.info('Trigger received - $event');
     final context = await gateway.evaluate(event, properties);
@@ -50,6 +62,11 @@ class InAppMessaging {
     return _logSeen(outcome, message);
   }
 
+  /// Adds or removes a suppression key on the active presenter.
+  ///
+  /// While any key is suppressed, selected messages stay queued. [bufferDuration]
+  /// delays unsuppression so route transitions can finish before presentation
+  /// resumes.
   void setSuppressed(
     bool value, {
     Duration bufferDuration = Duration.zero,
@@ -62,6 +79,7 @@ class InAppMessaging {
     );
   }
 
+  /// Cancels queued presentations held by the active presenter.
   FutureOr<void> dispose() async {
     inAppMessagePresenterKey.currentState?.clear();
   }

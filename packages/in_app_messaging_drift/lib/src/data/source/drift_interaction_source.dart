@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging_drift/src/data/dao/in_app_messaging_dao.dart';
 
+/// Persistent interaction source for seen history.
 class DriftInteractionSource implements InteractionSource {
   final InAppMessagingDao _dao;
 
+  /// Uses [dao] to access persisted interaction history.
   DriftInteractionSource({required InAppMessagingDao dao}) : _dao = dao;
 
+  /// Loads seen history for [id].
   @override
   Future<MessageInteractions> getInteractions(String id) async {
     final seenEntries = await _dao.getSeenEntries(id);
@@ -18,6 +21,7 @@ class DriftInteractionSource implements InteractionSource {
     );
   }
 
+  /// Records a visible presentation.
   @override
   Future<void> markSeen({
     required String id,

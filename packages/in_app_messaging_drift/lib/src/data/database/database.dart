@@ -5,17 +5,21 @@ import 'package:in_app_messaging_drift/src/data/database/database.drift.dart';
 import 'package:in_app_messaging_drift/src/data/database/schema_versions.dart';
 import 'package:in_app_messaging_drift/src/data/schema/schema.dart';
 
+/// Persistent store for seen history and aggregate interactions.
 @DriftDatabase(
   tables: [InAppMessageSeenDates, InAppMessageInteractions],
   daos: [InAppMessagingDao],
 )
 class InAppMessagingDatabase extends $InAppMessagingDatabase {
+  /// Creates a persistent store or uses [executor] for tests.
   InAppMessagingDatabase({QueryExecutor? executor})
       : super(executor ?? openConnection('in_app_messaging', 'db'));
 
+  /// Schema version with trigger and trigger-property seen columns.
   @override
   int get schemaVersion => 2;
 
+  /// Creates all tables and upgrades schema version 1 seen rows in place.
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(

@@ -5,6 +5,7 @@ import 'errors.dart';
 import 'interface.dart';
 import 'numeric.dart';
 
+/// Parses date values accepted by date operators.
 DateTime? getDateTime(dynamic arg) {
   if (arg == null) {
     return null;
@@ -21,6 +22,7 @@ DateTime? getDateTime(dynamic arg) {
   return null;
 }
 
+/// Folds parsed date parameters with [operation].
 dynamic reduceOperateDateTime(
   DateTime? Function(DateTime dt1, DateTime dt2) operation,
   Applier applier,
@@ -54,6 +56,7 @@ dynamic reduceOperateDateTime(
   return result;
 }
 
+/// Returns whether date parameters form a strictly decreasing sequence.
 bool dateTimeGreaterOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isAfter(b) ? b : null,
@@ -64,6 +67,7 @@ bool dateTimeGreaterOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether date parameters form a non-increasing sequence.
 bool dateTimeGreaterEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isAfter(b) || a.isAtSameMomentAs(b) ? b : null,
@@ -74,6 +78,7 @@ bool dateTimeGreaterEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether date parameters form a strictly increasing sequence.
 bool dateTimeLessOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isBefore(b) ? b : null,
@@ -84,6 +89,7 @@ bool dateTimeLessOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether date parameters form a non-decreasing sequence.
 bool dateTimeLessEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isBefore(b) || a.isAtSameMomentAs(b) ? b : null,
@@ -94,6 +100,7 @@ bool dateTimeLessEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether parsed date parameters represent the same instant.
 bool isDateTimeEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isAtSameMomentAs(b) ? b : null,
@@ -104,20 +111,27 @@ bool isDateTimeEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns the current local date and time truncated to the minute.
 dynamic nowOperator(Applier applier, dynamic data, List params) {
   DateTime now = DateTime.now();
   return DateTime(now.year, now.month, now.day, now.hour, now.minute);
 }
 
+/// Returns today's local date at midnight.
 dynamic currentDateOperator(Applier applier, dynamic data, List params) {
   DateTime now = DateTime.now();
   return DateTime(now.year, now.month, now.day);
 }
 
+/// Shifts a date backward by an interval.
 dynamic dateSubtractOperator(Applier applier, dynamic data, List params) {
   return dateAddOperator(applier, data, params, negative: true);
 }
 
+/// Shifts a date by an integer amount of a named interval.
+///
+/// Supported intervals are years, months, weeks, days, hours, minutes, seconds,
+/// milliseconds, and microseconds.
 dynamic dateAddOperator(Applier applier, dynamic data, List params,
     {bool negative = false}) {
   if (params.length != 3) {
@@ -160,6 +174,7 @@ dynamic dateAddOperator(Applier applier, dynamic data, List params,
   }
 }
 
+/// Truncates a date to a named precision.
 dynamic dateTruncateOperator(dynamic applier, dynamic data, dynamic params) {
   if (params.length == 1) return applier(params[0], data);
 
@@ -203,6 +218,7 @@ dynamic dateTruncateOperator(dynamic applier, dynamic data, dynamic params) {
   }
 }
 
+/// Adds calendar months while clamping the day to the destination month.
 DateTime addMonths(DateTime from, int months) {
   final r = months % 12;
   final q = (months - r) ~/ 12;
@@ -228,6 +244,7 @@ int _daysInMonth(int year, int month) {
   return DateTime(year, month + 1, 0).day;
 }
 
+/// Adds whole calendar days.
 DateTime addDays(DateTime date, int amount) {
   return date.add(Duration(days: amount));
 }

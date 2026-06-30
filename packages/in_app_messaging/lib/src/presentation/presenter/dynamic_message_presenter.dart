@@ -6,17 +6,28 @@ import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
 import 'in_app_message_presenter_key.dart';
 
+/// Registry that maps message types to their UI adapters.
 typedef DynamicMessageHandleFactories
     = Map<MessageType, DynamicMessageHandleFactory>;
 
+/// Queue host that ensures at most one in-app message is presented at a time.
 class DynamicMessagePresenter extends StatefulWidget {
+  /// Application subtree that can trigger messages.
   final Widget child;
+
+  /// Registered UI adapters keyed by [Message.type].
+  ///
+  /// Messages with unregistered types complete with
+  /// [PresentationNotShownReason.missingHandle].
   final DynamicMessageHandleFactories builders;
+
+  /// Whether the default suppression key is active from startup.
   final bool initiallySuppressed;
 
-  /// Use it if you place presenter over navigator
+  /// Navigator forwarded to handles that present routes, dialogs, or overlays.
   final GlobalKey<NavigatorState>? navigatorKey;
 
+  /// Creates the queue host for in-app message presentation.
   DynamicMessagePresenter({
     required this.child,
     DynamicMessageHandleFactories builders = const {},
@@ -33,11 +44,15 @@ class DynamicMessagePresenter extends StatefulWidget {
       DynamicMessagePresenterState();
 }
 
+/// Presentation queue state for dynamic messages.
 class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
+  /// Message contexts waiting for presentation.
   final Queue<DynamicMessageContext> pending = Queue();
   final Map<DynamicMessage, Completer<PresentationOutcome>> _completers = {};
 
   DynamicMessageHandle? _active;
+
+  /// Handle currently occupying the presentation slot.
   DynamicMessageHandle? get active => _active;
 
   final Set<String> _suppressKeys = {};
@@ -53,10 +68,11 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     }
   }
 
-  /// Controls whether message presentation is suppressed ( paused ).
+  /// Adds or removes one suppression key.
   ///
-  /// When [value] is `true`, the presenter stops processing the pending queue
-  /// and no messages are shown until unsuppressed.
+  /// Suppression is keyed so independent screens can block presentation without
+  /// coordinating with each other. The queue resumes only when all keys are
+  /// removed.
   ///
   /// When [value] is `false`, suppression ends and the queue is processed.
   /// Use [bufferDuration] to delay unsuppression by that amount of time.
@@ -129,6 +145,9 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     }
   }
 
+  /// Cancels pending presentations and clears the active handle.
+  ///
+  /// Outstanding futures complete with [PresentationNotShownReason.cancelled].
   void clear() {
     pending.clear();
 
@@ -170,7 +189,10 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     super.dispose();
   }
 
-  /// Returns the presentation outcome once visibility is known.
+  /// Enqueues [context] and completes once visibility is known.
+  ///
+  /// Enqueuing the same message again cancels the previous outstanding result
+  /// for that message.
   Future<PresentationOutcome> enqueue(DynamicMessageContext context) {
     final completer = Completer<PresentationOutcome>();
     _complete(

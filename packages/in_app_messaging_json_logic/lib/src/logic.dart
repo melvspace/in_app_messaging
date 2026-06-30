@@ -7,6 +7,7 @@ import 'numeric.dart';
 import 'truth.dart';
 import 'string.dart';
 
+/// Returns the value for the first truthy condition in a JsonLogic `if` rule.
 dynamic ifOperator(Applier applier, dynamic data, List params) {
   while (true) {
     if (params.isEmpty) return null;
@@ -23,6 +24,7 @@ dynamic ifOperator(Applier applier, dynamic data, List params) {
   }
 }
 
+/// Whether the first two parameters are equal after JsonLogic-style coercion.
 bool isEqual(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -53,6 +55,7 @@ bool isEqual(Applier applier, dynamic data, List params) {
   return v1 == v2;
 }
 
+/// Whether [first] and [second] are equal when list values are normalized.
 bool compareContent(dynamic first, dynamic second) {
   if (first is List && second is List) {
     return listEquals(first, second);
@@ -64,6 +67,7 @@ bool compareContent(dynamic first, dynamic second) {
   return false;
 }
 
+/// Whether nullable lists [a] and [b] contain the same ordered values.
 bool listEquals<T>(List<T>? a, List<T>? b) {
   if (a == null) {
     return b == null;
@@ -82,14 +86,17 @@ bool listEquals<T>(List<T>? a, List<T>? b) {
   return true;
 }
 
+/// Returns loose equality for the first two parameters.
 dynamic equalOperator(Applier applier, dynamic data, List params) {
   return isEqual(applier, data, params);
 }
 
+/// Returns loose inequality for the first two parameters.
 dynamic notEqualOperator(Applier applier, dynamic data, List params) {
   return !isEqual(applier, data, params);
 }
 
+/// Returns strict equality for the first two evaluated parameters.
 dynamic strictEqualOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -102,6 +109,7 @@ dynamic strictEqualOperator(Applier applier, dynamic data, List params) {
   return v1 == v2;
 }
 
+/// Returns strict inequality for the first two evaluated parameters.
 dynamic strictNEOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -114,6 +122,7 @@ dynamic strictNEOperator(Applier applier, dynamic data, List params) {
   return v1 != v2;
 }
 
+/// Returns the negated JsonLogic truthiness of the first parameter.
 dynamic notOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -122,6 +131,7 @@ dynamic notOperator(Applier applier, dynamic data, List params) {
   return !truth(v);
 }
 
+/// Returns the JsonLogic truthiness of the first parameter.
 dynamic notNotOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -130,6 +140,7 @@ dynamic notNotOperator(Applier applier, dynamic data, List params) {
   return truth(v);
 }
 
+/// Returns the first truthy value, or the last evaluated value.
 dynamic orOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -139,6 +150,7 @@ dynamic orOperator(Applier applier, dynamic data, List params) {
   return v;
 }
 
+/// Returns the first falsy value, or the last evaluated value.
 dynamic andOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -148,6 +160,7 @@ dynamic andOperator(Applier applier, dynamic data, List params) {
   return v;
 }
 
+/// Returns true only when every parameter evaluates truthy.
 dynamic andBoolOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -157,6 +170,7 @@ dynamic andBoolOperator(Applier applier, dynamic data, List params) {
   return true;
 }
 
+/// Chooses date, version, or numeric comparison based on the first parameter.
 dynamic determineAndApplyComparison(
   Applier applier,
   dynamic data,
@@ -179,6 +193,7 @@ dynamic determineAndApplyComparison(
   return numberOperator(applier, data, params);
 }
 
+/// Returns whether parameters form a strictly increasing sequence.
 dynamic lessOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
     applier,
@@ -190,6 +205,7 @@ dynamic lessOperator(Applier applier, dynamic data, List params) {
   );
 }
 
+/// Returns whether parameters form a non-decreasing sequence.
 dynamic lessEqualOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
     applier,
@@ -201,6 +217,7 @@ dynamic lessEqualOperator(Applier applier, dynamic data, List params) {
   );
 }
 
+/// Returns whether parameters form a strictly decreasing sequence.
 dynamic greaterOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
     applier,
@@ -212,6 +229,7 @@ dynamic greaterOperator(Applier applier, dynamic data, List params) {
   );
 }
 
+/// Returns whether parameters form a non-increasing sequence.
 dynamic greaterEqualOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
     applier,

@@ -4,6 +4,7 @@ import 'package:version/version.dart';
 
 import 'interface.dart';
 
+/// Parses numeric values accepted by arithmetic operators.
 num? getNumber(dynamic arg) {
   if (arg is num) {
     return arg;
@@ -17,11 +18,13 @@ num? getNumber(dynamic arg) {
   return null;
 }
 
+/// Whether [str] can be parsed as a number.
 bool isNumber(String str) {
   num? number = num.tryParse(str);
   return number != null;
 }
 
+/// Chooses date, version, or numeric arithmetic from the first parameter.
 dynamic determineAndApplyOperation(
   Applier applier,
   dynamic data,
@@ -44,6 +47,7 @@ dynamic determineAndApplyOperation(
   return numberOperator(applier, data, params);
 }
 
+/// Applies [op] after parsing the first two parameters as numbers.
 dynamic binaryOperate(dynamic Function(num n1, num n2) op, Applier applier,
     dynamic data, List params) {
   if (params.length <= 1) {
@@ -61,6 +65,7 @@ dynamic binaryOperate(dynamic Function(num n1, num n2) op, Applier applier,
   return op(n1, n2);
 }
 
+/// Folds all parameters as numbers, returning null if any value is non-numeric.
 dynamic reduceOperate(num Function(num n1, num n2) op, Applier applier,
     dynamic data, List params, num zero) {
   var r = zero;
@@ -78,10 +83,12 @@ dynamic reduceOperate(num Function(num n1, num n2) op, Applier applier,
   return r;
 }
 
+/// Adds all numeric parameters, starting at zero.
 dynamic numAddOperator(Applier applier, dynamic data, List params) {
   return reduceOperate((a, b) => a + b, applier, data, params, 0.0);
 }
 
+/// Adds numbers or shifts dates, depending on the first parameter.
 dynamic addOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyOperation(
     applier,
@@ -94,10 +101,12 @@ dynamic addOperator(Applier applier, dynamic data, List params) {
   );
 }
 
+/// Multiplies all numeric parameters, starting at one.
 dynamic mulOperator(Applier applier, dynamic data, List params) {
   return reduceOperate((a, b) => a * b, applier, data, params, 1.0);
 }
 
+/// Negates one numeric parameter or subtracts the second from the first.
 dynamic numSubOperator(Applier applier, dynamic data, List params) {
   if (params.length == 1) {
     var v = applier(params[0], data);
@@ -110,6 +119,7 @@ dynamic numSubOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a - b, applier, data, params);
 }
 
+/// Subtracts numbers or shifts dates backward.
 dynamic subOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyOperation(
     applier,
@@ -122,14 +132,17 @@ dynamic subOperator(Applier applier, dynamic data, List params) {
   );
 }
 
+/// Divides the first numeric parameter by the second.
 dynamic divOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a / b, applier, data, params);
 }
 
+/// Returns the remainder of the first numeric parameter divided by the second.
 dynamic modOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a % b, applier, data, params);
 }
 
+/// Returns whether numeric parameters form a strictly decreasing sequence.
 dynamic numGreaterOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate(
       (a, b) => a > b ? b : double.nan, applier, data, params, double.infinity);
@@ -137,6 +150,7 @@ dynamic numGreaterOperator(Applier applier, dynamic data, List params) {
   return !r.isNaN;
 }
 
+/// Returns whether numeric parameters form a non-increasing sequence.
 dynamic numGreaterEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a >= b ? b : double.nan, applier, data,
       params, double.infinity);
@@ -144,6 +158,7 @@ dynamic numGreaterEqualOperator(Applier applier, dynamic data, List params) {
   return !r.isNaN;
 }
 
+/// Returns whether numeric parameters form a strictly increasing sequence.
 dynamic numLessOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a < b ? b : double.nan, applier, data, params,
       -double.infinity);
@@ -151,6 +166,7 @@ dynamic numLessOperator(Applier applier, dynamic data, List params) {
   return !r.isNaN;
 }
 
+/// Returns whether numeric parameters form a non-decreasing sequence.
 dynamic numLessEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a <= b ? b : double.nan, applier, data,
       params, -double.infinity);
@@ -158,11 +174,13 @@ dynamic numLessEqualOperator(Applier applier, dynamic data, List params) {
   return !r.isNaN;
 }
 
+/// Returns the largest numeric parameter.
 dynamic maxOperator(Applier applier, dynamic data, List params) {
   return reduceOperate(
       (a, b) => a > b ? a : b, applier, data, params, -double.infinity);
 }
 
+/// Returns the smallest numeric parameter.
 dynamic minOperator(Applier applier, dynamic data, List params) {
   return reduceOperate(
       (a, b) => a < b ? a : b, applier, data, params, double.infinity);

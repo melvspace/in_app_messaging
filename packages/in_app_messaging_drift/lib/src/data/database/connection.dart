@@ -13,6 +13,7 @@ Future<File> _getFile(String path, String name) async {
   return File(p.join(dbDirectory, '$name.sqlite'));
 }
 
+/// Opens the package database file.
 LazyDatabase openConnection(String path, String name) {
   return LazyDatabase(() async {
     final file = await _getFile(path, name);
@@ -21,6 +22,7 @@ LazyDatabase openConnection(String path, String name) {
   });
 }
 
+/// Deletes the package database file if it exists.
 Future<void> destroyDatabase(String path, String name) async {
   final file = await _getFile(path, name);
   try {

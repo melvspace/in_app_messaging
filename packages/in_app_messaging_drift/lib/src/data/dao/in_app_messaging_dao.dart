@@ -7,11 +7,14 @@ import 'package:in_app_messaging_drift/src/data/database/database.dart';
 import 'package:in_app_messaging_drift/src/data/schema/schema.dart';
 import 'package:in_app_messaging_drift/src/in_app_messaging_drift_logger.dart';
 
+/// Queries for persisted message interaction history.
 @DriftAccessor(tables: [InAppMessageSeenDates, InAppMessageInteractions])
 class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
     with $InAppMessagingDaoMixin {
+  /// Binds interaction queries to [db].
   InAppMessagingDao(super.db);
 
+  /// Loads seen entries for [id] and decodes trigger payload JSON.
   Future<List<MessageSeenEntry>> getSeenEntries(String id) async {
     final seenQuery = inAppMessageSeenDates.select() //
       ..where((tbl) => tbl.message.equals(id));
@@ -31,6 +34,9 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
         .toList();
   }
 
+  /// Stores aggregate interaction [data] under [key] for one message.
+  ///
+  /// Existing aggregate keys for [id] are preserved.
   Future<void> interact<T>({
     required String id,
     required String key,
@@ -53,6 +59,10 @@ class InAppMessagingDao extends DatabaseAccessor<InAppMessagingDatabase>
     await into(inAppMessageInteractions).insertOnConflictUpdate(updated);
   }
 
+  /// Records that [id] became visible.
+  ///
+  /// If [triggerProperties] cannot be serialized, the seen entry is still
+  /// recorded without trigger properties.
   Future<void> markSeen({
     required String id,
     String? trigger,

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
 
+/// Blocks in-app message presentation while its subtree is mounted.
 class InAppMessagingSuppressor extends StatefulWidget {
+  /// Subtree that should not be interrupted by in-app messages.
   final Widget child;
 
+  /// Starts suppression in [initState] and releases it on dispose.
   const InAppMessagingSuppressor({
     super.key,
     required this.child,

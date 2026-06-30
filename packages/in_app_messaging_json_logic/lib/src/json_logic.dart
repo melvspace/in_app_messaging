@@ -13,33 +13,34 @@ const _defaultAggregator = '_default_aggregator';
 const _quickVarPrefix = r'$';
 const _quickVarOp = '_quick_access';
 
-/// Jsonlogic evaluates the jsonlogic rules for the given data.
+/// JsonLogic evaluator with configurable operators.
 class JsonLogic {
   late Map<String, Operator> _ops;
 
-  /// Creates the Jsonlogic class with default operations.
+  /// Registers the standard operators supported by this package.
   JsonLogic() {
     _ops = <String, Operator>{};
     _addDefaultOps();
   }
 
-  /// Creates the Jsonlogic class with no operations. The operations needs to
-  /// manually added via the `add` function.
+  /// Starts with no operators for custom evaluation rules.
+  ///
+  /// Operations can be added later with [add].
   JsonLogic.empty() {
     _ops = <String, Operator>{};
   }
 
-  /// add a function/operator.
+  /// Registers [op] under [name].
   void add(String name, Operator op) {
     _ops[name] = op;
   }
 
-  /// remove a function/operator
+  /// Removes the operator registered under [name].
   void remove(String name) {
     _ops.remove(name);
   }
 
-  /// applies the give rule with given data.
+  /// Evaluates a JsonLogic [rule] against [data].
   dynamic apply(dynamic rule, dynamic data) {
     return _apply(rule, data);
   }

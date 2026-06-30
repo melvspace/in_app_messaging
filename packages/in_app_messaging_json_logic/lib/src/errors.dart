@@ -1,7 +1,9 @@
-/// JsonlogicException is the base exception raised by all the functions
-/// in this library.
+/// An exception raised while evaluating a JsonLogic rule.
 class JsonlogicException implements Exception {
+  /// Explanation of the evaluation failure.
   final String message;
+
+  /// Wraps an evaluator or operator failure.
   const JsonlogicException(this.message);
 
   @override

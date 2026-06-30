@@ -1,6 +1,4 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
+/// Drift persistence support for the in-app messaging package.
 library;
 
 export 'src/data/database/database.dart';

@@ -1,4 +1,6 @@
+/// Precision truncation used by JsonLogic date operators.
 extension DateTimeX on DateTime {
+  /// Drops fields below the first enabled precision flag.
   DateTime truncate({
     bool toYears = false,
     bool toMonths = false,

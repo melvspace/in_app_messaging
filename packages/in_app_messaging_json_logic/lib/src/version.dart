@@ -3,6 +3,7 @@ import 'package:version/version.dart';
 import 'interface.dart';
 import 'numeric.dart';
 
+/// Parses semantic-version values accepted by version comparisons.
 Version? getVersion(dynamic arg) {
   if (arg == null) {
     return null;
@@ -19,6 +20,7 @@ Version? getVersion(dynamic arg) {
   return null;
 }
 
+/// Folds parsed version parameters with [operation].
 dynamic reduceOperateVersion(
   Version? Function(Version dt1, Version dt2) operation,
   Applier applier,
@@ -52,6 +54,7 @@ dynamic reduceOperateVersion(
   return result;
 }
 
+/// Returns whether versions form a strictly decreasing sequence.
 bool versionGreaterOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateVersion(
     (a, b) => a > b ? b : null,
@@ -62,6 +65,7 @@ bool versionGreaterOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether versions form a non-increasing sequence.
 bool versionGreaterEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateVersion(
     (a, b) => a >= b ? b : null,
@@ -72,6 +76,7 @@ bool versionGreaterEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether versions form a strictly increasing sequence.
 bool versionLessOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateVersion(
     (a, b) => a < b ? b : null,
@@ -82,6 +87,7 @@ bool versionLessOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether versions form a non-decreasing sequence.
 bool versionLessEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateVersion(
     (a, b) => a <= b ? b : null,
@@ -92,6 +98,7 @@ bool versionLessEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Returns whether all parsed versions are equal.
 bool isVersionEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateVersion(
     (a, b) => a == b ? b : null,
@@ -102,6 +109,7 @@ bool isVersionEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+/// Reads `current_version` from [data] and parses it as a [Version].
 dynamic currentVersionOperator(Applier applier, dynamic data, List params) {
   Version? current = getVersion(data['current_version']!);
   if (current == null) return null;

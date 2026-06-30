@@ -3,11 +3,13 @@ import 'package:in_app_messaging_json_logic/src/logic.dart';
 import 'interface.dart';
 import 'truth.dart';
 
+/// Normalizes a value for operators that merge list-like data.
 List toList(dynamic arg) {
   if (arg is List) return arg;
   return [arg];
 }
 
+/// Applies an array callback after evaluating the source list and rule.
 dynamic arrayApply(dynamic Function(List args, List applied) f,
     dynamic defaultValue, Applier applier, dynamic data, List params) {
   if (params.length != 2) {
@@ -38,15 +40,18 @@ dynamic arrayApply(dynamic Function(List args, List applied) f,
   return defaultValue;
 }
 
+/// Applies a boolean array predicate to mapped values.
 dynamic boolArrayApply(
     bool Function(List array) f, Applier applier, dynamic data, List params) {
   return arrayApply((args, applied) => f(applied), null, applier, data, params);
 }
 
+/// Maps each source list item through a JsonLogic rule.
 dynamic mapOperator(Applier applier, dynamic data, List params) {
   return arrayApply((_, applied) => applied, [], applier, data, params);
 }
 
+/// Keeps source list items whose mapped value is truthy.
 dynamic filterOperator(Applier applier, dynamic data, List params) {
   List filter(List args, List applied) {
     var output = [];
@@ -61,6 +66,7 @@ dynamic filterOperator(Applier applier, dynamic data, List params) {
   return arrayApply(filter, [], applier, data, params);
 }
 
+/// Folds [data] with `current` and `accumulator` variables.
 dynamic reduce(
     List data, Applier applier, Map<String, dynamic> opdata, dynamic zero) {
   var r = zero;
@@ -70,6 +76,7 @@ dynamic reduce(
   return r;
 }
 
+/// Reduces a source list with an accumulator rule and initial value.
 dynamic reduceOperator(Applier applier, dynamic data, List params) {
   if (params.length != 3) {
     return null;
@@ -83,6 +90,7 @@ dynamic reduceOperator(Applier applier, dynamic data, List params) {
   return initialValue;
 }
 
+/// Returns true when every mapped value is truthy and the list is non-empty.
 dynamic allOperator(Applier applier, dynamic data, List params) {
   bool all(List array) {
     if (array.isEmpty) return false;
@@ -95,6 +103,7 @@ dynamic allOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(all, applier, data, params);
 }
 
+/// Returns true when at least one mapped value is truthy.
 dynamic someOperator(Applier applier, dynamic data, List params) {
   bool some(List array) {
     if (array.isEmpty) return false;
@@ -107,6 +116,7 @@ dynamic someOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(some, applier, data, params);
 }
 
+/// Returns true when no mapped value is truthy.
 dynamic noneOperator(Applier applier, dynamic data, List params) {
   bool none(List array) {
     for (var a in array) {
@@ -118,6 +128,7 @@ dynamic noneOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(none, applier, data, params);
 }
 
+/// Concatenates evaluated parameters after wrapping non-lists.
 dynamic mergeOperator(Applier applier, dynamic data, List params) {
   var output = [];
   for (var p in params) {
@@ -127,6 +138,7 @@ dynamic mergeOperator(Applier applier, dynamic data, List params) {
   return output;
 }
 
+/// Checks string containment or list membership.
 dynamic inOperator(Applier applier, dynamic data, List params) {
   if (params.length != 2) {
     return false;
