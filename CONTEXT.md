@@ -68,6 +68,18 @@ _Avoid_: Weight, rank, score
 The process that decides whether and how a selected in-app message is shown in Flutter.
 _Avoid_: Evaluation, triggering, rendering
 
+**Presentation Outcome**:
+The result of attempting presentation for a selected in-app message. A shown outcome means the in-app message became visible to the user; user action or consumption is not required.
+_Avoid_: Delivery status, boolean result
+
+**Presentation Completion**:
+The end of a shown in-app message's presentation lifecycle, usually after the visible surface is dismissed or closed. Presentation completion is separate from presentation outcome because seen entries are created when the in-app message becomes visible, not when the user finishes with it.
+_Avoid_: Consumption, delivery, interaction
+
+**Presentation Session**:
+The lifecycle of a shown in-app message after it becomes visible and before presentation completion. A presentation session keeps the presentation queue occupied while the visible surface remains active.
+_Avoid_: Message session, interaction session
+
 **Suppression**:
 A temporary presentation state that prevents queued in-app messages from being shown without changing evaluation results or creating seen entries.
 _Avoid_: Pause, disable, cancellation

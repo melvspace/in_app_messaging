@@ -8,7 +8,8 @@ abstract class DynamicMessageHandle {
 
   DynamicMessageHandle({required this.context});
 
-  FutureOr<bool> canShow(BuildContext context);
-
-  Future<void> onShow(BuildContext context, [NavigatorState? navigator]);
+  FutureOr<PresentationAttempt> present(
+    BuildContext context, [
+    NavigatorState? navigator,
+  ]);
 }

@@ -5,6 +5,7 @@ import 'package:in_app_messaging/src/in_app_messaging_logger.dart';
 import 'src/domain/domain.dart';
 
 import 'src/presentation/presenter/in_app_message_presenter_key.dart';
+import 'src/presentation/presenter/presentation_outcome.dart';
 export 'src/data/data.dart';
 export 'src/domain/domain.dart';
 export 'src/presentation/presentation.dart';
@@ -39,11 +40,14 @@ class InAppMessaging {
       'Message(${message.id}) of ${message.type.runtimeType} type triggered and enqueued',
     );
 
-    return inAppMessagePresenterKey.currentState //
-            ?.enqueue(context)
-            .then((value) => _markSeen(value, context))
-            .then((value) => _logSeen(value, message)) ??
-        Future.value(false);
+    final outcome = await inAppMessagePresenterKey.currentState //
+            ?.enqueue(context) ??
+        const PresentationOutcome.notShown(
+            PresentationNotShownReason.cancelled);
+
+    await _markSeen(outcome, context);
+
+    return _logSeen(outcome, message);
   }
 
   void setSuppressed(
@@ -62,20 +66,27 @@ class InAppMessaging {
     inAppMessagePresenterKey.currentState?.clear();
   }
 
-  bool _logSeen(bool seen, Message message) {
-    if (seen) {
+  bool _logSeen(PresentationOutcome outcome, Message message) {
+    if (outcome.isShown) {
       logger.info(
-          'Message(${message.id}) of ${message.type.runtimeType} type delivered');
+          'Message(${message.id}) of ${message.type.runtimeType} type shown');
     } else {
-      logger.info(
-          'Message(${message.id}) of ${message.type.runtimeType} type cancelled');
+      final reason = switch (outcome) {
+        PresentationNotShown(:final reason) => reason.name,
+        PresentationShown() => null,
+      };
+      logger.info('Message(${message.id}) of ${message.type.runtimeType} type '
+          'not shown: $reason');
     }
 
-    return seen;
+    return outcome.isShown;
   }
 
-  Future<bool> _markSeen(bool value, MessageContext context) async {
-    if (value) {
+  Future<void> _markSeen(
+    PresentationOutcome outcome,
+    MessageContext context,
+  ) async {
+    if (outcome.isShown) {
       await gateway.markSeen(
         id: context.message.id,
         trigger: context.map(
@@ -90,7 +101,5 @@ class InAppMessaging {
         ),
       );
     }
-
-    return value;
   }
 }

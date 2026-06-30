@@ -35,44 +35,10 @@ class DynamicMessagePresenter extends StatefulWidget {
 
 class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
   final Queue<DynamicMessageContext> pending = Queue();
-  final Map<DynamicMessage, Completer<bool>> _completers = {};
+  final Map<DynamicMessage, Completer<PresentationOutcome>> _completers = {};
 
   DynamicMessageHandle? _active;
   DynamicMessageHandle? get active => _active;
-  set active(DynamicMessageHandle? value) {
-    if (_active != value && value != null && mounted) {
-      Future.value(value.canShow(context)).then(
-        (canShow) {
-          final context = this.context;
-          _completers.remove(value.context.message)?.complete(canShow);
-
-          if (canShow) {
-            if (!context.mounted) {
-              logger.warning('DynamicMessagePresenter was unmounted and '
-                  'message cannot be delivered');
-              return;
-            }
-
-            value.onShow(context, widget.navigatorKey?.currentState).then(
-              (_) {
-                logger.info('Message(${value.context.message.id}) closed');
-
-                active = null;
-                _checkQueue();
-              },
-            );
-          } else {
-            logger.info('Message(${value.context.message.id}) skipped');
-
-            active = null;
-            _checkQueue();
-          }
-        },
-      );
-    }
-
-    _active = value;
-  }
 
   final Set<String> _suppressKeys = {};
   final Map<String, Timer> _unsuppressTimers = {};
@@ -167,7 +133,13 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     pending.clear();
 
     for (final completer in _completers.values) {
-      if (!completer.isCompleted) completer.complete(false);
+      if (!completer.isCompleted) {
+        completer.complete(
+          const PresentationOutcome.notShown(
+            PresentationNotShownReason.cancelled,
+          ),
+        );
+      }
     }
 
     _completers.clear();
@@ -182,19 +154,29 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
 
     _unsuppressTimers.clear();
     for (final completer in _completers.values) {
-      if (!completer.isCompleted) completer.complete(false);
+      if (!completer.isCompleted) {
+        completer.complete(
+          const PresentationOutcome.notShown(
+            PresentationNotShownReason.cancelled,
+          ),
+        );
+      }
     }
 
     _completers.clear();
     pending.clear();
+    _active = null;
 
     super.dispose();
   }
 
-  /// Returns future which ends with true if message was delivered and seen.
-  Future<bool> enqueue(DynamicMessageContext context) {
-    final completer = Completer<bool>();
-    _completers[context.message]?.complete(false);
+  /// Returns the presentation outcome once visibility is known.
+  Future<PresentationOutcome> enqueue(DynamicMessageContext context) {
+    final completer = Completer<PresentationOutcome>();
+    _complete(
+      context.message,
+      const PresentationOutcome.notShown(PresentationNotShownReason.cancelled),
+    );
     _completers[context.message] = completer;
 
     pending.remove(context);
@@ -230,11 +212,96 @@ class DynamicMessagePresenterState extends State<DynamicMessagePresenter> {
     if (builder == null) {
       logger.info(
           '[Presenter.checkQueue]: No builder found for ${message.type} type, skipping message');
-      _completers.remove(message)?.complete(false);
+      _complete(
+        message,
+        const PresentationOutcome.notShown(
+          PresentationNotShownReason.missingHandle,
+        ),
+      );
+      _checkQueue();
       return;
     }
 
-    active = builder(tuple);
+    _active = builder(tuple);
+    unawaited(_present(_active!));
+  }
+
+  Future<void> _present(DynamicMessageHandle handle) async {
+    PresentationAttempt attempt;
+    try {
+      attempt = await Future.value(
+        handle.present(context, widget.navigatorKey?.currentState),
+      );
+    } catch (error, stackTrace) {
+      logger.warning(
+        'Message(${handle.context.message.id}) presentation failed',
+        error,
+        stackTrace,
+      );
+      _complete(
+        handle.context.message,
+        const PresentationOutcome.notShown(PresentationNotShownReason.failed),
+      );
+      _finish(handle);
+      return;
+    }
+
+    if (!mounted) {
+      _complete(
+        handle.context.message,
+        const PresentationOutcome.notShown(
+            PresentationNotShownReason.cancelled),
+      );
+      _finish(handle);
+      return;
+    }
+
+    switch (attempt) {
+      case PresentationShownAttempt(:final session):
+        logger.info('Message(${handle.context.message.id}) shown');
+        _complete(handle.context.message, attempt.outcome);
+        await _waitForCompletion(handle, session);
+      case PresentationNotShownAttempt(:final reason):
+        logger.info(
+          'Message(${handle.context.message.id}) not shown: ${reason.name}',
+        );
+        _complete(handle.context.message, attempt.outcome);
+        _finish(handle);
+    }
+  }
+
+  Future<void> _waitForCompletion(
+    DynamicMessageHandle handle,
+    PresentationSession session,
+  ) async {
+    try {
+      await session.completed;
+      logger.info('Message(${handle.context.message.id}) closed');
+    } catch (error, stackTrace) {
+      logger.warning(
+        'Message(${handle.context.message.id}) completion failed',
+        error,
+        stackTrace,
+      );
+    } finally {
+      _finish(handle);
+    }
+  }
+
+  void _finish(DynamicMessageHandle handle) {
+    if (_active != handle) return;
+
+    _active = null;
+    if (mounted) {
+      _checkQueue();
+    }
+  }
+
+  void _complete(DynamicMessage message, PresentationOutcome outcome) {
+    final completer = _completers.remove(message);
+    if (completer == null || completer.isCompleted) return;
+
+    completer.complete(outcome);
   }
 
   @override

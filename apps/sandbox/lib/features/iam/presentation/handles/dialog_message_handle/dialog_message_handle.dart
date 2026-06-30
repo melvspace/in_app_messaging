@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:in_app_messaging/in_app_messaging.dart';
 import 'package:sandbox/features/iam/presentation/handles/dialog_message_handle/dialog_message_data.dart';
@@ -17,13 +15,11 @@ class DialogMessageHandle extends DynamicMessageHandle {
       : data = DialogMessageData.fromJson(context.message.data);
 
   @override
-  FutureOr<bool> canShow(BuildContext context) {
-    return true;
-  }
-
-  @override
-  Future<void> onShow(BuildContext context, [NavigatorState? navigator]) {
-    return showDialog(
+  Future<PresentationAttempt> present(
+    BuildContext context, [
+    NavigatorState? navigator,
+  ]) async {
+    final completed = showDialog<void>(
       context: navigator?.context ?? context,
       builder: (context) => Dialog(
         child: Column(
@@ -54,6 +50,12 @@ class DialogMessageHandle extends DynamicMessageHandle {
           ],
         ),
       ),
+    );
+
+    await WidgetsBinding.instance.endOfFrame;
+
+    return PresentationAttempt.shown(
+      session: PresentationSession(completed: completed),
     );
   }
 }

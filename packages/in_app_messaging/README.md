@@ -101,8 +101,9 @@ await messaging.trigger('app_opened', {
 ```
 
 When a message is selected, presentation decides whether and how it is shown.
-The package records a seen entry only when the presentation handler reports
-success.
+The package records a seen entry only when the presentation handler reports that
+the in-app message became visible. The presentation queue waits for the visible
+surface to complete before showing the next queued message.
 
 ## Conditions
 

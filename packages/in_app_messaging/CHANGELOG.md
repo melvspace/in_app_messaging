@@ -1,3 +1,8 @@
+## Unreleased
+
+ - **BREAKING**: replace message handle `canShow` and `onShow` with `present` returning a presentation attempt.
+ - **FIX**: record seen entries when an in-app message becomes visible, not after presentation completion.
+
 ## 0.0.22
 
  - **FIX**: fix simple message condition type.
@@ -76,4 +81,3 @@
 ## 0.0.1
 
 - Initial version.
-
