@@ -1,48 +1,62 @@
-# In-app Messaging - Json Logic
+# In-App Messaging JsonLogic
 
-This is extended fork of [jsonlogic](https://github.com/vikesh-raj/jsonlogic)
+Pure Dart JsonLogic implementation used by `in_app_messaging` to evaluate
+serialized conditions.
 
-JsonLogic not actively maintained, so I've created this fork to maintain it and add some features that are not included in the original package.
+This package is maintained as part of the in-app messaging workspace because the
+original Dart JsonLogic package is not actively maintained. It remains
+independent of Flutter and persistence so it can be used in pure Dart contexts.
 
-# JsonLogic
-
-Jsonlogic is dart package that evaluates the json logic rules(logic) with
-the give data.
-
-This is a dart port for the [JSON logic javascript](https://github.com/jwadhams/json-logic-js) package.
-
-It passes the compliance tests for the JSON logic tests.
-
-Usage:
-
-Sample example from jsonlogic website.
-
-`The pie isn’t ready to eat unless it’s cooler than 110 degrees, and filled with apples.`
-
-This can be encoded in the following JSON logic rule.
+## Usage
 
 ```dart
-  var jl = Jsonlogic();
-  var rule = {
-    "and": [
+import 'package:in_app_messaging_json_logic/in_app_messaging_json_logic.dart';
+
+void main() {
+  final jsonLogic = Jsonlogic();
+
+  final rule = {
+    'and': [
       {
-        "<": [
-          {"var": "temp"},
-          110
-        ]
+        '<': [
+          {'var': 'temp'},
+          110,
+        ],
       },
       {
-        "==": [
-          {"var": "pie.filling"},
-          "apple"
-        ]
-      }
-    ]
+        '==': [
+          {'var': 'pie.filling'},
+          'apple',
+        ],
+      },
+    ],
   };
-  var data = {
-    "temp": 100,
-    "pie": {"filling": "apple"}
+
+  final data = {
+    'temp': 100,
+    'pie': {
+      'filling': 'apple',
+    },
   };
-  var answer = jl.apply(rule, data);
-  print('example1 answer = $answer');
+
+  final result = jsonLogic.apply(rule, data);
+  print(result); // true
+}
 ```
+
+## In-App Messaging Conditions
+
+The core package serializes conditions as JsonLogic so message configuration can
+come from local or remote sources. The JsonLogic package evaluates those rules
+against an evaluation context containing event properties, user/device
+attributes, and interaction history.
+
+## Tests
+
+Run the package tests from the workspace root:
+
+```bash
+dart run melos exec --scope=in_app_messaging_json_logic -- dart test
+```
+
+The package includes compliance fixtures for the JsonLogic behavior it supports.
