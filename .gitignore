@@ -34,3 +34,6 @@ pubspec_override.yaml
 
 # FVM Version Cache
 .fvm/
+
+# Agentic
+.agents/reports/
