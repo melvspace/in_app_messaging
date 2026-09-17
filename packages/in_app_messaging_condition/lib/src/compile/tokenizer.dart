@@ -21,6 +21,18 @@ enum TokenKind {
   /// The `or` logical operator.
   or,
 
+  /// The `not` logical or comparison-negation operator.
+  not,
+
+  /// The `contains` membership operator.
+  contains,
+
+  /// The `in` membership operator.
+  inOperator,
+
+  /// The `matches` regular-expression operator.
+  matches,
+
   /// The `+` addition or unary-plus operator.
   plus,
 
@@ -159,6 +171,10 @@ List<Token> tokenize(String source) {
         'null' => (TokenKind.nullLiteral, null),
         'and' => (TokenKind.and, null),
         'or' => (TokenKind.or, null),
+        'not' => (TokenKind.not, null),
+        'contains' => (TokenKind.contains, null),
+        'in' => (TokenKind.inOperator, null),
+        'matches' => (TokenKind.matches, null),
         _ => (TokenKind.identifier, lexeme),
       };
       tokens.add(

@@ -23,9 +23,9 @@ comparisonOperator  = "=="
                     | ">="
                     | "<"
                     | "<="
-                    | "contains"
-                    | "in"
-                    | "matches" ;
+                    | membershipOperator
+                    | "not", membershipOperator ;
+membershipOperator  = "contains" | "in" | "matches" ;
 
 nullFallbackExpression
                     = additiveExpression,
@@ -82,8 +82,11 @@ user.plan == "pro"
 not user.isBlocked
 (user.isPremium or user.isTrial) and device.isMobile
 user.plan contains "pro"
+user.plan not contains "free"
 "premium" in user.tags
+"blocked" not in user.tags
 user.release matches "^release-[0-9]{4}$"
+user.release not matches "-snapshot$"
 user.nickname ?? user.name == "Mel"
 cart.subtotal + cart.shipping >= 50
 progress.completed / progress.total >= 0.75
@@ -154,6 +157,10 @@ operation.
 `matches` applies the regular expression in its right string operand to its
 left string operand. A match may occur anywhere unless the pattern uses
 anchors such as `^` and `$`.
+
+`not contains`, `not in`, and `not matches` negate their corresponding
+membership comparison. For example, `value not in values` is equivalent to
+`not (value in values)`.
 
 A comparison operator applied to unsupported operand types evaluates to false.
 

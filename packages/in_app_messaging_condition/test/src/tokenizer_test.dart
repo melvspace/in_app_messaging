@@ -110,11 +110,30 @@ void main() {
     });
 
     test('does not match keywords inside identifiers', () {
-      final tokens = tokenize('android order nullable true_value');
+      final tokens = tokenize(
+        'android order nullable true_value notable inbox containsAll matches_value',
+      );
 
       expect(
-        tokens.take(4).map((token) => token.kind),
+        tokens.take(8).map((token) => token.kind),
         everyElement(TokenKind.identifier),
+      );
+    });
+
+    test('tokenizes logical and membership keywords', () {
+      final tokens = tokenize('not contains not in not matches');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.not,
+          TokenKind.contains,
+          TokenKind.not,
+          TokenKind.inOperator,
+          TokenKind.not,
+          TokenKind.matches,
+          TokenKind.endOfInput,
+        ]),
       );
     });
 

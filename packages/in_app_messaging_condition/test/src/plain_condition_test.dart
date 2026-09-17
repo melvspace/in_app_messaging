@@ -119,6 +119,20 @@ void main() {
         false,
       ),
       (
+        'user.plan not contains "free"',
+        {
+          "user": {"plan": "professional"},
+        },
+        true,
+      ),
+      (
+        'user.plan not contains "pro"',
+        {
+          "user": {"plan": "professional"},
+        },
+        false,
+      ),
+      (
         '"premium" in user.tags',
         {
           "user": {
@@ -137,7 +151,39 @@ void main() {
         false,
       ),
       (
+        '"free" not in user.tags',
+        {
+          "user": {
+            "tags": ["premium", "beta"],
+          },
+        },
+        true,
+      ),
+      (
+        '"premium" not in user.tags',
+        {
+          "user": {
+            "tags": ["premium", "beta"],
+          },
+        },
+        false,
+      ),
+      (
         'user.release matches "^release-[0-9]{4}\$"',
+        {
+          "user": {"release": "release-2026"},
+        },
+        true,
+      ),
+      (
+        'user.release not matches "^release-[0-9]{4}\$"',
+        {
+          "user": {"release": "release-2026"},
+        },
+        false,
+      ),
+      (
+        'user.release not matches "-snapshot\$"',
         {
           "user": {"release": "release-2026"},
         },
