@@ -1,4 +1,4 @@
-import 'package:in_app_messaging_condition/src/tokenizer.dart';
+import 'package:in_app_messaging_condition/src/compile/tokenizer.dart';
 import 'package:test/test.dart';
 
 void main() {
