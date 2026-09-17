@@ -1,0 +1,15 @@
+name: in_app_messaging_condition
+description: A condition expression evaluator for in-app messaging.
+repository: https://github.com/rIIh/in_app_messaging
+resolution: workspace
+version: 1.0.0
+
+environment:
+  sdk: ^3.13.3
+
+# dependencies:
+  # path: ^1.9.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
