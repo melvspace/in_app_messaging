@@ -18,24 +18,64 @@ void main() {
           TokenKind.equal,
           TokenKind.identifier,
           TokenKind.greaterThanOrEqual,
+          TokenKind.minus,
           TokenKind.number,
           TokenKind.endOfInput,
         ]),
       );
       expect(tokens[6].value, equals('object.child_1'));
-      expect(tokens[8].value, equals(-1.5));
+      expect(tokens[9].value, equals(1.5));
       expect(tokens.last.offset, equals(source.length));
     });
 
     test('preserves integer and decimal values', () {
-      final tokens = tokenize('0 -1 1.5');
+      final tokens = tokenize('0 1 1.5');
 
       expect(tokens[0].value, equals(0));
       expect(tokens[0].value, isA<int>());
-      expect(tokens[1].value, equals(-1));
+      expect(tokens[1].value, equals(1));
       expect(tokens[1].value, isA<int>());
       expect(tokens[2].value, equals(1.5));
       expect(tokens[2].value, isA<double>());
+    });
+
+    test('tokenizes arithmetic operators', () {
+      final tokens = tokenize('+ - * / %');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.plus,
+          TokenKind.minus,
+          TokenKind.multiply,
+          TokenKind.divide,
+          TokenKind.remainder,
+          TokenKind.endOfInput,
+        ]),
+      );
+    });
+
+    test('distinguishes subtraction from numeric literals', () {
+      final tokens = tokenize('-1+2-3*4/5%6');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.minus,
+          TokenKind.number,
+          TokenKind.plus,
+          TokenKind.number,
+          TokenKind.minus,
+          TokenKind.number,
+          TokenKind.multiply,
+          TokenKind.number,
+          TokenKind.divide,
+          TokenKind.number,
+          TokenKind.remainder,
+          TokenKind.number,
+          TokenKind.endOfInput,
+        ]),
+      );
     });
 
     test('uses maximal matching for comparison operators', () {
@@ -100,7 +140,6 @@ void main() {
       '=',
       '!',
       '@',
-      '--1',
       '.field',
       'field.',
       'field..name',

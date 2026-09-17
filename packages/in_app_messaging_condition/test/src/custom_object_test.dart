@@ -36,6 +36,29 @@ class AccessibleObject({
   Object? accessIndex(int index) => items[index];
 }
 
+class ArithmeticObject(final num value) extends ConditionObject {
+  @override
+  Object add(covariant num other) => value + other;
+
+  @override
+  Object subtract(covariant num other) => value - other;
+
+  @override
+  Object multiply(covariant num other) => value * other;
+
+  @override
+  Object divide(covariant num other) => value / other;
+
+  @override
+  Object remainder(covariant num other) => value % other;
+
+  @override
+  Object positive() => value;
+
+  @override
+  Object negate() => -value;
+}
+
 void main() {
   group("custom object access", () {
     final object = AccessibleObject(
@@ -53,6 +76,28 @@ void main() {
       test(
         "`$condition` -> $expected",
         () => expect(eval(condition, .new(values: {"object": object})), equals(expected)),
+      );
+    }
+  });
+
+  group("custom object arithmetic", () {
+    final cases = [
+      ("value + 2 == 12", true),
+      ("value - 2 == 8", true),
+      ("value * 2 == 20", true),
+      ("value / 2 == 5", true),
+      ("value % 3 == 1", true),
+      ("+value == 10", true),
+      ("-value == -10", true),
+    ];
+
+    for (final (condition, expected) in cases) {
+      test(
+        "`$condition` -> $expected",
+        () => expect(
+          eval(condition, .new(values: {"value": ArithmeticObject(10)})),
+          equals(expected),
+        ),
       );
     }
   });

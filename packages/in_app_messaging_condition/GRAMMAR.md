@@ -15,7 +15,8 @@ orExpression        = andExpression, { "or", andExpression } ;
 andExpression       = notExpression, { "and", notExpression } ;
 notExpression       = { "not" }, comparison ;
 
-comparison          = primary, [ comparisonOperator, primary ] ;
+comparison          = additiveExpression,
+                      [ comparisonOperator, additiveExpression ] ;
 comparisonOperator  = "=="
                     | "!="
                     | ">"
@@ -25,6 +26,13 @@ comparisonOperator  = "=="
                     | "contains"
                     | "in"
                     | "matches" ;
+
+additiveExpression  = multiplicativeExpression,
+                      { ( "+" | "-" ), multiplicativeExpression } ;
+multiplicativeExpression
+                    = unaryExpression,
+                      { ( "*" | "/" | "%" ), unaryExpression } ;
+unaryExpression     = [ ( "+" | "-" ) ], primary ;
 
 primary             = literal
                     | access
@@ -37,7 +45,7 @@ literal             = nullLiteral
 
 nullLiteral         = "null" ;
 booleanLiteral      = "true" | "false" ;
-numberLiteral       = [ "-" ], digits, [ ".", digits ] ;
+numberLiteral       = digits, [ ".", digits ] ;
 stringLiteral       = '"', { stringCharacter | escapeSequence }, '"' ;
 
 access              = identifier,
@@ -73,6 +81,9 @@ not user.isBlocked
 user.plan contains "pro"
 "premium" in user.tags
 user.release matches "^release-[0-9]{4}$"
+cart.subtotal + cart.shipping >= 50
+progress.completed / progress.total >= 0.75
+user.sequence % 2 == 0
 interactions.seen_entries[0]
 event["product.name"]
 event["order-id"]
@@ -129,7 +140,22 @@ operation.
 left string operand. A match may occur anywhere unless the pattern uses
 anchors such as `^` and `$`.
 
-An operator applied to unsupported operand types evaluates to false.
+A comparison operator applied to unsupported operand types evaluates to false.
+
+### Arithmetic
+
+`+`, `-`, `*`, `/`, and `%` provide arithmetic for numbers and values represented
+by a `ConditionObject`. Unary `+` preserves a number and unary `-` negates it;
+custom values may define both unary operations. Multiplication, division, and
+remainder have higher precedence than addition and subtraction. Operators at
+the same precedence are evaluated from left to right.
+
+Arithmetic does not coerce strings, booleans, or other values to numbers. When
+the left operand is a custom value, the operation is delegated to its
+`ConditionObject`, which may return any supported expression value. An
+unsupported operation or division by zero produces `null`. That value is false
+by itself and causes a subsequent comparison or arithmetic operation to
+evaluate to false or `null`, respectively.
 
 ## Errors
 

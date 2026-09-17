@@ -21,6 +21,21 @@ enum TokenKind {
   /// The `or` logical operator.
   or,
 
+  /// The `+` addition or unary-plus operator.
+  plus,
+
+  /// The `-` subtraction or negation operator.
+  minus,
+
+  /// The `*` multiplication operator.
+  multiply,
+
+  /// The `/` division operator.
+  divide,
+
+  /// The `%` remainder operator.
+  remainder,
+
   /// The `==` comparison operator.
   equal,
 
@@ -83,12 +98,8 @@ List<Token> tokenize(String source) {
       continue;
     }
 
-    if (_isDigit(character) ||
-        (character == _minus &&
-            offset + 1 < source.length &&
-            _isDigit(source.codeUnitAt(offset + 1)))) {
+    if (_isDigit(character)) {
       final start = offset;
-      if (character == _minus) offset++;
 
       while (offset < source.length && _isDigit(source.codeUnitAt(offset))) {
         offset++;
@@ -96,8 +107,7 @@ List<Token> tokenize(String source) {
 
       var isDecimal = false;
       if (offset < source.length && source.codeUnitAt(offset) == _dot) {
-        if (offset + 1 >= source.length ||
-            !_isDigit(source.codeUnitAt(offset + 1))) {
+        if (offset + 1 >= source.length || !_isDigit(source.codeUnitAt(offset + 1))) {
           throw FormatException(
             'Expected a digit after the decimal point',
             source,
@@ -129,8 +139,7 @@ List<Token> tokenize(String source) {
       while (offset < source.length && source.codeUnitAt(offset) == _dot) {
         final dotOffset = offset;
         offset++;
-        if (offset >= source.length ||
-            !_isIdentifierStart(source.codeUnitAt(offset))) {
+        if (offset >= source.length || !_isIdentifierStart(source.codeUnitAt(offset))) {
           throw FormatException(
             'Expected an identifier after the dot',
             source,
@@ -158,6 +167,21 @@ List<Token> tokenize(String source) {
     final start = offset;
     TokenKind? kind;
     switch (character) {
+      case _plus:
+        kind = TokenKind.plus;
+        offset++;
+      case _minus:
+        kind = TokenKind.minus;
+        offset++;
+      case _asterisk:
+        kind = TokenKind.multiply;
+        offset++;
+      case _slash:
+        kind = TokenKind.divide;
+        offset++;
+      case _percent:
+        kind = TokenKind.remainder;
+        offset++;
       case _equals:
         if (_hasFollowing(source, offset, _equals)) {
           kind = TokenKind.equal;
@@ -206,8 +230,7 @@ List<Token> tokenize(String source) {
 
 int _consumeIdentifierSegment(String source, int offset) {
   offset++;
-  while (offset < source.length &&
-      _isIdentifierPart(source.codeUnitAt(offset))) {
+  while (offset < source.length && _isIdentifierPart(source.codeUnitAt(offset))) {
     offset++;
   }
   return offset;
@@ -224,16 +247,17 @@ bool _isWhitespace(int character) => switch (character) {
 bool _isDigit(int character) => character >= 0x30 && character <= 0x39;
 
 bool _isIdentifierStart(int character) =>
-    character == _underscore ||
-    (character >= 0x41 && character <= 0x5A) ||
-    (character >= 0x61 && character <= 0x7A);
+    character == _underscore || (character >= 0x41 && character <= 0x5A) || (character >= 0x61 && character <= 0x7A);
 
-bool _isIdentifierPart(int character) =>
-    _isIdentifierStart(character) || _isDigit(character);
+bool _isIdentifierPart(int character) => _isIdentifierStart(character) || _isDigit(character);
 
 const _exclamation = 0x21;
+const _percent = 0x25;
+const _asterisk = 0x2A;
+const _plus = 0x2B;
 const _dot = 0x2E;
 const _minus = 0x2D;
+const _slash = 0x2F;
 const _lessThan = 0x3C;
 const _equals = 0x3D;
 const _greaterThan = 0x3E;
