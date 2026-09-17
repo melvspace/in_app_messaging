@@ -13,9 +13,10 @@ void main() {
       ('"hello"', true),
       ('""', false),
     ];
+
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, {});
+        final result = eval(fixture);
         expect(result, equals(expected));
       });
     }
@@ -45,9 +46,10 @@ void main() {
       ('"hello" or false', true),
       ('"hello" and true', true),
     ];
+
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, {});
+        final result = eval(fixture);
         expect(result, equals(expected));
       });
     }
@@ -71,7 +73,7 @@ void main() {
     ];
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, {});
+        final result = eval(fixture);
         expect(result, equals(expected));
       });
     }
@@ -122,7 +124,7 @@ void main() {
 
     for (final (fixture, context, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, context);
+        final result = eval(fixture, .new(values: context));
         expect(result, equals(expected));
       });
     }
@@ -196,7 +198,7 @@ void main() {
 
     for (final (fixture, context, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, context);
+        final result = eval(fixture, .new(values: context));
         expect(result, equals(expected));
       });
     }

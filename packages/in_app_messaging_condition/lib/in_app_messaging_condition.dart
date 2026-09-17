@@ -4,3 +4,4 @@
 library;
 
 export 'src/eval.dart';
+export 'src/runtime/runtime.dart';
