@@ -15,8 +15,8 @@ orExpression        = andExpression, { "or", andExpression } ;
 andExpression       = notExpression, { "and", notExpression } ;
 notExpression       = { "not" }, comparison ;
 
-comparison          = additiveExpression,
-                      [ comparisonOperator, additiveExpression ] ;
+comparison          = nullFallbackExpression,
+                      [ comparisonOperator, nullFallbackExpression ] ;
 comparisonOperator  = "=="
                     | "!="
                     | ">"
@@ -27,6 +27,9 @@ comparisonOperator  = "=="
                     | "in"
                     | "matches" ;
 
+nullFallbackExpression
+                    = additiveExpression,
+                      { "??", additiveExpression } ;
 additiveExpression  = multiplicativeExpression,
                       { ( "+" | "-" ), multiplicativeExpression } ;
 multiplicativeExpression
@@ -81,6 +84,7 @@ not user.isBlocked
 user.plan contains "pro"
 "premium" in user.tags
 user.release matches "^release-[0-9]{4}$"
+user.nickname ?? user.name == "Mel"
 cart.subtotal + cart.shipping >= 50
 progress.completed / progress.total >= 0.75
 user.sequence % 2 == 0
@@ -122,6 +126,17 @@ explicit `null` values are therefore indistinguishable.
 - `or` stops when an operand is true.
 
 The right operand is not evaluated after the result is known.
+
+### Null fallback
+
+`??` returns its left operand when that value is not `null`; otherwise it
+evaluates and returns its right operand. It short-circuits, so the right operand
+is not evaluated when the left operand is available. False, zero, and empty
+strings or collections do not trigger the fallback.
+
+Null fallback has lower precedence than arithmetic and higher precedence than
+comparison. For example, `nickname ?? name == "Mel"` compares the selected name
+with `"Mel"`.
 
 ### Comparisons
 

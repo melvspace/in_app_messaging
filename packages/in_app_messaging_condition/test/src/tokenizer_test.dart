@@ -55,6 +55,20 @@ void main() {
       );
     });
 
+    test('tokenizes the null-fallback operator', () {
+      final tokens = tokenize('primary??fallback');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.identifier,
+          TokenKind.nullFallback,
+          TokenKind.identifier,
+          TokenKind.endOfInput,
+        ]),
+      );
+    });
+
     test('distinguishes subtraction from numeric literals', () {
       final tokens = tokenize('-1+2-3*4/5%6');
 
@@ -139,6 +153,7 @@ void main() {
     for (final source in [
       '=',
       '!',
+      '?',
       '@',
       '.field',
       'field.',

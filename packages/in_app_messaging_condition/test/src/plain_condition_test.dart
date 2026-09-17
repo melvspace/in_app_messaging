@@ -79,6 +79,29 @@ void main() {
     }
   });
 
+  group("null fallback operator", () {
+    final cases = [
+      ("missing ?? true", <String, Object?>{}, true),
+      ("value ?? true", <String, Object?>{"value": false}, false),
+      ("value ?? true", <String, Object?>{"value": 0}, false),
+      ("value ?? true", <String, Object?>{"value": ""}, false),
+      ("value ?? false", <String, Object?>{"value": true}, true),
+      (
+        "first ?? second ?? false",
+        <String, Object?>{"second": true},
+        true,
+      ),
+      ("missing ?? 1 + 2 == 3", <String, Object?>{}, true),
+    ];
+
+    for (final (fixture, context, expected) in cases) {
+      test("$fixture is $expected", () {
+        final result = eval(fixture, .new(values: context));
+        expect(result, equals(expected));
+      });
+    }
+  });
+
   group("string and membership operators", () {
     final cases = [
       (

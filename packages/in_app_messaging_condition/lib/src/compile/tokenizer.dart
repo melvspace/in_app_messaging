@@ -36,6 +36,9 @@ enum TokenKind {
   /// The `%` remainder operator.
   remainder,
 
+  /// The `??` null-fallback operator.
+  nullFallback,
+
   /// The `==` comparison operator.
   equal,
 
@@ -182,6 +185,11 @@ List<Token> tokenize(String source) {
       case _percent:
         kind = TokenKind.remainder;
         offset++;
+      case _questionMark:
+        if (_hasFollowing(source, offset, _questionMark)) {
+          kind = TokenKind.nullFallback;
+          offset += 2;
+        }
       case _equals:
         if (_hasFollowing(source, offset, _equals)) {
           kind = TokenKind.equal;
@@ -258,6 +266,7 @@ const _plus = 0x2B;
 const _dot = 0x2E;
 const _minus = 0x2D;
 const _slash = 0x2F;
+const _questionMark = 0x3F;
 const _lessThan = 0x3C;
 const _equals = 0x3D;
 const _greaterThan = 0x3E;
