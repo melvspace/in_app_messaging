@@ -10,6 +10,8 @@ void main() {
       ("0", false),
       ("null", false),
       ("-1", true),
+      ('"hello"', true),
+      ('""', false),
     ];
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
@@ -35,6 +37,13 @@ void main() {
       ("true or -1", true),
       ("true and 0", false),
       ("true or 0", true),
+      ("true or false and false", true),
+      ("(true or false) and false", false),
+      ("not true", false),
+      ("not false", true),
+      ("not (true and false)", true),
+      ('"hello" or false', true),
+      ('"hello" and true', true),
     ];
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
@@ -58,10 +67,62 @@ void main() {
       ("1.5 >= 1.5", true),
       ("1.5 <= 1.5", true),
       ("1.5 <= 0", false),
+      ('1 == "1"', false),
     ];
     for (final (fixture, expected) in cases) {
       test("$fixture is $expected", () {
         final result = eval(fixture, {});
+        expect(result, equals(expected));
+      });
+    }
+  });
+
+  group("string and membership operators", () {
+    final cases = [
+      (
+        'user.plan contains "pro"',
+        {
+          "user": {"plan": "professional"},
+        },
+        true,
+      ),
+      (
+        'user.plan contains "free"',
+        {
+          "user": {"plan": "professional"},
+        },
+        false,
+      ),
+      (
+        '"premium" in user.tags',
+        {
+          "user": {
+            "tags": ["premium", "beta"],
+          },
+        },
+        true,
+      ),
+      (
+        '"free" in user.tags',
+        {
+          "user": {
+            "tags": ["premium", "beta"],
+          },
+        },
+        false,
+      ),
+      (
+        'user.release matches "^release-[0-9]{4}\$"',
+        {
+          "user": {"release": "release-2026"},
+        },
+        true,
+      ),
+    ];
+
+    for (final (fixture, context, expected) in cases) {
+      test("$fixture is $expected", () {
+        final result = eval(fixture, context);
         expect(result, equals(expected));
       });
     }
@@ -85,6 +146,49 @@ void main() {
           "object": {
             "object": {"field": true},
           },
+        },
+        true,
+      ),
+      (
+        "interactions.seen_entries[0]",
+        {
+          "interactions": {
+            "seen_entries": [true],
+          },
+        },
+        true,
+      ),
+      (
+        'event["product.name"]',
+        {
+          "event": {"product.name": true},
+        },
+        true,
+      ),
+      (
+        'event["order-id"]',
+        {
+          "event": {"order-id": true},
+        },
+        true,
+      ),
+      ("missing", <String, Object?>{}, false),
+      ("value", <String, Object?>{"value": null}, false),
+      ("value", <String, Object?>{"value": ""}, false),
+      ("value", <String, Object?>{"value": "hello"}, true),
+      ("value", <String, Object?>{"value": <Object?>[]}, false),
+      (
+        "value",
+        <String, Object?>{
+          "value": [1],
+        },
+        true,
+      ),
+      ("value", <String, Object?>{"value": <String, Object?>{}}, false),
+      (
+        "value",
+        <String, Object?>{
+          "value": {"enabled": false},
         },
         true,
       ),
