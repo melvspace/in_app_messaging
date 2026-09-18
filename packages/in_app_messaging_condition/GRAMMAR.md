@@ -38,8 +38,16 @@ multiplicativeExpression
 unaryExpression     = [ ( "+" | "-" ) ], primary ;
 
 primary             = literal
+                    | functionCall
                     | access
                     | "(", orExpression, ")" ;
+
+functionCall        = globalFunctionCall | instanceFunctionCall ;
+globalFunctionCall  = identifier, "(", [ argumentList ], ")" ;
+instanceFunctionCall
+                    = access, ".", identifier,
+                      "(", [ argumentList ], ")" ;
+argumentList        = orExpression, { ",", orExpression } ;
 
 literal             = nullLiteral
                     | booleanLiteral
@@ -88,6 +96,9 @@ user.plan not contains "free"
 user.release matches "^release-[0-9]{4}$"
 user.release not matches "-snapshot$"
 user.nickname ?? user.name == "Mel"
+length(user.tags) >= 2
+isEligible(user.plan, cart.subtotal)
+audience.isEligible(user.plan)
 cart.subtotal + cart.shipping >= 50
 progress.completed / progress.total >= 0.75
 user.sequence % 2 == 0
@@ -178,6 +189,28 @@ the left operand is a custom value, the operation is delegated to its
 unsupported operation or division by zero produces `null`. That value is false
 by itself and causes a subsequent comparison or arithmetic operation to
 evaluate to false or `null`, respectively.
+
+### Functions
+
+Function calls use the same syntax for built-in and application-defined
+functions. Function names are identifiers. Calls accept zero or more
+comma-separated expressions, which are evaluated eagerly from left to right. A
+function may return any supported expression value.
+
+The evaluation context resolves function names. Application-defined functions
+take precedence over built-ins with the same name, allowing a context to
+replace built-in behavior deliberately. Calling an unknown function is an
+authoring error.
+
+An instance function call resolves its receiver through context access and
+delegates function lookup to the receiver's `ConditionObject`. For example,
+`audience.isEligible(user.plan)` invokes `isEligible` on the value at
+`audience`. Calling a function that the receiver does not expose is an authoring
+error.
+
+The built-in `length(value)` function returns the number of characters in a
+string or the number of entries in a list, set, or map. Unsupported values or
+an argument count other than one produce `null`.
 
 ## Errors
 

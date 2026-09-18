@@ -1,8 +1,18 @@
+import 'package:in_app_messaging_condition/src/runtime/condition_function.dart';
+
 /// Defines expression operations for a value used in a condition context.
 ///
 /// Returning `null` from an access or arithmetic operation indicates that the
 /// operation is unsupported or has no value.
 abstract class ConditionObject {
+  /// Resolves an instance function named [name] for this value.
+  ///
+  /// Implementations return a receiver-bound callback, or `null` when the
+  /// function is not exposed by this value.
+  ConditionFunction? resolveFunction(String name) {
+    return null;
+  }
+
   /// Reads the property named [key], or returns `null` when it is unavailable.
   dynamic accessKey(String key) {
     return null;

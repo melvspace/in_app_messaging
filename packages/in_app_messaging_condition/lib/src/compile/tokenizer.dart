@@ -69,6 +69,15 @@ enum TokenKind {
   /// The `<=` comparison operator.
   lessThanOrEqual,
 
+  /// The `(` opening parenthesis.
+  leftParenthesis,
+
+  /// The `)` closing parenthesis.
+  rightParenthesis,
+
+  /// The `,` function-argument separator.
+  comma,
+
   /// The marker after the final source character.
   endOfInput,
 }
@@ -206,6 +215,15 @@ List<Token> tokenize(String source) {
           kind = TokenKind.nullFallback;
           offset += 2;
         }
+      case _leftParenthesis:
+        kind = TokenKind.leftParenthesis;
+        offset++;
+      case _rightParenthesis:
+        kind = TokenKind.rightParenthesis;
+        offset++;
+      case _comma:
+        kind = TokenKind.comma;
+        offset++;
       case _equals:
         if (_hasFollowing(source, offset, _equals)) {
           kind = TokenKind.equal;
@@ -277,8 +295,11 @@ bool _isIdentifierPart(int character) => _isIdentifierStart(character) || _isDig
 
 const _exclamation = 0x21;
 const _percent = 0x25;
+const _leftParenthesis = 0x28;
+const _rightParenthesis = 0x29;
 const _asterisk = 0x2A;
 const _plus = 0x2B;
+const _comma = 0x2C;
 const _dot = 0x2E;
 const _minus = 0x2D;
 const _slash = 0x2F;

@@ -137,6 +137,40 @@ void main() {
       );
     });
 
+    test('tokenizes function calls and arguments', () {
+      final tokens = tokenize('isEligible(user.plan, 10)');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.identifier,
+          TokenKind.leftParenthesis,
+          TokenKind.identifier,
+          TokenKind.comma,
+          TokenKind.number,
+          TokenKind.rightParenthesis,
+          TokenKind.endOfInput,
+        ]),
+      );
+      expect(tokens.first.value, 'isEligible');
+    });
+
+    test('tokenizes instance function calls', () {
+      final tokens = tokenize('audience.isEligible(user.plan)');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.identifier,
+          TokenKind.leftParenthesis,
+          TokenKind.identifier,
+          TokenKind.rightParenthesis,
+          TokenKind.endOfInput,
+        ]),
+      );
+      expect(tokens.first.value, 'audience.isEligible');
+    });
+
     test('ignores whitespace and records source offsets', () {
       final tokens = tokenize('\t now\n<=\r 10 ');
 
