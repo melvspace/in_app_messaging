@@ -3,6 +3,9 @@ enum TokenKind {
   /// A numeric literal represented by an [int] or [double].
   number,
 
+  /// A decoded double-quoted string literal.
+  string,
+
   /// The `true` literal.
   trueLiteral,
 
@@ -77,6 +80,15 @@ enum TokenKind {
 
   /// The `,` function-argument separator.
   comma,
+
+  /// The `[` opening bracket.
+  leftBracket,
+
+  /// The `]` closing bracket.
+  rightBracket,
+
+  /// A path separator after bracket access.
+  dot,
 
   /// The marker after the final source character.
   endOfInput,
@@ -157,6 +169,61 @@ List<Token> tokenize(String source) {
       continue;
     }
 
+    if (character == _doubleQuote) {
+      final start = offset;
+      final buffer = StringBuffer();
+      offset++;
+
+      var terminated = false;
+      while (offset < source.length) {
+        final current = source.codeUnitAt(offset);
+        if (current == _doubleQuote) {
+          offset++;
+          terminated = true;
+          break;
+        }
+        if (current == _lineFeed || current == _carriageReturn) {
+          throw FormatException('Line breaks are not allowed in strings', source, offset);
+        }
+        if (current != _backslash) {
+          buffer.writeCharCode(current);
+          offset++;
+          continue;
+        }
+
+        final escapeOffset = offset;
+        offset++;
+        if (offset >= source.length) {
+          throw FormatException('Unterminated escape sequence', source, escapeOffset);
+        }
+        final escaped = source.codeUnitAt(offset);
+        buffer.writeCharCode(
+          switch (escaped) {
+            _doubleQuote => _doubleQuote,
+            _backslash => _backslash,
+            _lowercaseN => _lineFeed,
+            _lowercaseR => _carriageReturn,
+            _lowercaseT => _tab,
+            _ => throw FormatException('Unsupported escape sequence', source, escapeOffset),
+          },
+        );
+        offset++;
+      }
+
+      if (!terminated) {
+        throw FormatException('Unterminated string', source, start);
+      }
+      tokens.add(
+        Token(
+          kind: TokenKind.string,
+          lexeme: source.substring(start, offset),
+          offset: start,
+          value: buffer.toString(),
+        ),
+      );
+      continue;
+    }
+
     if (_isIdentifierStart(character)) {
       final start = offset;
       offset = _consumeIdentifierSegment(source, offset);
@@ -224,6 +291,17 @@ List<Token> tokenize(String source) {
       case _comma:
         kind = TokenKind.comma;
         offset++;
+      case _leftBracket:
+        kind = TokenKind.leftBracket;
+        offset++;
+      case _rightBracket:
+        kind = TokenKind.rightBracket;
+        offset++;
+      case _dot:
+        if (tokens.lastOrNull?.kind == TokenKind.rightBracket) {
+          kind = TokenKind.dot;
+          offset++;
+        }
       case _equals:
         if (_hasFollowing(source, offset, _equals)) {
           kind = TokenKind.equal;
@@ -294,17 +372,27 @@ bool _isIdentifierStart(int character) =>
 bool _isIdentifierPart(int character) => _isIdentifierStart(character) || _isDigit(character);
 
 const _exclamation = 0x21;
+const _doubleQuote = 0x22;
 const _percent = 0x25;
 const _leftParenthesis = 0x28;
 const _rightParenthesis = 0x29;
 const _asterisk = 0x2A;
 const _plus = 0x2B;
 const _comma = 0x2C;
-const _dot = 0x2E;
 const _minus = 0x2D;
+const _dot = 0x2E;
 const _slash = 0x2F;
 const _questionMark = 0x3F;
 const _lessThan = 0x3C;
 const _equals = 0x3D;
 const _greaterThan = 0x3E;
+const _leftBracket = 0x5B;
+const _backslash = 0x5C;
+const _rightBracket = 0x5D;
 const _underscore = 0x5F;
+const _lowercaseN = 0x6E;
+const _lowercaseR = 0x72;
+const _lowercaseT = 0x74;
+const _tab = 0x09;
+const _lineFeed = 0x0A;
+const _carriageReturn = 0x0D;

@@ -39,6 +39,27 @@ void main() {
       expect(tokens[2].value, isA<double>());
     });
 
+    test('decodes strings and tokenizes bracket access', () {
+      final tokens = tokenize(r'''event["line\n\"quoted\""][0].enabled''');
+
+      expect(
+        tokens.map((token) => token.kind),
+        equals([
+          TokenKind.identifier,
+          TokenKind.leftBracket,
+          TokenKind.string,
+          TokenKind.rightBracket,
+          TokenKind.leftBracket,
+          TokenKind.number,
+          TokenKind.rightBracket,
+          TokenKind.dot,
+          TokenKind.identifier,
+          TokenKind.endOfInput,
+        ]),
+      );
+      expect(tokens[2].value, 'line\n"quoted"');
+    });
+
     test('tokenizes arithmetic operators', () {
       final tokens = tokenize('+ - * / %');
 
@@ -213,6 +234,8 @@ void main() {
       'field..name',
       '1.',
       '1.2.3',
+      '"unterminated',
+      r'"invalid\escape"',
     ]) {
       test('rejects malformed input: $source', () {
         expect(() => tokenize(source), throwsFormatException);
