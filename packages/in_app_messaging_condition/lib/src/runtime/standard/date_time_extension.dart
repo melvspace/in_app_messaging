@@ -1,6 +1,10 @@
 import 'package:in_app_messaging_condition/in_app_messaging_condition.dart';
 
-class DateTimeConditionObject(final DateTime dateTime) extends ConditionObject {
+class DateTimeConditionObject extends ConditionObject {
+  DateTimeConditionObject(this.dateTime);
+
+  final DateTime dateTime;
+
   @override
   bool less(covariant DateTime other) => dateTime.isBefore(other);
 
@@ -11,7 +15,9 @@ class DateTimeConditionObject(final DateTime dateTime) extends ConditionObject {
   bool equals(covariant DateTime other) => dateTime.isAtSameMomentAs(other);
 }
 
-class const DateTimeConditionExtension() extends ConditionExtension<DateTime> {
+class DateTimeConditionExtension extends ConditionExtension<DateTime> {
+  const DateTimeConditionExtension();
+
   @override
   bool check(Object object) {
     return object is DateTime;

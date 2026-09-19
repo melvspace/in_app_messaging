@@ -1,10 +1,13 @@
 import 'package:in_app_messaging_condition/src/eval.dart';
+import 'package:in_app_messaging_condition/src/runtime/condition_context.dart';
 import 'package:in_app_messaging_condition/src/runtime/condition_object.dart';
 import 'package:test/test.dart';
 import 'package:version/version.dart' as v;
 
-class Version(final String version) extends ConditionObject {
-  final _version = v.Version.parse(version);
+class Version extends ConditionObject {
+  Version(String version) : _version = v.Version.parse(version);
+
+  final v.Version _version;
 
   @override
   bool less(Object other) {
@@ -25,10 +28,15 @@ class Version(final String version) extends ConditionObject {
   }
 }
 
-class AccessibleObject({
-  final Map<String, Object?> keys = const {},
-  final List<Object?> items = const [],
-}) extends ConditionObject {
+class AccessibleObject extends ConditionObject {
+  AccessibleObject({
+    this.keys = const {},
+    this.items = const [],
+  });
+
+  final Map<String, Object?> keys;
+  final List<Object?> items;
+
   @override
   Object? accessKey(String key) => keys[key];
 
@@ -36,7 +44,11 @@ class AccessibleObject({
   Object? accessIndex(int index) => items[index];
 }
 
-class ArithmeticObject(final num value) extends ConditionObject {
+class ArithmeticObject extends ConditionObject {
+  ArithmeticObject(this.value);
+
+  final num value;
+
   @override
   Object add(covariant num other) => value + other;
 
@@ -75,7 +87,10 @@ void main() {
     for (final (condition, expected) in cases) {
       test(
         "`$condition` -> $expected",
-        () => expect(eval(condition, .new(values: {"object": object})), equals(expected)),
+        () => expect(
+          eval(condition, ConditionContext(values: {"object": object})),
+          equals(expected),
+        ),
       );
     }
   });
@@ -95,7 +110,10 @@ void main() {
       test(
         "`$condition` -> $expected",
         () => expect(
-          eval(condition, .new(values: {"value": ArithmeticObject(10)})),
+          eval(
+            condition,
+            ConditionContext(values: {"value": ArithmeticObject(10)}),
+          ),
           equals(expected),
         ),
       );
@@ -129,7 +147,10 @@ void main() {
     for (final (condition, context, expected) in cases) {
       test(
         "`$condition` -> $expected when $context",
-        () => expect(eval(condition, .new(values: context)), equals(expected)),
+        () => expect(
+          eval(condition, ConditionContext(values: context)),
+          equals(expected),
+        ),
       );
     }
   });
@@ -165,7 +186,10 @@ void main() {
     for (final (condition, context, expected) in cases) {
       test(
         "`$condition` -> $expected when $context",
-        () => expect(eval(condition, .new(values: context)), equals(expected)),
+        () => expect(
+          eval(condition, ConditionContext(values: context)),
+          equals(expected),
+        ),
       );
     }
   });

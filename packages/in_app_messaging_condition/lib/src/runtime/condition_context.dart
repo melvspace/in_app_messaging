@@ -4,18 +4,25 @@ import 'package:in_app_messaging_condition/src/runtime/condition_object.dart';
 import 'package:in_app_messaging_condition/src/runtime/standard/date_time_extension.dart';
 
 /// Values and functions available while evaluating a condition expression.
-class const ConditionContext({
+class ConditionContext {
+  /// Creates an evaluation context from values and optional runtime extensions.
+  const ConditionContext({
+    this.values = const {},
+    this.functions = const {},
+    this.extensions = const [],
+  });
+
   /// Values available through identifier and bracket access.
-  final Map<String, Object?> values = const {},
+  final Map<String, Object?> values;
 
   /// Application-defined functions keyed by their expression name.
   ///
   /// These functions take precedence over built-ins with the same name.
-  final Map<String, ConditionFunction> functions = const {},
+  final Map<String, ConditionFunction> functions;
 
   /// Adapters that expose application values as [ConditionObject]s.
-  final List<ConditionExtension> extensions = const [],
-}) {
+  final List<ConditionExtension> extensions;
+
   static final _builtInFunctions = <String, ConditionFunction>{
     'length': _length,
   };

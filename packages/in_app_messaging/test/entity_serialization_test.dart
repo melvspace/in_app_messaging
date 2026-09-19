@@ -137,5 +137,16 @@ void main() {
 
       expect(SimpleMessage.fromJson(json), message);
     });
+
+    test('SimpleMessage round-trips a string condition', () {
+      final message = testMessage(
+        id: 'message',
+        condition: 'user.plan == "pro"',
+      );
+
+      final json = jsonDecode(jsonEncode(message.toJson()));
+
+      expect(SimpleMessage.fromJson(json), message);
+    });
   });
 }

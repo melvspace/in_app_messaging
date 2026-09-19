@@ -23,9 +23,9 @@ void main() {
     },
     functions: {
       'isExperimentEnabled': (arguments) => switch (arguments) {
-        [final String experiment] => enabledExperiments.contains(experiment),
-        _ => false,
-      },
+            [final String experiment] => enabledExperiments.contains(experiment),
+            _ => false,
+          },
     },
   );
 
@@ -39,11 +39,9 @@ void main() {
   final messageRules = {
     'Pro beta upsell': 'user.plan == "pro" and user.hasTag("beta")',
     'Free shipping reminder': 'cart.subtotal + (cart.shipping ?? 0) >= 50',
-    'Checkout experiment':
-        '"checkout-v2" in user.experiments '
+    'Checkout experiment': '"checkout-v2" in user.experiments '
         'and isExperimentEnabled("checkout-v2")',
-    'Recently active mobile user':
-        'user.lastSeenDays <= 7 '
+    'Recently active mobile user': 'user.lastSeenDays <= 7 '
         'and device.platform not in blockedPlatforms',
     'Active campaign window': 'now >= campaign.startsAt and now < campaign.endsAt',
     'User has experiments': 'length(user.experiments) > 0',
@@ -54,28 +52,36 @@ void main() {
   }
 }
 
-class _UserAudience({
-  required final String id,
-  required final String plan,
-  required final Set<String> tags,
-  required final Set<String> experiments,
-  required final int lastSeenDays,
-}) extends ConditionObject {
+class _UserAudience extends ConditionObject {
+  _UserAudience({
+    required this.id,
+    required this.plan,
+    required this.tags,
+    required this.experiments,
+    required this.lastSeenDays,
+  });
+
+  final String id;
+  final String plan;
+  final Set<String> tags;
+  final Set<String> experiments;
+  final int lastSeenDays;
+
   @override
   Object? accessKey(String key) => switch (key) {
-    'id' => id,
-    'plan' => plan,
-    'experiments' => experiments,
-    'lastSeenDays' => lastSeenDays,
-    _ => null,
-  };
+        'id' => id,
+        'plan' => plan,
+        'experiments' => experiments,
+        'lastSeenDays' => lastSeenDays,
+        _ => null,
+      };
 
   @override
   ConditionFunction? resolveFunction(String name) => switch (name) {
-    'hasTag' => (arguments) => switch (arguments) {
-      [final String tag] => tags.contains(tag),
-      _ => false,
-    },
-    _ => null,
-  };
+        'hasTag' => (arguments) => switch (arguments) {
+              [final String tag] => tags.contains(tag),
+              _ => false,
+            },
+        _ => null,
+      };
 }

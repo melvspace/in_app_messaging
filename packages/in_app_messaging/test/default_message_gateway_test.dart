@@ -163,6 +163,83 @@ void main() {
       expect(result?.message.id, 'message');
     });
 
+    test('evaluates string conditions against the complete context', () async {
+      final interactions = MemoryInteractionSource();
+      interactions.markSeen(
+        id: 'message',
+        trigger: 'event',
+        triggerProperties: {'plan': 'pro'},
+      );
+      final gateway = _gateway(
+        [
+          testMessage(
+            id: 'message',
+            condition: '''
+              event.event_name == "event" and
+              event.plan == "pro" and
+              device.platform == "android" and
+              user.id == "user-1" and
+              interactions.last_seen.trigger == "event"
+            ''',
+          ),
+        ],
+        interactionSource: interactions,
+      );
+
+      final result = await gateway.evaluate('event', {'plan': 'pro'});
+
+      expect(result?.message.id, 'message');
+    });
+
+    test('falls back to the next message when a string condition is false',
+        () async {
+      final gateway = _gateway([
+        testMessage(
+          id: 'expression',
+          priority: 0,
+          condition: 'user.id == "other-user"',
+        ),
+        testMessage(
+          id: 'json-logic',
+          priority: 1,
+          condition: {
+            '==': [
+              {'var': 'user.id'},
+              'user-1',
+            ],
+          },
+        ),
+      ]);
+
+      final result = await gateway.evaluate('event', {});
+
+      expect(result?.message.id, 'json-logic');
+    });
+
+    test('evaluates string conditions for sequence triggers', () async {
+      final gateway = _gateway([
+        testMessage(
+          id: 'message',
+          triggers: const [
+            MessageTrigger.eventSequence(
+              events: [
+                EventSequenceItem(name: 'first'),
+                EventSequenceItem(name: 'second'),
+              ],
+              data: [null, null],
+            ),
+          ],
+          condition: 'event.step == 2',
+        ),
+      ]);
+
+      expect(await gateway.evaluate('first', {'step': 1}), isNull);
+
+      final result = await gateway.evaluate('second', {'step': 2});
+
+      expect(result?.message.id, 'message');
+    });
+
     test('selects lowest numeric priority when multiple messages match',
         () async {
       final gateway = _gateway([

@@ -107,8 +107,14 @@ surface to complete before showing the next queued message.
 
 ## Conditions
 
-Conditions are serialized as JsonLogic. Use raw JsonLogic maps or the built-in
-condition builders:
+String conditions use the condition expression language:
+
+```dart
+final condition = 'user.plan == "pro" and event.source == "launcher"';
+```
+
+Existing JsonLogic conditions remain supported. Use raw JsonLogic maps or the
+built-in condition builders when JsonLogic-specific operators are needed:
 
 ```dart
 final condition = (UserPropertyCondition(

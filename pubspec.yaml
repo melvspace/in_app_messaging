@@ -2,6 +2,7 @@ name: in_app_messaging_workspace
 
 workspace:
   - apps/sandbox
+  - packages/in_app_messaging
   - packages/in_app_messaging_condition
   - packages/in_app_messaging_drift
   - packages/in_app_messaging_json_logic

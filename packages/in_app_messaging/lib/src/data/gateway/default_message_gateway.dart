@@ -5,6 +5,8 @@ import 'package:async/async.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:in_app_messaging/src/core/jsonlogic.dart';
+import 'package:in_app_messaging_condition/in_app_messaging_condition.dart'
+    as condition_expression;
 import '../../../in_app_messaging.dart';
 
 /// Message gateway backed by pluggable message, context, and interaction sources.
@@ -69,14 +71,12 @@ class DefaultMessageGateway implements MessageGateway {
         context: _contextSource.context,
       );
 
-      final result = message.condition != null
-          ? defaultJsonLogic.apply(
-              message.condition,
-              _buildConditionContext(properties, event, context),
-            )
-          : true;
+      final result = _evaluateCondition(
+        message.condition,
+        _buildConditionContext(properties, event, context),
+      );
 
-      if (result == true) {
+      if (result) {
         return context;
       }
     }
@@ -156,14 +156,12 @@ class DefaultMessageGateway implements MessageGateway {
             context: _contextSource.context,
           );
 
-          final result = message.condition != null
-              ? defaultJsonLogic.apply(
-                  message.condition,
-                  _buildConditionContext(properties, event, context),
-                )
-              : true;
+          final result = _evaluateCondition(
+            message.condition,
+            _buildConditionContext(properties, event, context),
+          );
 
-          if (result == true) {
+          if (result) {
             return context;
           }
         }
@@ -193,5 +191,19 @@ class DefaultMessageGateway implements MessageGateway {
     };
 
     return conditionContext;
+  }
+
+  bool _evaluateCondition(
+    Object? condition,
+    Map<String, dynamic> context,
+  ) {
+    return switch (condition) {
+      null => true,
+      final String expression => condition_expression.eval(
+          expression,
+          condition_expression.ConditionContext(values: context),
+        ),
+      _ => defaultJsonLogic.apply(condition, context) == true,
+    };
   }
 }

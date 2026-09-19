@@ -5,7 +5,7 @@ resolution: workspace
 version: 1.0.0
 
 environment:
-  sdk: ^3.13.3
+  sdk: ^3.5.0
 
 # dependencies:
   # path: ^1.9.0

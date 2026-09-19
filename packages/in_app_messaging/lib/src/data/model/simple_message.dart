@@ -44,11 +44,12 @@ abstract class SimpleMessage with _$SimpleMessage implements DynamicMessage {
     /// Runtime triggers that can make this message eligible for display.
     required List<MessageTrigger> triggers,
 
-    /// JsonLogic-compatible targeting and recurrence rule for this message.
+    /// Targeting and recurrence rule for this message.
     ///
-    /// The rule is evaluated after trigger and time-window matching with event
-    /// payload, context data, and seen history available. A null condition adds no
-    /// extra targeting or recurrence constraint.
+    /// Strings use the condition expression language. Other values use JsonLogic
+    /// for backwards compatibility. The rule is evaluated after trigger and
+    /// time-window matching with event payload, context data, and seen history
+    /// available. A null condition adds no extra constraint.
     dynamic condition,
 
     /// Opaque payload consumed by the presentation handle for [type].

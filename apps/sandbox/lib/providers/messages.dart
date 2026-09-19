@@ -18,7 +18,7 @@ List<Message> iamMessages(Ref ref) {
       triggers: [
         const MessageTrigger.cron(cron: '* * * * *'),
       ],
-      condition: OnceCondition().asJsonLogic(),
+      condition: 'interactions.last_seen == null',
       data: {
         'title': 'Cron Message',
       },
@@ -32,7 +32,7 @@ List<Message> iamMessages(Ref ref) {
       triggers: [
         const MessageTrigger.event(event: 'message_event_1'),
       ],
-      condition: OnceCondition().asJsonLogic(),
+      condition: 'interactions.last_seen == null',
       data: {
         'title': 'Event Triggered Dialog',
         'body': 'event: message_event_1',
@@ -60,7 +60,7 @@ List<Message> iamMessages(Ref ref) {
           data: [{}, {}],
         ),
       ],
-      condition: OnceCondition().asJsonLogic(),
+      condition: 'interactions.last_seen == null',
       data: {
         'title': 'Dialog triggered by Sequence of events',
         'body': 'events: ${[

@@ -1,14 +1,18 @@
 import 'package:in_app_messaging_condition/in_app_messaging_condition.dart';
 import 'package:test/test.dart';
 
-class Audience(final Set<String> eligiblePlans) extends ConditionObject {
+class Audience extends ConditionObject {
+  Audience(this.eligiblePlans);
+
+  final Set<String> eligiblePlans;
+
   @override
   ConditionFunction? resolveFunction(String name) {
     return switch (name) {
       'isEligible' => (arguments) => switch (arguments) {
-        [final String plan] => eligiblePlans.contains(plan),
-        _ => false,
-      },
+            [final String plan] => eligiblePlans.contains(plan),
+            _ => false,
+          },
       _ => null,
     };
   }
@@ -26,7 +30,7 @@ void main() {
       test('$condition is $expected', () {
         final result = eval(
           condition,
-          .new(
+          ConditionContext(
             values: {
               'items': [1, 2],
             },

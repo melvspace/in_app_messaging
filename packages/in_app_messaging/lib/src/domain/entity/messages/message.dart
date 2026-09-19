@@ -36,11 +36,12 @@ abstract class Message {
   /// display window open-ended after [start].
   DateTime? get end;
 
-  /// JsonLogic-compatible targeting and recurrence rule for this message.
+  /// Targeting and recurrence rule for this message.
   ///
-  /// The rule is evaluated after trigger and time-window matching with event
-  /// payload, context data, and seen history available. A null condition adds no
-  /// extra targeting or recurrence constraint.
+  /// Strings use the condition expression language. Other values use JsonLogic
+  /// for backwards compatibility. The rule is evaluated after trigger and
+  /// time-window matching with event payload, context data, and seen history
+  /// available. A null condition adds no extra constraint.
   dynamic get condition;
 
   /// Opaque payload consumed by the presentation handle for [type].

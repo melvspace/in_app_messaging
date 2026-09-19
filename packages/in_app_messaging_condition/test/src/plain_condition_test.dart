@@ -96,7 +96,7 @@ void main() {
 
     for (final (fixture, context, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, .new(values: context));
+        final result = eval(fixture, ConditionContext(values: context));
         expect(result, equals(expected));
       });
     }
@@ -193,7 +193,7 @@ void main() {
 
     for (final (fixture, context, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, .new(values: context));
+        final result = eval(fixture, ConditionContext(values: context));
         expect(result, equals(expected));
       });
     }
@@ -267,7 +267,7 @@ void main() {
 
     for (final (fixture, context, expected) in cases) {
       test("$fixture is $expected", () {
-        final result = eval(fixture, .new(values: context));
+        final result = eval(fixture, ConditionContext(values: context));
         expect(result, equals(expected));
       });
     }
