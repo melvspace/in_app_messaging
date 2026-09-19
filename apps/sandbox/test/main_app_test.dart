@@ -8,7 +8,9 @@ import 'package:sandbox/providers/database.dart';
 import 'package:sandbox/providers/in_app_messaging.dart';
 
 void main() {
-  testWidgets('MainApp pumps with in-memory database override', (tester) async {
+  testWidgets('storefront presents welcome and saved-item campaigns', (
+    tester,
+  ) async {
     final database = InAppMessagingDatabase(
       executor: NativeDatabase.memory(),
     );
@@ -27,10 +29,41 @@ void main() {
         ),
       ),
     );
+    await tester.pump();
+    await tester.pump();
 
     expect(find.byType(MaterialApp), findsOneWidget);
-    expect(find.text('Clear Interactions'), findsOneWidget);
-    expect(find.text('message_event_1'), findsOneWidget);
-    expect(find.text('message_event_2'), findsOneWidget);
+    expect(find.text('Northstar Market'), findsOneWidget);
+    expect(find.text('A little welcome gift'), findsOneWidget);
+
+    await tester.tap(find.text('Start shopping'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Good afternoon, Maya'), findsOneWidget);
+    expect(find.text('Restock your favorites'), findsOneWidget);
+
+    await tester.tap(find.text('Browse collection'));
+    await tester.pump();
+    await tester.pump();
+
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, -1200));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Add viewed bundle'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Weekend bundle added'), findsOneWidget);
+
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, 1200));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Save Citrus olive oil'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Saved for later'), findsOneWidget);
+    expect(find.text('Weekend bundle added'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump(const Duration(minutes: 5));
   });
 }

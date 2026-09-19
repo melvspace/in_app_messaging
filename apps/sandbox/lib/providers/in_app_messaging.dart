@@ -24,7 +24,12 @@ InAppMessaging inAppMessaging(Ref ref) {
             "version_number": "123",
             "language": "en",
           },
-          "user": {}
+          "user": {
+            "id": "maya-2048",
+            "membership": "plus",
+            "tier": "gold",
+            "tags": ["member", "early-access"]
+          }
         },
       ),
     ),

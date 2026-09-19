@@ -22,32 +22,67 @@ class DialogMessageHandle extends DynamicMessageHandle {
     final completed = showDialog<void>(
       context: navigator?.context ?? context,
       builder: (context) => Dialog(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              data.title,
-              style: Theme.of(context).textTheme.titleMedium,
+        clipBehavior: Clip.antiAlias,
+        insetPadding: const EdgeInsets.all(24),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(28, 24, 28, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFFFE4C7),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.auto_awesome_outlined,
+                    color: Color(0xFF9B4B00),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  data.title,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                if (data.body case String body) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    body,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          height: 1.45,
+                        ),
+                  ),
+                ],
+                if (data.actions.isNotEmpty) ...[
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      for (final (index, action) in data.actions.indexed) ...[
+                        if (index > 0) const SizedBox(width: 8),
+                        if (index == 0)
+                          FilledButton(
+                            onPressed: () => _performAction(context, action),
+                            child: Text(action.text),
+                          )
+                        else
+                          TextButton(
+                            onPressed: () => _performAction(context, action),
+                            child: Text(action.text),
+                          ),
+                      ],
+                    ],
+                  ),
+                ],
+              ],
             ),
-            if (data.body case String body) //
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(body),
-              ),
-            for (final action in data.actions)
-              ElevatedButton(
-                onPressed: () {
-                  switch (action.click) {
-                    case DialogPopClickAction():
-                      Navigator.of(context).pop();
-                      for (final event in action.events) {
-                        InAppMessaging.instance.trigger(event, {});
-                      }
-                  }
-                },
-                child: Text(action.text),
-              ),
-          ],
+          ),
         ),
       ),
     );
@@ -57,5 +92,17 @@ class DialogMessageHandle extends DynamicMessageHandle {
     return PresentationAttempt.shown(
       session: PresentationSession(completed: completed),
     );
+  }
+
+  void _performAction(BuildContext context, DialogMessageAction action) {
+    switch (action.click) {
+      case DialogPopClickAction():
+        Navigator.of(context).pop();
+        for (final event in action.events) {
+          InAppMessaging.instance.trigger(event, {});
+        }
+      case null:
+        Navigator.of(context).pop();
+    }
   }
 }
